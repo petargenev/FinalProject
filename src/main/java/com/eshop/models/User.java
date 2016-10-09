@@ -3,15 +3,15 @@ package com.eshop.models;
 import com.eshop.exceptions.InvalidInputException;
 
 public class User {
-	private String firstName;
+	private String name;
 	private String email;
 	private String password;
 	
 	public User(){
 		
 	}
-	public User(String firstName, String email, String password) throws InvalidInputException {
-		setFirstName(firstName);
+	public User(String name, String email, String password) throws InvalidInputException {
+		setName(name);
 		setEmail(email);
 		setPassword(password);
 	}
@@ -43,17 +43,17 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [firstName=" + firstName +  ", email=" + email  + ", password=" + password + "]";
+		return "User [firstName=" + name +  ", email=" + email  + ", password=" + password + "]";
 
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) throws InvalidInputException {
-		if (firstName != null && !firstName.isEmpty()){
-			this.firstName = firstName;
+	public void setName(String name) throws InvalidInputException {
+		if (name != null && !name.isEmpty()){
+			this.name = name;
 		}else{
 			throw new InvalidInputException();
 		}
