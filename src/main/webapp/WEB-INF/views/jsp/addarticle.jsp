@@ -221,15 +221,15 @@
 								<label>Резолюция</label>
 								<form:input path="resolution" type="text"/>
 							</li>
-							<!--  
+							
 							<li >
 								<label>Снимка</label>
 						
-									<form:input path="image" type="file"  name="file" accept="image/*" onchange="readURLTablet(this);" />
+									<input  type="file"  name="file" accept="image/*" onchange="readURLTablet(this);" />
 							       	<img id="tabletImage" src="#" alt="Вашата снимка" />
 											
 							</li>
-							-->
+							
 							
 							
 					</ul>
@@ -306,15 +306,15 @@
 								<label>Резолюция</label>
 								<form:input path="resolution" type="text"/>
 							</li>
-							<!--  
+							
 							<li >
 								<label>Снимка</label>
 						
-									<form:input path="image"  name="file" type="file"   accept="image/*" onchange="readURLLaptop(this);" />
+									<input   name="file" type="file"   accept="image/*" onchange="readURLLaptop(this);" />
 							       	<img id="laptopImage" src="#" alt="Вашата снимка" />
 											
 							</li>
-							-->
+				
 							
 							
 							

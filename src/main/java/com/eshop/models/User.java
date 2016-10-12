@@ -6,6 +6,7 @@ public class User {
 	private String name;
 	private String email;
 	private String password;
+	private boolean isAdministrator = false;
 	
 	public User(){
 		
@@ -17,6 +18,13 @@ public class User {
 		setName(name);
 		setEmail(email);
 		setPassword(password);
+	}
+	
+	public User(String name, String email, String password, boolean isAdministrator) throws InvalidInputException {
+		setName(name);
+		setEmail(email);
+		setPassword(password);
+		setAdministrator(isAdministrator);
 	}
 
 	@Override
@@ -49,6 +57,18 @@ public class User {
 		return "User [firstName=" + name +  ", email=" + email  + ", password=" + password + "]";
 
 	}
+
+	public boolean isAdministrator() {
+		return isAdministrator;
+	}
+
+
+
+	public void setAdministrator(boolean isAdministrator) {
+		this.isAdministrator = isAdministrator;
+	}
+
+
 
 	public String getName() {
 		return name;

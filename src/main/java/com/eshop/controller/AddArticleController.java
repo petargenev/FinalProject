@@ -2,6 +2,9 @@ package com.eshop.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +21,7 @@ import com.eshop.dao.TabletDAO;
 import com.eshop.exceptions.ArticleException;
 import com.eshop.exceptions.InvalidInputException;
 import com.eshop.exceptions.UserException;
+import com.eshop.models.Article;
 import com.eshop.models.Computer;
 import com.eshop.models.Laptop;
 import com.eshop.models.Tablet;
@@ -41,25 +45,35 @@ public class AddArticleController {
 	
 	
 	@RequestMapping(value="/addcomputer", method = RequestMethod.POST)
-	public String addNewComputer(@RequestParam("file") MultipartFile multipartFile, @ModelAttribute Computer computer, Model model) throws UserException, ArticleException, IOException, InvalidInputException {
+	public String addNewComputer(@RequestParam("file") MultipartFile multipartFile, @ModelAttribute Computer computer, Model model) throws UserException, ArticleException, IOException, InvalidInputException, SQLException {
 		
 		String[] path = multipartFile.getOriginalFilename().split("\\\\");
 		String fileName = path[path.length-1];
 		FileCopyUtils.copy(multipartFile.getBytes(), new File(getUploadLocation() + fileName));
-		String image = ("/img/" + fileName);
+		String image = ("./img/" + fileName);
 		computer.setImage(image);
 		
 		new ComputerDAO().insertComputer(computer);
+		Collection<Article> computers = new ComputerDAO().showAll();
+		for (Article article : computers) {
+			if(article instanceof Computer){
+				System.out.println(((Computer)article));
+			}
+		}
+		
 		
 		
 		return  creatingArticles(model);
 	}
 	
 	@RequestMapping(value="/addtablet", method = RequestMethod.POST)
-	public String addNewTablet(@RequestParam("file") MultipartFile multipartFile, @ModelAttribute Tablet tablet, Model model) throws UserException, ArticleException {
+	public String addNewTablet(@RequestParam("file") MultipartFile multipartFile, @ModelAttribute Tablet tablet, Model model) throws UserException, ArticleException, IOException, InvalidInputException {
 		
-		System.out.println("V POSTA SUM");
-		System.out.println(tablet);
+		String[] path = multipartFile.getOriginalFilename().split("\\\\");
+		String fileName = path[path.length-1];
+		FileCopyUtils.copy(multipartFile.getBytes(), new File(getUploadLocation() + fileName));
+		String image = ("./img/" + fileName);
+		tablet.setImage(image);
 		
 		new TabletDAO().insertTable(tablet);
 		
@@ -68,10 +82,13 @@ public class AddArticleController {
 	}
 	
 	@RequestMapping(value="/addlaptop", method = RequestMethod.POST)
-	public String addNewLaptop(@RequestParam("file") MultipartFile multipartFile, @ModelAttribute Laptop laptop, Model model) throws UserException, ArticleException {
+	public String addNewLaptop(@RequestParam("file") MultipartFile multipartFile, @ModelAttribute Laptop laptop, Model model) throws UserException, ArticleException, InvalidInputException, IOException {
 		
-		System.out.println("V POSTA SUM");
-		System.out.println(laptop);
+		String[] path = multipartFile.getOriginalFilename().split("\\\\");
+		String fileName = path[path.length-1];
+		FileCopyUtils.copy(multipartFile.getBytes(), new File(getUploadLocation() + fileName));
+		String image = ("./img/" + fileName);
+		laptop.setImage(image);
 		
 		new LaptopDAO().insertLaptop(laptop);
 		

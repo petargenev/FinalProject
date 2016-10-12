@@ -109,14 +109,15 @@ public class Computer extends Article{
 		}
 	}
 
-
 	@Override
 	public String toString() {
-		return "Computer [ram=" + ram + ", processorType=" + processorType + ", displaySize="
-				 + ", processorSpeed=" + processorSpeed + ", videoCardType=" + videoCardType + ", hdd="
-				+ hdd + ", operationSystem=" + operationSystem + ", toString()=" + super.toString() + "]";
+		return "Computer [ram=" + ram + ", processorType=" + processorType + ", processorSpeed=" + processorSpeed
+				+ ", videoCardType=" + videoCardType + ", hdd=" + hdd + ", operationSystem=" + operationSystem
+				+ ", toString()=" + super.toString() + "]";
 	}
 
+
+	
 
 	
 

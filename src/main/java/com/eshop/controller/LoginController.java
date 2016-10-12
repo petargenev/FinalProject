@@ -35,7 +35,7 @@ public class LoginController {
 			if (userFromDb.getName() != null) {
 
 				HttpSession session = request.getSession();
-				if (user.getEmail().equals("administrator@gmail.com")) {
+				if (userFromDb.isAdministrator()) {
 					session.setAttribute("isAdmin", true);
 				} else {
 					session.setAttribute("isAdmin", false);

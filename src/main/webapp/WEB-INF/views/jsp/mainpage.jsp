@@ -271,8 +271,33 @@
 				
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
+					
 						<h2 class="title text-center">Продукти</h2>
 						
+						<table>
+						
+							<tr><td>MARKA I MODEL</td></tr>
+							
+							<tr>
+							<td>СНИМКА</td> 
+							<td>
+								ХАРАКТЕРИСТИКИ
+								<ul>
+								<li>RAM памет: </li>
+								<li>RAM памет: </li>
+								<li>RAM памет: </li>
+								<li>RAM памет: </li>
+								<li>RAM памет: </li>
+								<li>RAM памет: </li>
+								<li>RAM памет: </li>
+								</ul>
+							</td>
+							<td> ДОБАВИ В КОЛИЧКАТА И ЦЕНА</td>
+							
+							</tr>
+							
+						</table>
+						<hr>
 									
 						<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</a>
 						<ul class="pagination">

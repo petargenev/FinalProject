@@ -65,10 +65,11 @@ public abstract class Article {
 		else
 			throw new InvalidInputException("Invalid input!");
 	}
-
 	@Override
 	public String toString() {
-		return "Article [label=" + label + ", model=" + model + ", price=" + price + "]";
+		return "Article [label=" + label + ", model=" + model + ", price=" + price + ", image=" + image + "]";
 	}
+
+	
 
 }

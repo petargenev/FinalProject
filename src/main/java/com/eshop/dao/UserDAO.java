@@ -46,15 +46,17 @@ public class UserDAO {
 		String password = null;
 		String name =null;
 		String email = null;
+		boolean isAdmin = false;
 		
 		while (rs.next()) {
 			 name = rs.getString("name");
 			 email = rs.getString("email");
 			 password = rs.getString("password");
+			 isAdmin = rs.getInt("isAdministrator") == 1 ? true : false;
 		
 		}
 		if(email != null){
-			return new User(name, email, password);
+			return new User(name, email, password, isAdmin);
 		}else{
 			return new User();
 		}
