@@ -90,12 +90,17 @@
 							</c:if>
 							
 							<c:if test="${sessionScope.username != null}">
-								<li><a href="addarticle"><i class="fa fa-shopping-cart"></i> Добави артикул</a></li>
-    						<!--	<li><a href=""><i class="fa fa-user"></i>Добре дошъл ${sessionScope.username} !</a></li>		-->			
-    						<li><a ><i class="fa fa-user"></i>Добре дошъл ${sessionScope.username} !</a></li>										
+								
+    							
+    						<li><a ><i class="fa fa-user"></i>Добре дошъл ${sessionScope.username} !</a></li>	
+    						<c:if test="${sessionScope.isAdmin == true}">	
+    						<li><a href="addarticle"><i class="fa fa-shopping-cart"></i> Добави артикул</a></li>	
+    						</c:if>							
 								<li><a href="cart"><i class="fa fa-shopping-cart"></i> Количка</a></li>
 								<li><a href="LogoutController"><i class="fa fa-lock"></i> Изход</a></li>
-							</c:if>
+								</c:if>
+								
+							
 							
 								
 							</ul>

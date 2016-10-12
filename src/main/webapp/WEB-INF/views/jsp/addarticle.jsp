@@ -106,7 +106,7 @@
 				<!-- <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p> -->
 			</div>
 			
-			<form:form commandName="computer" action="./addcomputer" method="post" id="computerForm">
+			<form:form commandName="computer" action="./addcomputer" method="post" id="computerForm" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="chose_area">
@@ -151,9 +151,12 @@
 								<label>Тип видео карта</label>
 								<form:input path="videoCardType" type="text"/>
 							</li>
-							<li class="single_field">
+							<li >
 								<label>Снимка</label>
-								<form:input path="image" type="text"/>
+						
+									<input type="file"  id="file" name="file" accept="image/*" onchange="readURL(this);" />
+							       	<img id="blah" src="#" alt="Вашата снимка" />
+											
 							</li>
 							
 							
@@ -178,7 +181,7 @@
 				
 			</div>
 			
-			<form:form commandName="tablet" action="./addtablet" method="post">
+			<form:form commandName="tablet" action="./addtablet" method="post" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="chose_area">
@@ -200,10 +203,6 @@
 								<form:input path="price" type="text"/>
 							</li>
 							
-							<li class="single_field">
-								<label>Снимка</label>
-								<form:input path="image" type="text"/>
-							</li>
 							
 							<li class="single_field">
 								<label>Тип дисплей:</label>
@@ -222,6 +221,15 @@
 								<label>Резолюция</label>
 								<form:input path="resolution" type="text"/>
 							</li>
+							<!--  
+							<li >
+								<label>Снимка</label>
+						
+									<form:input path="image" type="file"  name="file" accept="image/*" onchange="readURLTablet(this);" />
+							       	<img id="tabletImage" src="#" alt="Вашата снимка" />
+											
+							</li>
+							-->
 							
 							
 					</ul>
@@ -244,7 +252,7 @@
 				<!-- <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p> -->
 			</div>
 			
-			<form:form commandName="laptop" action="./addlaptop" method="post" id="laptopForm">
+			<form:form commandName="laptop" action="./addlaptop" method="post" id="laptopForm" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="chose_area">
@@ -289,11 +297,7 @@
 								<label>Тип видео карта</label>
 								<form:input path="videoCardType" type="text"/>
 							</li>
-							<li class="single_field">
-								<label>Снимка</label>
-								<form:input path="image" type="text"/>
-							</li>
-							
+						
 							<li class="single_field">
 								<label>Големина на екрана</label>
 								<form:input path="displaySize" type="text"/>
@@ -302,6 +306,16 @@
 								<label>Резолюция</label>
 								<form:input path="resolution" type="text"/>
 							</li>
+							<!--  
+							<li >
+								<label>Снимка</label>
+						
+									<form:input path="image"  name="file" type="file"   accept="image/*" onchange="readURLLaptop(this);" />
+							       	<img id="laptopImage" src="#" alt="Вашата снимка" />
+											
+							</li>
+							-->
+							
 							
 							
 							
@@ -324,7 +338,7 @@
 
 	
 	
-
+	<script src="js/photoupload.js"></script>
 	<script src="js/hideOrShow.js"></script>
     <script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
