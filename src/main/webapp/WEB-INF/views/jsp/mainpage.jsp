@@ -82,11 +82,22 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href=""><i class="fa fa-user"></i> Account</a></li>
-								
-								
+							
+							<c:if test="${sessionScope.username == null}">
+    																						
 								<li><a href="cart"><i class="fa fa-shopping-cart"></i> Количка</a></li>
 								<li><a href="login"><i class="fa fa-lock"></i> Вход</a></li>
+							</c:if>
+							
+							<c:if test="${sessionScope.username != null}">
+								<li><a href="addarticle"><i class="fa fa-shopping-cart"></i> Добави артикул</a></li>
+    						<!--	<li><a href=""><i class="fa fa-user"></i>Добре дошъл ${sessionScope.username} !</a></li>		-->			
+    						<li><a ><i class="fa fa-user"></i>Добре дошъл ${sessionScope.username} !</a></li>										
+								<li><a href="cart"><i class="fa fa-shopping-cart"></i> Количка</a></li>
+								<li><a href="LogoutController"><i class="fa fa-lock"></i> Изход</a></li>
+							</c:if>
+							
+								
 							</ul>
 						</div>
 					</div>

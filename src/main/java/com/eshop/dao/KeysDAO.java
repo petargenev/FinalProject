@@ -11,9 +11,9 @@ import com.eshop.connection.DBConnection;
 public class KeysDAO {
 	Connection connection = DBConnection.getInstance().getConnection();
 
-	public synchronized int insertLabel(String label) {
-
-		try {
+	public synchronized int insertLabel(String label) throws SQLException {
+System.out.println("vleznah v labela keys");
+		
 			PreparedStatement ps = connection.prepareStatement("INSERT INTO label VALUES(null, ?)",
 					Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, label);
@@ -21,17 +21,15 @@ public class KeysDAO {
 
 			ResultSet rs = ps.getGeneratedKeys();
 			rs.next();
+			System.out.println("VUVEDOH MARKA");
 			return rs.getInt(1);
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
+			
+		
 
 	}
 	//inserting processor
-	public synchronized int insertProcessor(String processorType) {
-		try {
+	public synchronized int insertProcessor(String processorType) throws SQLException {
+		
 			PreparedStatement ps = connection.prepareStatement("INSERT INTO processor_type VALUES(null, ?)",
 					Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, processorType);
@@ -39,16 +37,14 @@ public class KeysDAO {
 
 			ResultSet rs = ps.getGeneratedKeys();
 			rs.next();
+			System.out.println("VUVEDOH PROCESOR");
 			return rs.getInt(1);
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
+		
 	}
 	//inserting video card
-	public synchronized int insertVideoCard(String videoCardType) {
-		try {
+	public synchronized int insertVideoCard(String videoCardType) throws SQLException {
+		System.out.println("VLEZNAh VIDEOKARTA");
 			PreparedStatement ps = connection.prepareStatement("INSERT INTO video_card_type VALUES(null, ?)",
 					Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, videoCardType);
@@ -56,16 +52,14 @@ public class KeysDAO {
 
 			ResultSet rs = ps.getGeneratedKeys();
 			rs.next();
+			System.out.println("VUVEDOH VIDEOKARTA");
 			return rs.getInt(1);
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
+		
 	}
 	//insertiong operation system
-	public synchronized int insertOperationSystem(String operationSystem) {
-		try {
+	public synchronized int insertOperationSystem(String operationSystem) throws SQLException {
+		System.out.println("VLEZNAh OS");
 			PreparedStatement ps = connection.prepareStatement("INSERT INTO operation_system VALUES(null, ?)",
 					Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, operationSystem);
@@ -73,16 +67,15 @@ public class KeysDAO {
 
 			ResultSet rs = ps.getGeneratedKeys();
 			rs.next();
+			System.out.println("VUVEDOH OS");
 			return rs.getInt(1);
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
+		
+		
 	}
 	
-	public synchronized int insertEnergyClass(String energyClass) {
-		try {
+	public synchronized int insertEnergyClass(String energyClass) throws SQLException {
+		
 			PreparedStatement ps = connection.prepareStatement("INSERT INTO energy_class VALUES(null, ?)",
 					Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, energyClass);
@@ -90,16 +83,14 @@ public class KeysDAO {
 
 			ResultSet rs = ps.getGeneratedKeys();
 			rs.next();
+			System.out.println("VUVEDOH ENERGYCLASS");
 			return rs.getInt(1);
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
+		
 	}
 
-	public synchronized int insertColour(String colour) {
-		try {
+	public synchronized int insertColour(String colour) throws SQLException {
+		
 			PreparedStatement ps = connection.prepareStatement("INSERT INTO colour VALUES(null, ?)",
 					Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, colour);
@@ -109,14 +100,11 @@ public class KeysDAO {
 			rs.next();
 			return rs.getInt(1);
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
+		
 	}
 	
-	public synchronized int insertResolution(String resolution) {
-		try {
+	public synchronized int insertResolution(String resolution) throws SQLException {
+		
 			PreparedStatement ps = connection.prepareStatement("INSERT INTO resolution VALUES(null, ?)",
 					Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, resolution);
@@ -126,14 +114,11 @@ public class KeysDAO {
 			rs.next();
 			return rs.getInt(1);
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
+		
 	}
 	
-	public synchronized int insertCpu(String cpu) {
-		try {
+	public synchronized int insertCpu(String cpu) throws SQLException {
+		
 			PreparedStatement ps = connection.prepareStatement("INSERT INTO cpu VALUES(null, ?)",
 					Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, cpu);
@@ -141,12 +126,10 @@ public class KeysDAO {
 
 			ResultSet rs = ps.getGeneratedKeys();
 			rs.next();
+			System.out.println("VUVEDOH CPU");
 			return rs.getInt(1);
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return 0;
+		
 	}
 	
 	

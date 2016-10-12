@@ -80,10 +80,20 @@
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href=""><i class="fa fa-user"></i> Потребител/име</a></li>
 								
-								<li><a href="cart" class="active"><i class="fa fa-shopping-cart"></i> Количка</a></li>
+								<c:if test="${sessionScope.username == null}">
+    																						
+								<li><a href="cart"><i class="fa fa-shopping-cart"></i> Количка</a></li>
 								<li><a href="login"><i class="fa fa-lock"></i> Вход</a></li>
+							</c:if>
+							
+							<c:if test="${sessionScope.username != null}">
+								
+    						<!--	<li><a href=""><i class="fa fa-user"></i>Добре дошъл ${sessionScope.username} !</a></li>		-->			
+    						<li><a ><i class="fa fa-user"></i>Добре дошъл ${sessionScope.username} !</a></li>										
+								
+								<li><a href="LogoutCartController"><i class="fa fa-lock"></i> Изход</a></li>
+							</c:if>
 							</ul>
 						</div>
 					</div>
@@ -167,6 +177,7 @@
 	</section> <!--/#cart_items-->
 
 	<section id="do_action">
+	<c:if test="${sessionScope.username != null}">
 		<div class="container">
 			<div class="heading">
 				<h3>За да осъществите поръчката, моля въведете лична информация и адрес за доставка!</h3>
@@ -235,10 +246,22 @@
 						</ul>
 							
 							<a class="btn btn-default check_out" href="" class="pull-right" >Поръчай</a>
+							
 					</div>
 				</div>
 			</div>
 		</div>
+		</c:if>
+		
+		<c:if test="${sessionScope.username == null}">
+		<div class="container">
+		<div class="heading">
+				<h3>За да осъществите поръчката, моля впишете се в системата!</h3>
+				<!-- <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p> -->
+			</div>
+		</div>
+		</c:if>
+		
 	</section><!--/#do_action-->
 	<i class="fa fa-angle-up"></i>
 

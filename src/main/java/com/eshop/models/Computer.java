@@ -3,10 +3,7 @@ package com.eshop.models;
 import com.eshop.exceptions.InvalidInputException;
 
 public class Computer extends Article{
-	private String type;
-
 	
-
 	private int ram;
 	private String processorType;	
 	private double processorSpeed;
@@ -16,13 +13,15 @@ public class Computer extends Article{
 	
 	
 
-	
+	public Computer(){
+		super();
+	}
 
-	public Computer(String type, String label, String model, int ram, String processorType, 
+	public Computer(String model, String label,  int ram, String processorType, 
 			double processorSpeed, String videoCardType, int hdd, String operationSystem, double price, String image)
 			throws InvalidInputException,InvalidInputException {
-		super(type,label,price,image);
-		setModel(model);
+		super(model,label,price,image);
+		
 		setRam(ram);
 		setProcessorType(processorType);
 		setProcessorSpeed(processorSpeed);
@@ -33,17 +32,7 @@ public class Computer extends Article{
 	}
 	
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) throws InvalidInputException {
-		if (type != null && !type.isEmpty()) {
-			this.type = type;
-		} else {
-			throw new InvalidInputException("Invalid type!");
-		}
-	}
+	
 
 
 
@@ -123,7 +112,7 @@ public class Computer extends Article{
 
 	@Override
 	public String toString() {
-		return "Computer [type=" + type + ", ram=" + ram + ", processorType=" + processorType + ", displaySize="
+		return "Computer [ram=" + ram + ", processorType=" + processorType + ", displaySize="
 				 + ", processorSpeed=" + processorSpeed + ", videoCardType=" + videoCardType + ", hdd="
 				+ hdd + ", operationSystem=" + operationSystem + ", toString()=" + super.toString() + "]";
 	}

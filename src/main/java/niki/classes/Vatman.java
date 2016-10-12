@@ -1,4 +1,4 @@
-package com.eshop.models;
+package niki.classes;
 
 public class Vatman {
 	private String name;

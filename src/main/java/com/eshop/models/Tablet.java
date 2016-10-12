@@ -8,6 +8,10 @@ public class Tablet extends Article {
 	private String displayType;
 	private String resolution;
 	private String cpu;
+	
+	public Tablet(){
+		super();
+	}
 
 	public Tablet(String label, String model, double price,String cpu,  double displaySize, String displayType,
 			String resolution, String image) throws InvalidInputException {
@@ -18,20 +22,21 @@ public class Tablet extends Article {
 		setResolution(resolution);
 	}
 
+	
+	
+
 	@Override
 	public String toString() {
-		return "Tablet [processor=" +  ", displaySize=" + displaySize + ", displayType=" + displayType
-				+ ", resolution=" + resolution + ", toString()=" + super.toString() + "]";
+		return "Tablet [displaySize=" + displaySize + ", displayType=" + displayType + ", resolution=" + resolution
+				+ ", cpu=" + cpu + ", toString()=" + super.toString() + "]";
 	}
-
-	
 
 	public double getDisplaySize() {
 		return displaySize;
 	}
 
 	public void setDisplaySize(double displaySize) throws InvalidInputException {
-		if (displaySize < 0)
+		if (displaySize > 0)
 			this.displaySize = displaySize;
 		else
 			throw new InvalidInputException("Invalid input!");

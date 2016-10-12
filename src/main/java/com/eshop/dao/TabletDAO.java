@@ -49,6 +49,7 @@ Connection connection = DBConnection.getInstance().getConnection();
 	public void insertTable(Tablet tablet){
 		try {
 			//inserting lable
+			System.out.println("vuvejdam label");
 			String query = "SELECT * FROM label WHERE label LIKE '" + tablet.getLabel() + "';";
 			PreparedStatement ps = connection.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
@@ -60,13 +61,14 @@ Connection connection = DBConnection.getInstance().getConnection();
 				labelId = new KeysDAO().insertLabel(tablet.getLabel());
 			}
 			//inserting cpu
+			System.out.println("vuvejdam cpu");
 			String cpuQuery = "SELECT * FROM cpu WHERE cpu LIKE '" + tablet.getCpu() + "';";
 			PreparedStatement cpuPs = connection.prepareStatement(cpuQuery);
 			ResultSet cpuRs = cpuPs.executeQuery();
 			int cpuId = 0;
 
 			if (cpuRs.next()) {
-				cpuId = rs.getInt("id");
+				cpuId = cpuRs.getInt("id");
 			} else {
 				cpuId = new KeysDAO().insertCpu(tablet.getCpu());
 			}
@@ -79,10 +81,13 @@ Connection connection = DBConnection.getInstance().getConnection();
 			if(resolutionRs.next()){
 				resolutionId = resolutionRs.getInt("id");
 			}else{
-				resolutionId = new KeysDAO().insertLabel(tablet.getLabel());
+				resolutionId = new KeysDAO().insertResolution(tablet.getResolution());
 			}
 			
 			//inserting tablet
+			System.out.println("vuvejdam TABLET");
+			System.out.println(cpuId);
+			System.out.println(resolutionId);
 			PreparedStatement ps1 = connection.prepareStatement("INSERT INTO tablet VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?)");
 			ps1.setDouble(1, tablet.getDisplaySize());
 			ps1.setString(2, tablet.getDisplayType());
@@ -94,6 +99,7 @@ Connection connection = DBConnection.getInstance().getConnection();
 			ps1.setInt(8, resolutionId);
 			
 			ps1.executeUpdate();
+			System.out.println("VUVEDOH TABLET");
 
 		} catch (SQLException e) {
 

@@ -10,6 +10,9 @@ public class User {
 	public User(){
 		
 	}
+	
+	
+	
 	public User(String name, String email, String password) throws InvalidInputException {
 		setName(name);
 		setEmail(email);

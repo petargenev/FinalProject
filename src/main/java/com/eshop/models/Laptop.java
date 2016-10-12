@@ -6,16 +6,26 @@ public class Laptop extends Computer{
 	private double displaySize;
 	private String resolution;
 	
-	public Laptop(String type, String label, String model, int ram, String processorType, double processorSpeed,
-			String videoCardType, int hdd, String operationSystem, double price, String image, double displaySize,
-			String resolution) throws InvalidInputException, InvalidInputException {
-		super(type, label, model, ram, processorType, processorSpeed, videoCardType, hdd, operationSystem, price,
-				image);
+	
+	
+	
+	
+
+
+	public Laptop() {
+		super();
+	}
+
+
+	public Laptop(double displaySize, String resolution, String model, String label, int ram, String processorType, double processorSpeed,
+			String videoCardType, int hdd, String operationSystem, double price, String image)
+			throws InvalidInputException, InvalidInputException {
+		super(model, label, ram, processorType, processorSpeed, videoCardType, hdd, operationSystem, price, image);
 		setDisplaySize(displaySize);
 		setResolution(resolution);
 	}
-	
-	
+
+
 	@Override
 	public String toString() {
 		return "Laptop [displaySize=" + displaySize + ", resolution=" + resolution + ", toString()=" + super.toString()

@@ -7,7 +7,10 @@ public abstract class Article {
 	private String model;
 	private double price;
 	private String image;
-
+	
+	public Article(){
+		
+	}
 	public Article(String label, String model, double price, String image) throws InvalidInputException {
 		setLabel(label);
 		setModel(model);

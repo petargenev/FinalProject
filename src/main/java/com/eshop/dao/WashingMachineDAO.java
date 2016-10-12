@@ -9,6 +9,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.eshop.connection.DBConnection;
 import com.eshop.exceptions.InvalidInputException;
 import com.eshop.models.WashingMachine;

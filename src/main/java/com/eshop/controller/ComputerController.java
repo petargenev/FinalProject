@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class CartController {
+public class ComputerController {
 
-	@RequestMapping(value="/cart", method = RequestMethod.GET)
-	public String sayHello(Model model) {
+	@RequestMapping(value="/ComputerController", method = RequestMethod.GET)
+	public String checkout(Model model) {
 	
-		return "cart";
+		return "checkout";
 	}	
 	
 	

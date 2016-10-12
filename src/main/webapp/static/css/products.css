@@ -1,0 +1,89 @@
+@CHARSET "UTF-8";
+
+.products-list .list-view .product-box .text ul li {
+	padding: 0;
+}
+
+.text ol li, .text ul li, .text-page ol li, .text-page ul li, article ol li,
+	article ul li {
+	padding: 2px 0;
+	position: relative;
+}
+.important a, .info-message a, .stores .details a, .underline, a:hover {
+    text-decoration: underline;
+}
+
+.products-list.list-view .product-box .text h2 a {
+    color: #004fa2;
+}
+
+.text ul li:before, .text-page ul li:before, article ul li:before {
+    content: "•";
+    position: absolute;
+    top: 0;
+    margin-left: -20px;
+    color: #dc1f26;
+    font-size: 20px;
+}
+
+.products-list.list-view .product-box .text ul li:before {
+    color: #dc1f26;
+    top: -1px;
+    margin-left: -16px;
+}
+
+.products-list.list-view .product-box .text h2 a {
+    color: #004fa2;
+}
+
+a, a:hover {
+    color: #004fa2;
+}
+
+a {
+    text-decoration: none;
+    -webkit-transition: color 250ms ease-out;
+    -ms-transition: color 250ms ease-out;
+    transition: color 250ms ease-out;
+}
+
+.products-list.list-view .product-box {
+    clear: both;
+    min-height: 180px;
+    padding: 10px 0 10px 10px;
+    position: relative;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: auto;
+}
+
+.products-list.list-view .product-box .text {
+    width: 375px;
+    float: left;
+    min-height: 121px;
+    clear: none;
+    padding: 5px 0 58px;
+    position: relative;
+}
+
+.text, .text-page, article {
+    color: #3e3e3e;
+    font-size: 16px;
+    line-height: 22px;
+    padding: 20px;
+}
+
+
+.products-list.list-view .product-box:before {
+    content: '';
+    width: 175px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+    background-color: #f4f4f4;
+}
