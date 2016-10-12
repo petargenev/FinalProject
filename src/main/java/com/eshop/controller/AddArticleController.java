@@ -54,12 +54,7 @@ public class AddArticleController {
 		computer.setImage(image);
 		
 		new ComputerDAO().insertComputer(computer);
-		Collection<Article> computers = new ComputerDAO().showAll();
-		for (Article article : computers) {
-			if(article instanceof Computer){
-				System.out.println(((Computer)article));
-			}
-		}
+		
 		
 		
 		

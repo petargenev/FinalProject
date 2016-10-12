@@ -16,7 +16,7 @@ import com.eshop.models.Computer;
 @Controller
 public class ShowArticleController {
 
-	@RequestMapping(value = "/addcomputer", method = RequestMethod.POST)
+	@RequestMapping(value = "/showComputers", method = RequestMethod.GET)
 	public String showAllComputers(Model model) throws SQLException, InvalidInputException {
 		
 		Collection<Article> computers = new ComputerDAO().showAll();
@@ -27,7 +27,9 @@ public class ShowArticleController {
 //			}
 //		}
 //		
-		model.addAttribute("computers", computers);
+		if(!computers.isEmpty())
+			model.addAttribute("computers", computers);
+		
 		return "mainpage";
 	}
 }

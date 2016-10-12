@@ -81,8 +81,8 @@
 							<ul class="nav navbar-nav">
 								
 								
-								<li><a href="cart"><i class="fa fa-shopping-cart"></i> Количка</a></li>
-								<li><a href="login" class="active"><i class="fa fa-lock"></i> Вход</a></li>
+								<li><a href="cart"><i class="fa fa-shopping-cart cart1"></i><span class="cart1"> Количка</span></a></li>
+								<li><a href="login" class="active"><i class="fa fa-lock cart1"></i><span class="cart1"> Вход</span></a></li>
 							</ul>
 						</div>
 					</div>

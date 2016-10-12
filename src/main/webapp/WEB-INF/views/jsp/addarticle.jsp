@@ -102,7 +102,7 @@
 		<div id="computerDiv"  style="display:none;" class="container">
 		
 			<div class="heading">
-				<h3>Добавяне на компютър</h3>
+				<h3 style="text-indent: 43px;">Добавяне на компютър</h3>
 				<!-- <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p> -->
 			</div>
 			
@@ -110,7 +110,7 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="chose_area">
-						<ul class="user_info">
+						<ul class="user_info ul">
 						
 						
 							<li class="single_field">
@@ -155,7 +155,7 @@
 								<label>Снимка</label>
 						
 									<input type="file"  id="file" name="file" accept="image/*" onchange="readURL(this);" />
-							       	<img id="blah" src="#" alt="Вашата снимка" />
+							       	<img class="snimka" id="blah" src="#" alt="Вашата снимка" />
 											
 							</li>
 							
@@ -177,7 +177,7 @@
 		<div id="tabletDiv"  style="display:none;" class="container">
 		
 			<div class="heading">
-				<h3>Добавяне на таблет</h3>
+				<h3 style="text-indent: 43px;">Добавяне на таблет</h3>
 				
 			</div>
 			
@@ -185,7 +185,7 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="chose_area">
-						<ul class="user_info">
+						<ul class="user_info ul" >
 						
 						
 							<li class="single_field">
@@ -226,7 +226,7 @@
 								<label>Снимка</label>
 						
 									<input  type="file"  name="file" accept="image/*" onchange="readURLTablet(this);" />
-							       	<img id="tabletImage" src="#" alt="Вашата снимка" />
+							       	<img class="snimka" id="tabletImage" src="#" alt="Вашата снимка" />
 											
 							</li>
 							
@@ -248,7 +248,7 @@
 		<div id="laptopDiv"  style="display:none;" class="container">
 		
 			<div class="heading">
-				<h3>Добавяне на лаптоп</h3>
+				<h3 style="text-indent: 43px;">Добавяне на лаптоп</h3>
 				<!-- <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p> -->
 			</div>
 			
@@ -256,7 +256,7 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="chose_area">
-						<ul class="user_info">
+						<ul class="user_info ul">
 						
 						
 							<li class="single_field">
@@ -311,7 +311,7 @@
 								<label>Снимка</label>
 						
 									<input   name="file" type="file"   accept="image/*" onchange="readURLLaptop(this);" />
-							       	<img id="laptopImage" src="#" alt="Вашата снимка" />
+							       	<img class="snimka" id="laptopImage" src="#" alt="Вашата снимка" />
 											
 							</li>
 				
@@ -334,7 +334,7 @@
 		
 		
 	
-	<i class="fa fa-angle-up"></i>
+	
 
 	
 	

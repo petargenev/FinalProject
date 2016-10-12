@@ -85,19 +85,19 @@
 							
 							<c:if test="${sessionScope.username == null}">
     																						
-								<li><a href="cart"><i class="fa fa-shopping-cart"></i> Количка</a></li>
-								<li><a href="login"><i class="fa fa-lock"></i> Вход</a></li>
+								<li><a href="cart"><i class="fa fa-shopping-cart cart1"></i><span class="cart1">Количка</span></a></li>
+								<li><a href="login"><i class="fa fa-lock cart1"></i> <span class="cart1">Вход</span></a></li>
 							</c:if>
 							
 							<c:if test="${sessionScope.username != null}">
 								
     							
-    						<li><a ><i class="fa fa-user"></i>Добре дошъл ${sessionScope.username} !</a></li>	
+    						<li><a ><i class="fa fa-user cart1"></i><span class="cart1">Добре дошъл ${sessionScope.username} !</span></a></li>	
     						<c:if test="${sessionScope.isAdmin == true}">	
-    						<li><a href="addarticle"><i class="fa fa-shopping-cart"></i> Добави артикул</a></li>	
+    						<li><a href="addarticle"><i class="fa fa-shopping-cart car1"></i> <span class="cart1">Добави артикул</span></a></li>	
     						</c:if>							
-								<li><a href="cart"><i class="fa fa-shopping-cart"></i> Количка</a></li>
-								<li><a href="LogoutController"><i class="fa fa-lock"></i> Изход</a></li>
+								<li><a href="cart"><i class="fa fa-shopping-cart car1"></i> <span class="cart1">Количка</span></a></li>
+								<li><a href="LogoutController"><i class="fa fa-lock car1"></i><span class="cart1"> Изход</span></a></li>
 								</c:if>
 								
 							
@@ -157,19 +157,16 @@
 									<h4 class="panel-title">
 										<a data-toggle="collapse" data-parent="#accordian" href="#computers">
 											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											<b>Компютри и периферия</b>
+											<b class="categories">Компютри</b>
 										</a>
 									</h4>
 								</div>
 								<div id="computers" class="panel-collapse collapse">
 									<div class="panel-body">
-										<ul>
-											<li><a href="">Компютри </a></li>
-											<li><a href="">Лаптопи </a></li>
-											<li><a href="">Монитори </a></li>
-											<li><a href="">Клавиатури </a></li>
-											<li><a href="">Мишки </a></li>
-											<li><a href="">Уеб камери </a></li>
+										<ul class="ul">
+											<li ><a href="showComputers"> <span class="subcategories">Компютри </span></a></li>
+											<li > <a href=""><span class="subcategories">Лаптопи</span> </a></li>
+											
 											
 											
 										</ul>
@@ -181,15 +178,15 @@
 									<h4 class="panel-title">
 										<a data-toggle="collapse" data-parent="#accordian" href="#perifery">
 											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											<b>Телефони и таблети</b>
+											<b class="categories">Таблети</b>
 										</a>
 									</h4>
 								</div>
 								<div id="perifery" class="panel-collapse collapse">
 									<div class="panel-body">
-										<ul>
-											<li><a href="">Телефони</a></li>
-											<li><a href="">Таблети</a></li>
+										<ul class="ul">
+											
+											<li ><a href=""><span class="subcategories">Таблети</span></a></li>
 											
 											
 										</ul>
@@ -197,47 +194,8 @@
 								</div>
 							</div>
 							
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#accessories">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											<b>Фотоапарати и камери</b>
-										</a>
-									</h4>
-								</div>
-								<div id="accessories" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="">Фотоапарати</a></li>
-											<li><a href="">Камери</a></li>
-											
-										</ul>
-									</div>
-								</div>
-							</div>
 							
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#domakinski">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											<b>Домакински електроуреди</b>
-										</a>
-									</h4>
-								</div>
-								<div id="domakinski" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="">Съдомиялни</a></li>
-											<li><a href="">Перални</a></li>
-											<li><a href="">Хладилници</a></li>
-											
-											
-										</ul>
-									</div>
-								</div>
-							</div>
+							
 							
 						</div><!--/category-productsr-->
 					
@@ -273,33 +231,41 @@
 					<div class="features_items"><!--features_items-->
 					
 						<h2 class="title text-center">Продукти</h2>
-						
+						<c:choose>
+						<c:when test="${ not empty computers}">
+							<c:forEach items="${computers}" var="computer">
 						<table>
 						
-							<tr><td>MARKA I MODEL</td></tr>
+							<tr><td class="labelmodel"><c:out value="${computer.model}  ${computer.label}"></c:out></td></tr>
 							
 							<tr>
-							<td>СНИМКА</td> 
-							<td>
-								ХАРАКТЕРИСТИКИ
-								<ul>
-								<li>RAM памет: </li>
-								<li>RAM памет: </li>
-								<li>RAM памет: </li>
-								<li>RAM памет: </li>
-								<li>RAM памет: </li>
-								<li>RAM памет: </li>
-								<li>RAM памет: </li>
+							<td><img src="<c:out value="${computer.image}"></c:out>" style="width:220px;height:180px;"></td> 
+							<td class="tdharakteristiki"><p class="harakteristiki">ХАРАКТЕРИСТИКИ:</p>
+								
+								<ul >
+									<li class="lisize"><span>RAM ПАМЕТ:</span> <span class="stoinosti"><c:out value="${computer.ram} GB"></c:out></span></li>
+									<li class="lisize"><span>ТИП ПРОЦЕСОР:</span> <span class="stoinosti"><c:out value="${computer.processorType}"></c:out></span></li>
+									<li class="lisize"><span>ЧЕСТОТА НА ПРОЦЕСОРА:</span> <span class="stoinosti"><c:out value="${computer.processorSpeed} GHz"></c:out></span></li>
+									<li class="lisize"><span>ВИДЕО КАРТА:</span> <span class="stoinosti"><c:out value="${computer.videoCardType}"></c:out></span></li>
+									<li class="lisize"><span>HDD:</span> <span class="stoinosti"><c:out value="${computer.hdd} GB"></c:out></span></li>
+									<li class="lisize"><span>ОПЕРАЦИОННА СИСТЕМА:</span> <span class="stoinosti"><c:out value="${computer.operationSystem}"></c:out></span></li>
+								
 								</ul>
 							</td>
-							<td> ДОБАВИ В КОЛИЧКАТА И ЦЕНА</td>
+							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${computer.price} лв."></c:out></span></span>
+							<br>
+							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</a>
+							</td>
+							
 							
 							</tr>
 							
 						</table>
 						<hr>
-									
-						<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</a>
+					</c:forEach>
+					</c:when>
+					</c:choose>				
+						
 						<ul class="pagination">
 							<li class="active"><a href="">1</a></li>
 							<li><a href="">2</a></li>
