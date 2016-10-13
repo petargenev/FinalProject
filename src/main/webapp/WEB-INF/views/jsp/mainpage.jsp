@@ -164,8 +164,8 @@
 								<div id="computers" class="panel-collapse collapse">
 									<div class="panel-body">
 										<ul class="ul">
-											<li ><a href="showComputers"> <span class="subcategories">Компютри </span></a></li>
-											<li > <a href=""><span class="subcategories">Лаптопи</span> </a></li>
+											<li ><a href="computers"> <span class="subcategories">Компютри </span></a></li>
+											<li > <a href="laptops"><span class="subcategories">Лаптопи</span> </a></li>
 											
 											
 											
@@ -186,7 +186,7 @@
 									<div class="panel-body">
 										<ul class="ul">
 											
-											<li ><a href=""><span class="subcategories">Таблети</span></a></li>
+											<li ><a href="tablets"><span class="subcategories">Таблети</span></a></li>
 											
 											
 										</ul>
@@ -236,7 +236,7 @@
 							<c:forEach items="${computers}" var="computer">
 						<table>
 						
-							<tr><td class="labelmodel"><c:out value="${computer.model}  ${computer.label}"></c:out></td></tr>
+							<tr><td class="labelmodel"><c:out value="Компютър ${computer.model}  ${computer.label}"></c:out></td></tr>
 							
 							<tr>
 							<td><img src="<c:out value="${computer.image}"></c:out>" style="width:220px;height:180px;"></td> 
@@ -264,7 +264,78 @@
 						<hr>
 					</c:forEach>
 					</c:when>
-					</c:choose>				
+					</c:choose>			
+					
+					<c:choose>
+						<c:when test="${ not empty laptops}">
+							<c:forEach items="${laptops}" var="laptop">
+						<table>
+						
+							<tr><td class="labelmodel"><c:out value="Лаптоп ${laptop.model}  ${laptop.label}"></c:out></td></tr>
+							
+							<tr>
+							<td><img src="<c:out value="${laptop.image}"></c:out>" style="width:220px;height:180px;"></td> 
+							<td class="tdharakteristiki"><p class="harakteristiki">ХАРАКТЕРИСТИКИ:</p>
+								
+								<ul >
+									<li class="lisize"><span>RAM ПАМЕТ:</span> <span class="stoinosti"><c:out value="${laptop.ram} GB"></c:out></span></li>
+									<li class="lisize"><span>ТИП ПРОЦЕСОР:</span> <span class="stoinosti"><c:out value="${laptop.processorType}"></c:out></span></li>
+									<li class="lisize"><span>ЧЕСТОТА НА ПРОЦЕСОРА:</span> <span class="stoinosti"><c:out value="${laptop.processorSpeed} GHz"></c:out></span></li>
+									<li class="lisize"><span>ВИДЕО КАРТА:</span> <span class="stoinosti"><c:out value="${laptop.videoCardType}"></c:out></span></li>
+									<li class="lisize"><span>HDD:</span> <span class="stoinosti"><c:out value="${laptop.hdd} GB"></c:out></span></li>
+									<li class="lisize"><span>ОПЕРАЦИОННА СИСТЕМА:</span> <span class="stoinosti"><c:out value="${laptop.operationSystem}"></c:out></span></li>
+									<li class="lisize"><span>ГОЛЕМИНА НА ЕКРАНА:</span> <span class="stoinosti"><c:out value='${laptop.displaySize} " '></c:out></span></li>
+									<li class="lisize"><span>РЕЗОЛЮЦИЯ:</span> <span class="stoinosti"><c:out value="${laptop.resolution}"></c:out></span></li>
+								
+								</ul>
+							</td>
+							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${laptop.price} лв."></c:out></span></span>
+							<br>
+							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</a>
+							</td>
+							
+							
+							</tr>
+							
+						</table>
+						<hr>
+					</c:forEach>
+					</c:when>
+					</c:choose>		
+					
+					<c:choose>
+						<c:when test="${ not empty tablets}">
+							<c:forEach items="${tablets}" var="tablet">
+						<table>
+						
+							<tr><td class="labelmodel"><c:out value="Таблет ${tablet.label} ${tablet.model}  "></c:out></td></tr>
+							
+							<tr>
+							<td><img src="<c:out value="${tablet.image}"></c:out>" style="width:220px;height:180px;"></td> 
+							<td class="tdharakteristiki"><p class="harakteristiki">ХАРАКТЕРИСТИКИ:</p>
+								
+								<ul >
+									<li class="lisize"><span>ТИП ПРОЦЕСОР:</span> <span class="stoinosti"><c:out value="${tablet.cpu}"></c:out></span></li>
+									<li class="lisize"><span>ТЕХНОЛОГИЯ НА ДИСПЛЕЯ:</span> <span class="stoinosti"><c:out value="${tablet.displayType}"></c:out></span></li>
+									<li class="lisize"><span>РАЗМЕР НА ЕКРАНА:</span> <span class="stoinosti"><c:out value='${tablet.displaySize} "'></c:out></span></li>
+									<li class="lisize"><span>РЕЗОЛЮЦИЯ НА ДИСПЛЕЯ:</span> <span class="stoinosti"><c:out value="${tablet.resolution}"></c:out></span></li>
+									
+								
+								</ul>
+							</td>
+							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${tablet.price} лв."></c:out></span></span>
+							<br>
+							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</a>
+							</td>
+							
+							
+							</tr>
+							
+						</table>
+						<hr>
+					</c:forEach>
+					</c:when>
+					</c:choose>		
 						
 						<ul class="pagination">
 							<li class="active"><a href="">1</a></li>

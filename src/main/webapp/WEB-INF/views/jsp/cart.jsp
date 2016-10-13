@@ -83,16 +83,16 @@
 								
 								<c:if test="${sessionScope.username == null}">
     																						
-								<li><a href="cart"><i class="fa fa-shopping-cart"></i> Количка</a></li>
-								<li><a href="login"><i class="fa fa-lock"></i> Вход</a></li>
+								<li><a href="cart"><i class="fa fa-shopping-cart cart1"></i><span class="cart1"> Количка</span></a></li>
+								<li><a href="login"><i class="fa fa-lock cart1"></i><span class="cart1">Вход</span></a></li>
 							</c:if>
 							
 							<c:if test="${sessionScope.username != null}">
 								
     						<!--	<li><a href=""><i class="fa fa-user"></i>Добре дошъл ${sessionScope.username} !</a></li>		-->			
-    						<li><a ><i class="fa fa-user"></i>Добре дошъл ${sessionScope.username} !</a></li>										
+    						<li><a ><i class="fa fa-user cart1"></i><span class="cart1">Добре дошъл ${sessionScope.username} !</span></a></li>										
 								
-								<li><a href="LogoutCartController"><i class="fa fa-lock"></i> Изход</a></li>
+								<li><a href="LogoutCartController"><i class="fa fa-lock cart1"></i> <span class="cart1">Изход</span></a></li>
 							</c:if>
 							</ul>
 						</div>

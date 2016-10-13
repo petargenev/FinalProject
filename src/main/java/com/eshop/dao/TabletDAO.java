@@ -21,9 +21,9 @@ Connection connection = DBConnection.getInstance().getConnection();
 	public Collection<Article> showAll()
 			throws SQLException, InvalidInputException, InvalidInputException {
 		List<Article> tablets = new ArrayList<Article>();
-		String query = "SELECT t.*, l.*, c.*,r.* FROM tablet t"+
-						"JOIN label l ON (t.label_id = l.id)"+
-						"JOIN cpu c ON (t.cpu_id = c.id)"+
+		String query = "SELECT t.*, l.*, c.*,r.* FROM tablet t "+
+						"JOIN label l ON (t.label_id = l.id) "+
+						"JOIN cpu c ON (t.cpu_id = c.id) "+
 						"JOIN resolution r ON (t.resolution_id = r.id);";
 
 		PreparedStatement ps = connection.prepareStatement(query);

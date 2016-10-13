@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.eshop.dao.ComputerDAO;
+import com.eshop.dao.LaptopDAO;
+import com.eshop.dao.TabletDAO;
 import com.eshop.exceptions.InvalidInputException;
 import com.eshop.models.Article;
-import com.eshop.models.Computer;
 
 @Controller
 public class ShowArticleController {
 
-	@RequestMapping(value = "/showComputers", method = RequestMethod.GET)
+	@RequestMapping(value = "/computers", method = RequestMethod.GET)
 	public String showAllComputers(Model model) throws SQLException, InvalidInputException {
 		
 		Collection<Article> computers = new ComputerDAO().showAll();
@@ -29,6 +30,40 @@ public class ShowArticleController {
 //		
 		if(!computers.isEmpty())
 			model.addAttribute("computers", computers);
+		
+		return "mainpage";
+	}
+	
+	@RequestMapping(value = "/laptops", method = RequestMethod.GET)
+	public String showAllLaptops(Model model) throws SQLException, InvalidInputException {
+		
+		Collection<Article> laptops = new LaptopDAO().showAll();
+		
+//		for (Article article : computers) {
+//			if (article instanceof Computer) {
+//				System.out.println(((Computer) article));
+//			}
+//		}
+//		
+		if(!laptops.isEmpty())
+			model.addAttribute("laptops", laptops);
+		
+		return "mainpage";
+	}
+	
+	@RequestMapping(value = "/tablets", method = RequestMethod.GET)
+	public String showAllTablets(Model model) throws SQLException, InvalidInputException {
+		
+		Collection<Article> tablets = new TabletDAO().showAll();
+		
+//		for (Article article : computers) {
+//			if (article instanceof Computer) {
+//				System.out.println(((Computer) article));
+//			}
+//		}
+//		
+		if(!tablets.isEmpty())
+			model.addAttribute("tablets", tablets);
 		
 		return "mainpage";
 	}

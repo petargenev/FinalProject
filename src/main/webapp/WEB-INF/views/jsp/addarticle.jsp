@@ -84,9 +84,9 @@
 							<c:if test="${sessionScope.username != null}">
 								
     						<!--	<li><a href=""><i class="fa fa-user"></i>Добре дошъл ${sessionScope.username} !</a></li>		-->			
-    						<li><a ><i class="fa fa-user"></i>Добре дошъл ${sessionScope.username} !</a></li>										
+    						<li><a ><i class="fa fa-user cart1"></i><span class="cart1">Добре дошъл ${sessionScope.username} !</span></a></li>										
 								
-								<li><a href="LogoutCartController"><i class="fa fa-lock"></i> Изход</a></li>
+								<li><a href="LogoutCartController"><i class="fa fa-lock cart1"></i> <span class="cart1">Изход</span></a></li>
 							</c:if>
 							</ul>
 						</div>
