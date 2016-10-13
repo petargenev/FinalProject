@@ -37,7 +37,8 @@ public class DishwasherDAO implements DAO{
 			int programmesNumber = rs.getInt("number_of_programmes");
 			int temperaturesNumber = rs.getInt("number_of_temperatures");
 			String image = rs.getString("image");
-			dishwashers.add(new Dishwasher(label, model, price, capacity, energyClass, programmesNumber, temperaturesNumber, image));
+			int id = rs.getInt("id");
+			dishwashers.add(new Dishwasher(label, model, price, capacity, energyClass, programmesNumber, temperaturesNumber, image, id));
 		}
 		return Collections.unmodifiableList(dishwashers);
 	}

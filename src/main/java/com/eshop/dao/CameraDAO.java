@@ -35,9 +35,9 @@ public class CameraDAO implements DAO {
 				double displaySize = rs.getDouble("display_size");
 				int digitalZoom = rs.getInt("digital_zoom");
 				int opticalZoom = rs.getInt("optical_zoom");
+				int id = rs.getInt("id");
 				
-				
-				cameras.add(new Camera(image, label, model, price, resolution, opticalZoom, displaySize, digitalZoom));
+				cameras.add(new Camera(image, label, model, price, resolution, opticalZoom, displaySize, digitalZoom, id));
 						
 				return Collections.unmodifiableList(cameras);
 		

@@ -31,10 +31,10 @@ public class MouseDAO implements DAO{
 			int price = rs.getInt("price");
 			String image = rs.getString("image");
 			String resolution = rs.getString("resolution");
+			int id = rs.getInt("id");
 			
 			
-			
-			mouses.add(new Mouse(label, model, price, resolution, image));
+			mouses.add(new Mouse(label, model, price, resolution, image, id));
 		}
 		return Collections.unmodifiableList(mouses);
 	}

@@ -106,7 +106,7 @@
 				<!-- <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p> -->
 			</div>
 			
-			<form:form commandName="computer" action="./addcomputer" method="post" id="computerForm" enctype="multipart/form-data">
+			<form:form commandName="computer" action="./addcomputer" method="post" id="computerForm" enctype="multipart/form-data" onsubmit="Validatebodypanelbumper()">
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="chose_area">
@@ -181,7 +181,7 @@
 				
 			</div>
 			
-			<form:form commandName="tablet" action="./addtablet" method="post" enctype="multipart/form-data">
+			<form:form commandName="tablet" action="./addtablet" method="post" enctype="multipart/form-data" onsubmit="Validatebodypanelbumper()">
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="chose_area">
@@ -252,7 +252,7 @@
 				<!-- <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p> -->
 			</div>
 			
-			<form:form commandName="laptop" action="./addlaptop" method="post" id="laptopForm" enctype="multipart/form-data">
+			<form:form commandName="laptop" action="./addlaptop" method="post" id="laptopForm" enctype="multipart/form-data" onsubmit="Validatebodypanelbumper()">
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="chose_area">

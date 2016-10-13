@@ -36,8 +36,9 @@ public class WashingMachineDAO {
 			int roundsPerMinute = rs.getInt("rounds_per_minute");
 			String energyClass = rs.getString("energy_class");
 			double washingCapacity = rs.getDouble("washing_capacity");
-
-			washingMachines.add(new WashingMachine(label, model, price, kind, roundsPerMinute, energyClass, washingCapacity, image));
+			int id = rs.getInt("id");
+			
+			washingMachines.add(new WashingMachine(label, model, price, kind, roundsPerMinute, energyClass, washingCapacity, image, id));
 		}
 		return Collections.unmodifiableList(washingMachines);
 	}

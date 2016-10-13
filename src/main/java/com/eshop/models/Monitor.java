@@ -14,8 +14,8 @@ public class Monitor extends Article{
 	
 
 	public Monitor(String label, String model,String displayType, double displaySize, String resolution,
-			String contrast, double price, String image) throws InvalidActivityException, InvalidInputException {
-		super(label,model,price,image);
+			String contrast, double price, String image, int id) throws InvalidActivityException, InvalidInputException {
+		super(label,model,price,image, id);
 		setDisplayType(displayType);
 		setDisplaySize(displaySize);
 		setResolution(resolution);

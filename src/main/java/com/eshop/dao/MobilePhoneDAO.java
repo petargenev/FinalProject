@@ -36,10 +36,10 @@ public class MobilePhoneDAO {
 			double rearCamera = rs.getDouble("rear_camera");
 			String cpu = rs.getString("cpu");
 			String displayType = rs.getString("display_type");
+			int id = rs.getInt("id");
 			
 			
-			
-			mobilePhones.add(new MobilePhone(label, model, price, cpu, displaySize, displayType, rearCamera, image));
+			mobilePhones.add(new MobilePhone(label, model, price, cpu, displaySize, displayType, rearCamera, image, id));
 		}
 		return Collections.unmodifiableList(mobilePhones);
 	}

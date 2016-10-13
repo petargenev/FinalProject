@@ -11,8 +11,8 @@ public class WashingMachine extends Article {
 	
 	
 	public WashingMachine(String label, String model, double price, String kind, int roundsPerMinute,
-			String energyClass, double washingCapacity, String image) throws InvalidInputException {
-		super(label, model, price, image);
+			String energyClass, double washingCapacity, String image, int id) throws InvalidInputException {
+		super(label, model, price, image, id);
 		setKind(kind);
 		setRoundsPerMinute(roundsPerMinute);
 		setEnergyClass(energyClass);

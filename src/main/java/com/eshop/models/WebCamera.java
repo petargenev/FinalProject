@@ -7,9 +7,9 @@ public class WebCamera extends Article {
 	private String resolution;
 	private int framesPerSecond;
 
-	public WebCamera(String label, String model, double price, String resolution, int framesPerSecond, String image)
+	public WebCamera(String label, String model, double price, String resolution, int framesPerSecond, String image, int id)
 			throws InvalidInputException {
-		super(label, model, price, image);
+		super(label, model, price, image, id);
 		setResolution(resolution);
 		setFramesPerSecond(framesPerSecond);
 

@@ -10,8 +10,8 @@ public class MobilePhone extends Article{
 	
 	
 	public MobilePhone(String label, String model, double price, String cpu, double displaySize, String displayType,
-			double rearCamera, String image) throws InvalidInputException {
-		super(label, model, price, image);
+			double rearCamera, String image, int id) throws InvalidInputException {
+		super(label, model, price, image, id);
 		setCpu(cpu);
 		setDisplaySize(displaySize);
 		setDisplayType(displayType);

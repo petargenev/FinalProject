@@ -11,8 +11,8 @@ public class Camera extends Article {
 	
 	
 	public Camera(String image, String label, String model, double price, double resolution, int opticalZoom, double displaySize,
-			int digitalZoom) throws InvalidInputException {
-		super(label, model, price,image);
+			int digitalZoom, int id) throws InvalidInputException {
+		super(label, model, price,image,id);
 		setResolution(resolution);
 		setOpticalZoom(opticalZoom);
 		setDisplaySize(displaySize);

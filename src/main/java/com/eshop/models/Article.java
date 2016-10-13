@@ -1,5 +1,7 @@
 package com.eshop.models;
 
+import java.sql.SQLDataException;
+
 import com.eshop.exceptions.InvalidInputException;
 
 public abstract class Article {
@@ -7,17 +9,28 @@ public abstract class Article {
 	private String model;
 	private double price;
 	private String image;
+	private int id;
 	
 	public Article(){
 		
 	}
-	public Article(String label, String model, double price, String image) throws InvalidInputException {
+	public Article(String label, String model, double price, String image, int id) throws InvalidInputException {
 		setLabel(label);
 		setModel(model);
 		setPrice(price);
 		setImage(image);
+		setId(id);
 	}
 
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) throws InvalidInputException {
+		if(id>0)
+			this.id = id;
+		else
+			throw new InvalidInputException();
+	}
 	public double getPrice() {
 		return price;
 	}

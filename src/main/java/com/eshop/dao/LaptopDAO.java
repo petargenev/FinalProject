@@ -22,24 +22,24 @@ import com.eshop.models.Laptop;
 public class LaptopDAO implements DAO {
 	Connection connection = DBConnection.getInstance().getConnection();
 
-	public Collection<Article> showAll()
-			throws SQLException, InvalidInputException,InvalidInputException {
-		List<Computer> laptops = new ArrayList<Computer>();
-		String query = "SELECT la.*, p.*, v.*, o.*, l.*,r.* FROM laptop la " + 
-						"JOIN processor_type p ON (la.processor_type_id = p.id) " +
-						"JOIN video_card_type v ON (la.video_card_type_id = v.id) " +
-						"JOIN operation_system o ON (la.operation_system_id = o.id) " +
-						"JOIN label l ON (la.label_id = l.id) "+
-						"JOIN resolution r ON(la.resolution_id = r.id) ";
+	public Laptop getLaptopById(int laptopId) throws SQLException, InvalidInputException {
+		String query = "SELECT la.*, p.*, v.*, o.*, l.*,r.* FROM laptop la "
+				+ "JOIN processor_type p ON (la.processor_type_id = p.id) "
+				+ "JOIN video_card_type v ON (la.video_card_type_id = v.id) "
+				+ "JOIN operation_system o ON (la.operation_system_id = o.id) "
+				+ "JOIN label l ON (la.label_id = l.id) " 
+				+ "JOIN resolution r ON(la.resolution_id = r.id) "
+				+ "WHERE la.id LIKE'"+ laptopId + "';";
 
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
+		Laptop laptop = null;
 		while (rs.next()) {
 			String label = rs.getString("label");
 			String model = rs.getString("model");
 			double price = rs.getDouble("price");
-			String image = rs.getString("image");	
-			
+			String image = rs.getString("image");
+
 			int ram = rs.getInt("ram");
 			double displaySize = rs.getDouble("display_size");
 			String processorType = rs.getString("processor_type");
@@ -48,36 +48,71 @@ public class LaptopDAO implements DAO {
 			int hdd = rs.getInt("hdd");
 			String resolution = rs.getString("resolution");
 			String operationSystem = rs.getString("operation_system");
-			laptops.add(new Laptop(displaySize, resolution, model, label, ram, processorType, processorSpeed, videoCardType, hdd, operationSystem, price, image));
+			int id = rs.getInt("id");
+			laptop = new Laptop(displaySize, resolution, model, label, ram, processorType, processorSpeed, videoCardType, hdd, operationSystem, price, image, id);
+		}
+		System.out.println("VRUSHTAM LAPTOP");
+		System.out.println(laptop);
+		return laptop;
+	}
+
+	public Collection<Article> showAll() throws SQLException, InvalidInputException, InvalidInputException {
+		List<Computer> laptops = new ArrayList<Computer>();
+		String query = "SELECT la.*, p.*, v.*, o.*, l.*,r.* FROM laptop la "
+				+ "JOIN processor_type p ON (la.processor_type_id = p.id) "
+				+ "JOIN video_card_type v ON (la.video_card_type_id = v.id) "
+				+ "JOIN operation_system o ON (la.operation_system_id = o.id) "
+				+ "JOIN label l ON (la.label_id = l.id) " + "JOIN resolution r ON(la.resolution_id = r.id) ";
+
+		PreparedStatement ps = connection.prepareStatement(query);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			String label = rs.getString("label");
+			String model = rs.getString("model");
+			double price = rs.getDouble("price");
+			String image = rs.getString("image");
+
+			int ram = rs.getInt("ram");
+			double displaySize = rs.getDouble("display_size");
+			String processorType = rs.getString("processor_type");
+			double processorSpeed = rs.getDouble("processor_speed");
+			String videoCardType = rs.getString("video_card");
+			int hdd = rs.getInt("hdd");
+			String resolution = rs.getString("resolution");
+			String operationSystem = rs.getString("operation_system");
+			int id = rs.getInt("id");
+			laptops.add(new Laptop(displaySize, resolution, model, label, ram, processorType, processorSpeed,
+					videoCardType, hdd, operationSystem, price, image, id));
 		}
 		return Collections.unmodifiableList(laptops);
 	}
-	
+
 	public void insertLaptop(Laptop laptop) throws ArticleException {
 
 		try {
-			//getting processor id
+			// getting processor id
 			System.out.println("VLIZAM V PROCESSOR");
 			int processorId = getOrInsertProcessor(laptop);
-			
-			//getting video card id
+
+			// getting video card id
 			System.out.println("VLIZAM V VIDEOCARD");
 			int videoCardId = getOrInserVideoCard(laptop);
-			
-			//getting operation system id
+
+			// getting operation system id
 			System.out.println("VLIZAM V OS");
 			int operationSystemId = getOrInsertOperationSystem(laptop);
-			
-			//getting label id
+
+			// getting label id
 			System.out.println("VLIZAM V LABEl");
 			int labelId = getOrInserLabel(laptop);
-			
-			//inserting resolution
+
+			// inserting resolution
 			System.out.println("VLIZAM V RESOLUTION");
 			int resolutionId = getOrInsertResolution(laptop);
-			
-			//inserting laptop into database
-			PreparedStatement laptopPs = connection.prepareStatement("INSERT INTO laptop VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+			// inserting laptop into database
+			PreparedStatement laptopPs = connection
+					.prepareStatement("INSERT INTO laptop VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			laptopPs.setInt(1, laptop.getRam());
 			laptopPs.setDouble(2, laptop.getDisplaySize());
 			laptopPs.setInt(3, laptop.getHdd());
@@ -109,10 +144,10 @@ public class LaptopDAO implements DAO {
 		PreparedStatement resolutionPs = connection.prepareStatement(resolutionQuery);
 		ResultSet resolutionRs = resolutionPs.executeQuery();
 		int resolutionId = 0;
-		
-		if(resolutionRs.next()){
+
+		if (resolutionRs.next()) {
 			resolutionId = resolutionRs.getInt("id");
-		}else{
+		} else {
 			resolutionId = new KeysDAO().insertResolution(laptop.getResolution());
 		}
 		return resolutionId;
@@ -124,10 +159,10 @@ public class LaptopDAO implements DAO {
 		PreparedStatement labelPs = connection.prepareStatement(labelQuery);
 		ResultSet labelRs = labelPs.executeQuery();
 		int labelId = 0;
-		
-		if(labelRs.next()){
+
+		if (labelRs.next()) {
 			labelId = labelRs.getInt("id");
-		}else{
+		} else {
 			labelId = new KeysDAO().insertLabel(laptop.getLabel());
 		}
 		System.out.println("IZLEZNAH V LABEL");
@@ -136,14 +171,15 @@ public class LaptopDAO implements DAO {
 
 	private int getOrInsertOperationSystem(Laptop laptop) throws SQLException {
 		System.out.println("VLEZNAH V OS");
-		String operationSystemQuery = "SELECT * FROM operation_system WHERE operation_system LIKE '" + laptop.getOperationSystem() + "';";
+		String operationSystemQuery = "SELECT * FROM operation_system WHERE operation_system LIKE '"
+				+ laptop.getOperationSystem() + "';";
 		PreparedStatement operationSystemPs = connection.prepareStatement(operationSystemQuery);
 		ResultSet operationSystemRs = operationSystemPs.executeQuery();
 		int operationSystemId = 0;
-		
-		if(operationSystemRs.next()){
+
+		if (operationSystemRs.next()) {
 			operationSystemId = operationSystemRs.getInt("id");
-		}else{
+		} else {
 			operationSystemId = new KeysDAO().insertOperationSystem(laptop.getOperationSystem());
 		}
 		return operationSystemId;
@@ -151,14 +187,15 @@ public class LaptopDAO implements DAO {
 
 	private int getOrInserVideoCard(Laptop laptop) throws SQLException {
 		System.out.println("VLEZNAH V VIDEOCARD");
-		String videoCardQuery = "SELECT * FROM video_card_type WHERE video_card LIKE '" + laptop.getVideoCardType() + "';";
+		String videoCardQuery = "SELECT * FROM video_card_type WHERE video_card LIKE '" + laptop.getVideoCardType()
+				+ "';";
 		PreparedStatement videoCardPs = connection.prepareStatement(videoCardQuery);
 		ResultSet videoCardRs = videoCardPs.executeQuery();
 		int videoCardId = 0;
-		
-		if(videoCardRs.next()){
+
+		if (videoCardRs.next()) {
 			videoCardId = videoCardRs.getInt("id");
-		}else{
+		} else {
 			videoCardId = new KeysDAO().insertVideoCard(laptop.getVideoCardType());
 		}
 		return videoCardId;
@@ -166,14 +203,15 @@ public class LaptopDAO implements DAO {
 
 	private int getOrInsertProcessor(Laptop laptop) throws SQLException {
 		System.out.println("VLEZNAH V PROCESOR");
-		String processorQuery = "SELECT * FROM processor_type WHERE processor_type LIKE '" + laptop.getProcessorType() + "';";
+		String processorQuery = "SELECT * FROM processor_type WHERE processor_type LIKE '" + laptop.getProcessorType()
+				+ "';";
 		PreparedStatement processorPs = connection.prepareStatement(processorQuery);
 		ResultSet processorRs = processorPs.executeQuery();
 		int processorId = 0;
-		
-		if(processorRs.next()){
+
+		if (processorRs.next()) {
 			processorId = processorRs.getInt("id");
-		}else{
+		} else {
 			processorId = new KeysDAO().insertProcessor(laptop.getProcessorType());
 		}
 		return processorId;

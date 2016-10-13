@@ -10,8 +10,8 @@ public class Refrigerator extends Article{
 	
 	
 	public Refrigerator(String label, String model, double price, int totalCapacity, String energyClass,
-			String colour, String image) throws InvalidInputException {
-		super(label, model, price,image);
+			String colour, String image, int id) throws InvalidInputException {
+		super(label, model, price,image, id);
 		setTotalCapacity(totalCapacity);
 		setEnergyClass(energyClass);
 		setColour(colour);

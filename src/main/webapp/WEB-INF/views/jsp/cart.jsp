@@ -139,36 +139,34 @@
 							<td class="image">Продукти</td>
 							<td class="description"></td>
 							<td class="price">Цена</td>
-							<td class="quantity">Брой</td>
+							
 							<td class="total">Премахни</td>
 							<td></td>
 						</tr>
 					</thead>
 					<tbody>
+					
+					
+					<c:forEach items="${sessionScope.cart}" var="article">
 						<tr>
 							<td class="cart_product">
-								<a href=""><img src="images/cart/one.png" alt=""></a>
+								<img src="<c:out value="${article.image}"></c:out>" style="width:220px;height:180px;">
 							</td>
 							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
+								<h4 class="labelmodel"><c:out value="${article.model}  ${article.label}"></c:out></h4>
 								<p>Web ID: 1089772</p>
 							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
+							<td class="cart_price cena">
+								<p><c:out value="${article.price} лв"></c:out></p>
 							</td>
 							
+							
 							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+								<button id="${article.id}" name="${article.type}" onclick="getIdAndRemove(this)" class="cart_quantity_delete" ><i class="fa fa-times"></i></button>
 							</td>
 						</tr>
-
+						</c:forEach>
+					
 						
 					</tbody>
 				</table>
@@ -186,7 +184,7 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="chose_area">
-						<ul class="user_info">
+						<ul class="user_info ul">
 							<li class="single_field">
 								<label>Име:</label>
 								<input type="text">
@@ -202,7 +200,7 @@
 								<input type="text">
 							</li>
 						</ul>
-						<ul class="user_info">
+						<ul class="user_info ul">
 							<li class="single_field">
 								<label>Страна:</label>
 								<select>
@@ -238,7 +236,7 @@
 				</div>
 				<div class="col-sm-6">
 					<div class="total_area">
-						<ul>
+						<ul class="ul">
 							<li>Количка:<span>200 лв.</span></li>
 							
 							<li>Доставка:<span>Безплатна</span></li>

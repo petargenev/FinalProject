@@ -254,7 +254,7 @@
 							</td>
 							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${computer.price} лв."></c:out></span></span>
 							<br>
-							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</a>
+							<button   id="${computer.id}" name="computer" onclick="getId(this)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
 							</td>
 							
 							
@@ -291,7 +291,7 @@
 							</td>
 							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${laptop.price} лв."></c:out></span></span>
 							<br>
-							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</a>
+							<button  id="${laptop.id}" name="laptop" onclick="getId(this)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
 							</td>
 							
 							
@@ -307,7 +307,7 @@
 						<c:when test="${ not empty tablets}">
 							<c:forEach items="${tablets}" var="tablet">
 						<table>
-						
+							
 							<tr><td class="labelmodel"><c:out value="Таблет ${tablet.label} ${tablet.model}  "></c:out></td></tr>
 							
 							<tr>
@@ -325,7 +325,7 @@
 							</td>
 							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${tablet.price} лв."></c:out></span></span>
 							<br>
-							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</a>
+							<button id="${tablet.id}" name="tablet" onclick="getId(this)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
 							</td>
 							
 							
@@ -354,7 +354,7 @@
 	
 	
 
-  
+  	
     <script src="js/jquery.js"></script>
 	<script src="js/price-range.js"></script>
     <script src="js/jquery.scrollUp.min.js"></script>

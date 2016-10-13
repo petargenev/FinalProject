@@ -9,9 +9,9 @@ public class Mouse extends Article {
 	private String resolution;
 	
 
-	public Mouse(String label, String model, double price, String resolution, String image)
+	public Mouse(String label, String model, double price, String resolution, String image, int id)
 			throws InvalidInputException {
-		super(label, model, price, image);
+		super(label, model, price, image, id);
 		setResolution(resolution);
 		
 	}

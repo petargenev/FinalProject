@@ -1,6 +1,7 @@
 package com.eshop.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.eshop.dao.UserDAO;
 import com.eshop.exceptions.InvalidInputException;
 import com.eshop.exceptions.UserException;
+import com.eshop.models.Article;
 import com.eshop.models.User;
 
 @Controller
@@ -41,9 +43,10 @@ public class LoginController {
 					session.setAttribute("isAdmin", false);
 				}
 				session.setAttribute("username", userFromDb.getName());
+				session.setAttribute("cart", new ArrayList<Article>());
 				System.out.println(session.getAttribute("username"));
 
-				return "mainpage";
+				return "redirect:/mainpage";
 			} else {
 				return "login";
 			}

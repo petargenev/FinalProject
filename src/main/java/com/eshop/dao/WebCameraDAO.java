@@ -34,10 +34,10 @@ public class WebCameraDAO implements DAO{
 			String image = rs.getString("image");
 			String resolution = rs.getString("resolution");
 			int framesPerSecond = rs.getInt("frames_per_second");
-			
+			int id = rs.getInt("id");
 			
 		
-			webCameras.add(new WebCamera(label, model, price, resolution, framesPerSecond,image));
+			webCameras.add(new WebCamera(label, model, price, resolution, framesPerSecond,image, id));
 		}
 		return Collections.unmodifiableList(webCameras);
 	}

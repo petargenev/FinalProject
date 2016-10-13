@@ -38,8 +38,9 @@ public class MonitorDAO implements DAO{
 			double displaySize = rs.getDouble("display_size");
 			String resolution = rs.getString("resolution");
 			String contrast = rs.getString("contrast");
+			int id = rs.getInt("id");
 			
-			monitors.add(new Monitor(label, model, displayType, displaySize, resolution, contrast, price, image));
+			monitors.add(new Monitor(label, model, displayType, displaySize, resolution, contrast, price, image, id));
 			
 		}
 		return Collections.unmodifiableList(monitors);

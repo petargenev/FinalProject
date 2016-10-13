@@ -9,8 +9,8 @@ public class Dishwasher extends Article {
 	private int temperaturesNumber;
 
 	public Dishwasher(String label, String model, double price, int capacity, String energyClass,
-			int programmesNumber, int temperaturesNumber, String image) throws InvalidInputException {
-		super(label, model, price, image);
+			int programmesNumber, int temperaturesNumber, String image, int id) throws InvalidInputException {
+		super(label, model, price, image, id);
 		setCapacity(capacity);
 		setEnergyClass(energyClass);
 		setProgrammesNumber(programmesNumber);

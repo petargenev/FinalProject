@@ -37,9 +37,9 @@ public class RefrigeratorDAO implements DAO {
 			int totalCapacity = rs.getInt("total_capacity");
 			String energyClass = rs.getString("energy_class");
 			String colour = rs.getString("colour");
+			int id = rs.getInt("id");
 			
-			
-			refrigerators.add(new Refrigerator(label, model, price, totalCapacity, energyClass, colour, image));
+			refrigerators.add(new Refrigerator(label, model, price, totalCapacity, energyClass, colour, image, id));
 		}
 		return Collections.unmodifiableList(refrigerators);
 	}

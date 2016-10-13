@@ -11,8 +11,8 @@ public class Camcorder extends Article{
 	private int digitalZoom;
 	
 	public Camcorder(String image,String label, String model, double price, double resolution, String cameraType, double displaySize,
-			int digitalZoom) throws InvalidInputException, InvalidActivityException {
-		super(label, model, price, image);
+			int digitalZoom, int id) throws InvalidInputException, InvalidActivityException {
+		super(label, model, price, image, id);
 		setResolution(resolution);
 		setCameraType(cameraType);
 		setDisplaySize(displaySize);

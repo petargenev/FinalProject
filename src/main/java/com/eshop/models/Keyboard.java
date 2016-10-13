@@ -7,9 +7,9 @@ public class Keyboard extends Article{
 	
 	private String colour;
 	
-	public Keyboard(String label, String model, double price, String type,  String colour, String image)
+	public Keyboard(String label, String model, double price, String type,  String colour, String image, int id)
 			throws InvalidInputException {
-		super(label, model, price, image);
+		super(label, model, price, image, id);
 		setType(type);
 	
 		setColor(colour);

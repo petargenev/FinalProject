@@ -34,8 +34,8 @@ public class KeyboardDAO implements DAO {
 			String type = rs.getString("type");
 			String color = rs.getString("color");
 			String image = rs.getString("image");
-
-			keyboards.add(new Keyboard(label, model, price, type, color, image));
+			int id = rs.getInt("id");
+			keyboards.add(new Keyboard(label, model, price, type, color, image, id));
 		}
 		return Collections.unmodifiableList(keyboards);
 	}

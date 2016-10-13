@@ -38,7 +38,8 @@ public class CamcorderDAO implements DAO {
 			double displaySize = rs.getDouble("display_size");
 			int digitalZoom = rs.getInt("digital_zoom");
 			String cameraType = rs.getString("camera_type");
-			camcorders.add(new Camcorder(image, label, model, price, resolution, cameraType, displaySize, digitalZoom));
+			int id = rs.getInt("id");
+			camcorders.add(new Camcorder(image, label, model, price, resolution, cameraType, displaySize, digitalZoom, id));
 
 		}
 
