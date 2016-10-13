@@ -83,4 +83,6 @@ function getIdAndRemove(item) {
 //		$(id).html(result);
 
 	});
+	
+	location.reload();
 }

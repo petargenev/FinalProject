@@ -39,6 +39,11 @@ public class AddToCartController {
 			if (articleType.equals("computer")) {
 				ArrayList<Computer> computers = (ArrayList<Computer>) session.getAttribute("cart");
 				computers.add(new ComputerDAO().getComputerById(id));
+				
+				Double currentPrice = (Double)session.getAttribute("carttotalprice");
+				currentPrice += new ComputerDAO().getComputerById(id).getPrice();
+				session.setAttribute("carttotalprice", currentPrice);
+				System.out.println(currentPrice);
 				// for (Computer computer : computers) {
 				// System.out.println(computer);
 				// }
@@ -47,6 +52,10 @@ public class AddToCartController {
 			if (articleType.equals("laptop")) {
 				ArrayList<Laptop> laptops = (ArrayList<Laptop>) session.getAttribute("cart");
 				laptops.add(new LaptopDAO().getLaptopById(id));
+				
+				Double currentPrice = (Double)session.getAttribute("carttotalprice");
+				currentPrice += new LaptopDAO().getLaptopById(id).getPrice();
+				session.setAttribute("carttotalprice", currentPrice);
 				// for (Laptop laptop : laptops) {
 				// System.out.println(laptop);
 				// }
@@ -55,6 +64,10 @@ public class AddToCartController {
 			if (articleType.equals("tablet")) {
 				ArrayList<Tablet> tablets = (ArrayList<Tablet>) session.getAttribute("cart");
 				tablets.add(new TabletDAO().getTabletById(id));
+				
+				Double currentPrice = (Double)session.getAttribute("carttotalprice");
+				currentPrice += new TabletDAO().getTabletById(id).getPrice();
+				session.setAttribute("carttotalprice", currentPrice);
 				// for (Tablet tablet : tablets) {
 				// System.out.println(tablet);
 				// }
@@ -76,26 +89,36 @@ public class AddToCartController {
 			ArrayList<Computer> computers = (ArrayList<Computer>) session.getAttribute("cart");
 			
 			computers.remove(new ComputerDAO().getComputerById(id));
-			return "redirect:/cart";
+			
+			Double currentPrice = (Double)session.getAttribute("carttotalprice");
+			currentPrice -= new ComputerDAO().getComputerById(id).getPrice();
+			session.setAttribute("carttotalprice", currentPrice);
+			
 		}
 
 		if (articleType.equals("laptop")) {
 			ArrayList<Laptop> laptops = (ArrayList<Laptop>) session.getAttribute("cart");
 			laptops.remove(new LaptopDAO().getLaptopById(id));
-			return "redirect:/cart";
+			
+			Double currentPrice = (Double)session.getAttribute("carttotalprice");
+			currentPrice -= new LaptopDAO().getLaptopById(id).getPrice();
+			session.setAttribute("carttotalprice", currentPrice);
 			
 		}
 
 		if (articleType.equals("tablet")) {
 			ArrayList<Tablet> tablets = (ArrayList<Tablet>) session.getAttribute("cart");
 			tablets.remove(new TabletDAO().getTabletById(id));
-			return "redirect:/cart";
-			// for (Tablet tablet : tablets) {
-			// System.out.println(tablet);
-			// }
+			
+			Double currentPrice = (Double)session.getAttribute("carttotalprice");
+			currentPrice -= new TabletDAO().getTabletById(id).getPrice();
+			session.setAttribute("carttotalprice", currentPrice);
+			
 		}
 		
 		return "cart";
 	}
+	
+	
 
 }

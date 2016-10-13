@@ -237,7 +237,7 @@
 				<div class="col-sm-6">
 					<div class="total_area">
 						<ul class="ul">
-							<li>Количка:<span>200 лв.</span></li>
+							<li>Количка:<span><c:out value="${sessionScope.carttotalprice} лв"></c:out></span></li>
 							
 							<li>Доставка:<span>Безплатна</span></li>
 							<li>Общо: <span>200 лв.</span></li>

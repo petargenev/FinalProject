@@ -44,6 +44,8 @@ public class LoginController {
 				}
 				session.setAttribute("username", userFromDb.getName());
 				session.setAttribute("cart", new ArrayList<Article>());
+				Double price = new Double(0);
+				session.setAttribute("carttotalprice", price);
 				System.out.println(session.getAttribute("username"));
 
 				return "redirect:/mainpage";
