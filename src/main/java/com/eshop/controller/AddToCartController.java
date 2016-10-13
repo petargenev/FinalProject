@@ -1,9 +1,12 @@
 package com.eshop.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -29,7 +32,7 @@ public class AddToCartController {
 	}
 
 	@RequestMapping(value = "/getArticleId", method = RequestMethod.POST)
-	public String addToCart(HttpServletRequest request) throws SQLException, InvalidInputException {
+	public String addToCart(HttpServletRequest request, HttpServletResponse response) throws SQLException, InvalidInputException, IOException {
 		HttpSession session = request.getSession();
 
 		int id = Integer.parseInt(request.getParameter("Id"));
@@ -37,28 +40,59 @@ public class AddToCartController {
 
 		if (session.getAttribute("username") != null) {
 			if (articleType.equals("computer")) {
+				//adding article to the cart
 				ArrayList<Computer> computers = (ArrayList<Computer>) session.getAttribute("cart");
-				computers.add(new ComputerDAO().getComputerById(id));
+				//checking if article is in the cart
+				 boolean isExisting = false;
+				for (Computer computer : computers) {
+					if(computer.equals(new ComputerDAO().getComputerById(id))){
+						isExisting = true;
+						break;
+					}
+					
+				}
 				
-				Double currentPrice = (Double)session.getAttribute("carttotalprice");
-				currentPrice += new ComputerDAO().getComputerById(id).getPrice();
-				session.setAttribute("carttotalprice", currentPrice);
-				System.out.println(currentPrice);
-				// for (Computer computer : computers) {
-				// System.out.println(computer);
-				// }
+				if(!isExisting){
+					computers.add(new ComputerDAO().getComputerById(id));
+					//increasing total price
+					Double currentPrice = (Double)session.getAttribute("carttotalprice");
+					currentPrice += new ComputerDAO().getComputerById(id).getPrice();
+					session.setAttribute("carttotalprice", currentPrice);
+				}else{
+					PrintWriter out = response.getWriter();
+					out.print("Article exists!");
+					out.flush();
+					out.close();
+				}
+				
+				
+				
 			}
 
 			if (articleType.equals("laptop")) {
 				ArrayList<Laptop> laptops = (ArrayList<Laptop>) session.getAttribute("cart");
-				laptops.add(new LaptopDAO().getLaptopById(id));
+				boolean isExisting = false;
+				for (Laptop laptop : laptops) {
+					if(laptop.equals(new LaptopDAO().getLaptopById(id))){
+						isExisting = true;
+						break;
+					}
+					
+				}
 				
-				Double currentPrice = (Double)session.getAttribute("carttotalprice");
-				currentPrice += new LaptopDAO().getLaptopById(id).getPrice();
-				session.setAttribute("carttotalprice", currentPrice);
-				// for (Laptop laptop : laptops) {
-				// System.out.println(laptop);
-				// }
+				if(!isExisting){
+					laptops.add(new LaptopDAO().getLaptopById(id));
+					//increasing total price
+					Double currentPrice = (Double)session.getAttribute("carttotalprice");
+					currentPrice += new LaptopDAO().getLaptopById(id).getPrice();
+					session.setAttribute("carttotalprice", currentPrice);
+				}else{
+					PrintWriter out = response.getWriter();
+					out.print("Article exists!");
+					out.flush();
+					out.close();
+				}
+				
 			}
 
 			if (articleType.equals("tablet")) {

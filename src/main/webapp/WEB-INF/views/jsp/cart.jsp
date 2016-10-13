@@ -128,7 +128,8 @@
 			</div>
 		</div><!--/header-bottom-->
 	</header><!--/header-->
-
+	
+<c:if test="${sessionScope.username != null}">
 	<section id="cart_items">
 		<div class="container">
 			
@@ -173,7 +174,7 @@
 			</div>
 		</div>
 	</section> <!--/#cart_items-->
-
+</c:if>
 	<section id="do_action">
 	<c:if test="${sessionScope.username != null}">
 		<div class="container">
@@ -254,7 +255,7 @@
 		<c:if test="${sessionScope.username == null}">
 		<div class="container">
 		<div class="heading">
-				<h3>За да осъществите поръчката, моля впишете се в системата!</h3>
+				<h3>За да ползвате количката и да осъществите поръчка, моля впишете се в системата!</h3>
 				<!-- <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p> -->
 			</div>
 		</div>
