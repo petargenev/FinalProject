@@ -55,6 +55,40 @@ public class LaptopDAO implements DAO {
 		System.out.println(laptop);
 		return laptop;
 	}
+	
+	public Collection<Article> getLaptopByLabel (String laptopLabel) throws SQLException, InvalidInputException{
+		List<Computer> laptops = new ArrayList<Computer>();
+		String query = "SELECT la.*, p.*, v.*, o.*, l.*,r.* FROM laptop la "
+				+ "JOIN processor_type p ON (la.processor_type_id = p.id) "
+				+ "JOIN video_card_type v ON (la.video_card_type_id = v.id) "
+				+ "JOIN operation_system o ON (la.operation_system_id = o.id) "
+				+ "JOIN label l ON (la.label_id = l.id) "
+				+ "JOIN resolution r ON(la.resolution_id = r.id) "
+				+ "WHERE l.label LIKE '"+laptopLabel + "';";
+				
+
+		PreparedStatement ps = connection.prepareStatement(query);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			String label = rs.getString("label");
+			String model = rs.getString("model");
+			double price = rs.getDouble("price");
+			String image = rs.getString("image");
+
+			int ram = rs.getInt("ram");
+			double displaySize = rs.getDouble("display_size");
+			String processorType = rs.getString("processor_type");
+			double processorSpeed = rs.getDouble("processor_speed");
+			String videoCardType = rs.getString("video_card");
+			int hdd = rs.getInt("hdd");
+			String resolution = rs.getString("resolution");
+			String operationSystem = rs.getString("operation_system");
+			int id = rs.getInt("id");
+			laptops.add(new Laptop(displaySize, resolution, model, label, ram, processorType, processorSpeed,
+					videoCardType, hdd, operationSystem, price, image, id));
+		}
+		return Collections.unmodifiableList(laptops);
+	}
 
 	public Collection<Article> showAll() throws SQLException, InvalidInputException, InvalidInputException {
 		List<Computer> laptops = new ArrayList<Computer>();

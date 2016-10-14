@@ -1,5 +1,7 @@
 package com.eshop.models;
 
+import org.springframework.context.annotation.ComponentScan;
+
 import com.eshop.exceptions.InvalidInputException;
 
 public class Label {
@@ -16,7 +18,7 @@ public class Label {
 	public void setName(String name) throws InvalidInputException {
 		if(name != null && !name.isEmpty())
 			this.name = name;
-		else throw new InvalidInputException("Invalid name!");
+
 	}
 	
 	public void increaseCount(){

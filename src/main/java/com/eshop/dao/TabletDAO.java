@@ -42,6 +42,34 @@ Connection connection = DBConnection.getInstance().getConnection();
 		}
 		return tablet;
 	}
+	
+	public Collection<Article> getTabletByLabel (String tabletLabel) throws SQLException, InvalidInputException{
+		List<Article> tablets = new ArrayList<Article>();
+		String query = "SELECT t.*, l.*, c.*,r.* FROM tablet t "+
+						"JOIN label l ON (t.label_id = l.id) "+
+						"JOIN cpu c ON (t.cpu_id = c.id) "+
+						"JOIN resolution r ON (t.resolution_id = r.id) " +
+						"WHERE l.label LIKE '"+tabletLabel+"';";
+
+		PreparedStatement ps = connection.prepareStatement(query);
+		ResultSet rs = ps.executeQuery();
+		
+		while (rs.next()) {
+			String label = rs.getString("label");
+			String model = rs.getString("model");
+			double price = rs.getDouble("price");
+			String image = rs.getString("image");
+			double displaySize = rs.getDouble("display_size");
+			String cpu = rs.getString("cpu");
+			String displayType = rs.getString("display_type");
+			String resolution = rs.getString("resolution");
+			int id = rs.getInt("id");
+			
+			
+			tablets.add(new Tablet(label, model, price, cpu, displaySize, displayType, resolution, image, id));
+		}
+		return Collections.unmodifiableList(tablets);
+	}
 	public Collection<Article> showAll()
 			throws SQLException, InvalidInputException, InvalidInputException {
 		List<Article> tablets = new ArrayList<Article>();

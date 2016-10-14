@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -203,10 +205,12 @@
 							<h2>Марки</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
-								<c:choose>
+								<li><a href="" name="Всички"  onclick="showByLabel(this)" > <span class="pull-right">(<c:out value="${sessionScope.articlesCount}"/>)</span>ВСИЧКИ</a></li>
+								<c:choose>								
 									<c:when test="${ not empty labels}">
 										<c:forEach items="${labels}" var="label">
-											<li><a href=""> <span class="pull-right">(<c:out value="${label.count}"/>)</span><c:out value="${label.name}"/></a></li>
+										
+											<li><a href="" name="${label.name}"  onclick="showByLabel(this)"> <span class="pull-right">(<c:out value="${label.count}"/>)</span><c:out value="${label.name}"/></a></li>
 											
 											</c:forEach>
 									</c:when>
@@ -234,9 +238,13 @@
 					<div class="features_items"><!--features_items-->
 					
 						<h2 class="title text-center">Продукти</h2>
+						
+					
 						<c:choose>
-						<c:when test="${ not empty computers}">
+    						<c:when test="${sessionScope.label != Всички && not empty sessionScope.label}">
+      							<c:if test="${ not empty computers}">
 							<c:forEach items="${computers}" var="computer">
+							<c:if test="${computer.model == sessionScope.label}">
 						<table>
 						
 							<tr><td class="labelmodel"><c:out value="Компютър ${computer.model}  ${computer.label}"></c:out></td></tr>
@@ -246,8 +254,9 @@
 							<td class="tdharakteristiki"><p class="harakteristiki">ХАРАКТЕРИСТИКИ:</p>
 								
 								<ul >
-									<li class="lisize"><span>RAM ПАМЕТ:</span> <span class="stoinosti"><c:out value="${computer.ram} GB"></c:out></span></li>
-									<li class="lisize"><span>ТИП ПРОЦЕСОР:</span> <span class="stoinosti"><c:out value="${computer.processorType}"></c:out></span></li>
+									
+									<li class="lisize"><span>RAM ПАМЕТ:  </span> <span class="stoinosti"><c:out value="${computer.ram} GB" ></c:out></span></li>
+									<li class="lisize"><span>ТИП ПРОЦЕСОР:</span> <span class="stoinosti"><c:out value="${computer.processorType}" ></c:out></span></li>
 									<li class="lisize"><span>ЧЕСТОТА НА ПРОЦЕСОРА:</span> <span class="stoinosti"><c:out value="${computer.processorSpeed} GHz"></c:out></span></li>
 									<li class="lisize"><span>ВИДЕО КАРТА:</span> <span class="stoinosti"><c:out value="${computer.videoCardType}"></c:out></span></li>
 									<li class="lisize"><span>HDD:</span> <span class="stoinosti"><c:out value="${computer.hdd} GB"></c:out></span></li>
@@ -265,13 +274,15 @@
 							
 						</table>
 						<hr>
+						</c:if>
 					</c:forEach>
-					</c:when>
-					</c:choose>			
 					
-					<c:choose>
-						<c:when test="${ not empty laptops}">
+					</c:if>	
+					
+					
+						<c:if test="${ not empty laptops}">
 							<c:forEach items="${laptops}" var="laptop">
+							<c:if test="${laptop.model == sessionScope.label}">
 						<table>
 						
 							<tr><td class="labelmodel"><c:out value="Лаптоп ${laptop.model}  ${laptop.label}"></c:out></td></tr>
@@ -302,13 +313,14 @@
 							
 						</table>
 						<hr>
+						</c:if>
 					</c:forEach>
-					</c:when>
-					</c:choose>		
+					</c:if>	
 					
-					<c:choose>
-						<c:when test="${ not empty tablets}">
+					
+						<c:if test="${ not empty tablets}">
 							<c:forEach items="${tablets}" var="tablet">
+							<c:if test="${tablet.label == sessionScope.label}">
 						<table>
 							
 							<tr><td class="labelmodel"><c:out value="Таблет ${tablet.label} ${tablet.model}  "></c:out></td></tr>
@@ -336,10 +348,125 @@
 							
 						</table>
 						<hr>
-					</c:forEach>
-					</c:when>
-					</c:choose>		
+						</c:if>
+									</c:forEach>
+								</c:if>
+    							</c:when>
+    							<c:otherwise>
+       						<c:if test="${ not empty computers}">
+							<c:forEach items="${computers}" var="computer">
+							
+						<table>
 						
+							<tr><td class="labelmodel"><c:out value="Компютър ${computer.model}  ${computer.label}"></c:out></td></tr>
+							
+							<tr>
+							<td><img src="<c:out value="${computer.image}"></c:out>" style="width:220px;height:180px;"></td> 
+							<td class="tdharakteristiki"><p class="harakteristiki">ХАРАКТЕРИСТИКИ:</p>
+								
+								<ul >
+									
+									<li class="lisize"><span>RAM ПАМЕТ:  </span> <span class="stoinosti"><c:out value="${computer.ram} GB" ></c:out></span></li>
+									<li class="lisize"><span>ТИП ПРОЦЕСОР:</span> <span class="stoinosti"><c:out value="${computer.processorType}" ></c:out></span></li>
+									<li class="lisize"><span>ЧЕСТОТА НА ПРОЦЕСОРА:</span> <span class="stoinosti"><c:out value="${computer.processorSpeed} GHz"></c:out></span></li>
+									<li class="lisize"><span>ВИДЕО КАРТА:</span> <span class="stoinosti"><c:out value="${computer.videoCardType}"></c:out></span></li>
+									<li class="lisize"><span>HDD:</span> <span class="stoinosti"><c:out value="${computer.hdd} GB"></c:out></span></li>
+									<li class="lisize"><span>ОПЕРАЦИОННА СИСТЕМА:</span> <span class="stoinosti"><c:out value="${computer.operationSystem}"></c:out></span></li>
+								
+								</ul>
+							</td>
+							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${computer.price} лв."></c:out></span></span>
+							<br>
+							<button   id="${computer.id}" name="computer" onclick="getId(this)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
+							</td>
+							
+							
+							</tr>
+							
+						</table>
+						<hr>
+						
+					</c:forEach>
+					
+					</c:if>	
+					
+					
+						<c:if test="${ not empty laptops}">
+							<c:forEach items="${laptops}" var="laptop">
+							
+						<table>
+						
+							<tr><td class="labelmodel"><c:out value="Лаптоп ${laptop.model}  ${laptop.label}"></c:out></td></tr>
+							
+							<tr>
+							<td><img src="<c:out value="${laptop.image}"></c:out>" style="width:220px;height:180px;"></td> 
+							<td class="tdharakteristiki"><p class="harakteristiki">ХАРАКТЕРИСТИКИ:</p>
+								
+								<ul >
+									<li class="lisize"><span>RAM ПАМЕТ:</span> <span class="stoinosti"><c:out value="${laptop.ram} GB"></c:out></span></li>
+									<li class="lisize"><span>ТИП ПРОЦЕСОР:</span> <span class="stoinosti"><c:out value="${laptop.processorType}"></c:out></span></li>
+									<li class="lisize"><span>ЧЕСТОТА НА ПРОЦЕСОРА:</span> <span class="stoinosti"><c:out value="${laptop.processorSpeed} GHz"></c:out></span></li>
+									<li class="lisize"><span>ВИДЕО КАРТА:</span> <span class="stoinosti"><c:out value="${laptop.videoCardType}"></c:out></span></li>
+									<li class="lisize"><span>HDD:</span> <span class="stoinosti"><c:out value="${laptop.hdd} GB"></c:out></span></li>
+									<li class="lisize"><span>ОПЕРАЦИОННА СИСТЕМА:</span> <span class="stoinosti"><c:out value="${laptop.operationSystem}"></c:out></span></li>
+									<li class="lisize"><span>ГОЛЕМИНА НА ЕКРАНА:</span> <span class="stoinosti"><c:out value='${laptop.displaySize} " '></c:out></span></li>
+									<li class="lisize"><span>РЕЗОЛЮЦИЯ:</span> <span class="stoinosti"><c:out value="${laptop.resolution}"></c:out></span></li>
+								
+								</ul>
+							</td>
+							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${laptop.price} лв."></c:out></span></span>
+							<br>
+							<button  id="${laptop.id}" name="laptop" onclick="getId(this)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
+							</td>
+							
+							
+							</tr>
+							
+						</table>
+						<hr>
+						
+					</c:forEach>
+					</c:if>	
+					
+					
+						<c:if test="${ not empty tablets}">
+							<c:forEach items="${tablets}" var="tablet">
+							
+						<table>
+							
+							<tr><td class="labelmodel"><c:out value="Таблет ${tablet.label} ${tablet.model}  "></c:out></td></tr>
+							
+							<tr>
+							<td><img src="<c:out value="${tablet.image}"></c:out>" style="width:220px;height:180px;"></td> 
+							<td class="tdharakteristiki"><p class="harakteristiki">ХАРАКТЕРИСТИКИ:</p>
+								
+								<ul >
+									<li class="lisize"><span>ТИП ПРОЦЕСОР:</span> <span class="stoinosti"><c:out value="${tablet.cpu}"></c:out></span></li>
+									<li class="lisize"><span>ТЕХНОЛОГИЯ НА ДИСПЛЕЯ:</span> <span class="stoinosti"><c:out value="${tablet.displayType}"></c:out></span></li>
+									<li class="lisize"><span>РАЗМЕР НА ЕКРАНА:</span> <span class="stoinosti"><c:out value='${tablet.displaySize} "'></c:out></span></li>
+									<li class="lisize"><span>РЕЗОЛЮЦИЯ НА ДИСПЛЕЯ:</span> <span class="stoinosti"><c:out value="${tablet.resolution}"></c:out></span></li>
+									
+								
+								</ul>
+							</td>
+							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${tablet.price} лв."></c:out></span></span>
+							<br>
+							<button id="${tablet.id}" name="tablet" onclick="getId(this)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
+							</td>
+							
+							
+							</tr>
+							
+						</table>
+						<hr>
+						
+									</c:forEach>
+									</c:if>
+  								  </c:otherwise>
+   							 </c:choose>			
+						
+						
+					
 						<ul class="pagination">
 							<li class="active"><a href="">1</a></li>
 							<li><a href="">2</a></li>

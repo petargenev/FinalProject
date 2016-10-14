@@ -16,14 +16,16 @@ public class LogoutController {
 	@RequestMapping(value="/LogoutController", method = RequestMethod.GET)
 	public String logoutUser(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		session.invalidate();
-		return "mainpage";
+		session.removeAttribute("username");
+		session.removeAttribute("cart");
+		return "redirect:/mainpage";
 	}
 	
 	@RequestMapping(value="/LogoutCartController", method = RequestMethod.GET)
 	public String logoutUserCart(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		session.invalidate();
+		session.removeAttribute("username");
+		session.removeAttribute("cart");
 		return "cart";
 	}
 

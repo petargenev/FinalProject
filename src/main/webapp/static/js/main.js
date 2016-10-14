@@ -74,7 +74,7 @@ function getId(item) {
 	
 }
 
-s
+
 
 function getIdAndRemove(item) {
 	var itemId = item.id
@@ -85,7 +85,7 @@ function getIdAndRemove(item) {
 		Id : itemId
 
 	};
-	if (confirm("Сигурни ли сте, че искате да добавите дадения артикул в количката си ?") == true){
+	if (confirm("Сигурни ли сте, че искате да премахнете дадения артикул от количката си ?") == true){
 	$.post("removeArticle", data, function(result) {
 		// var id = '#postedFor' + postId;
 		// $(id).html(result);
@@ -95,8 +95,23 @@ function getIdAndRemove(item) {
 	location.reload();
 }
 
-function addArticle() {
-    
-    
+function showByLabel(item) {
+	
+	
+	var itemName = item.name;
+	// var url = '@Url.Action("UpdateReport/", "Report")';
+	console.log(itemName);
+	var data = {
+		label : itemName
+		
+	};
+	console.log(data);
+	
+	$.post("showByLabel", data, function(result) {
+		
+	});
+	
+	
+
    
 }

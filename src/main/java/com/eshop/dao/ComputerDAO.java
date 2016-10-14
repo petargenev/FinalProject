@@ -9,8 +9,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
 import com.eshop.connection.DBConnection;
 import com.eshop.exceptions.ArticleException;
 import com.eshop.exceptions.InvalidInputException;
@@ -47,7 +45,37 @@ public class ComputerDAO implements DAO {
 		}
 		return computer;
 	}
+	
+	public Collection<Article> getComputerByLabel(String computerLabel) throws SQLException, InvalidInputException{
+		List<Computer> computers = new ArrayList<Computer>();
+		String query = "SELECT c.*, p.*, v.*, o.*, l.* FROM computer c "
+				+ "JOIN processor_type p ON (c.processor_type_id = p.id) "
+				+ "JOIN video_card_type v ON (c.video_card_type_id = v.id) "
+				+ "JOIN operation_system o ON (c.operation_system_id = o.id) "
+				+ "JOIN label l ON (c.label_id = l.id) "
+				+ "WHERE l.label LIKE '" +computerLabel +"';";
 
+		PreparedStatement ps = connection.prepareStatement(query);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			String label = rs.getString("label");
+			String model = rs.getString("model");
+			double price = rs.getDouble("price");
+			String image = rs.getString("image");
+
+			int ram = rs.getInt("ram");
+			String processorType = rs.getString("processor_type");
+			double processorSpeed = rs.getDouble("processor_speed");
+			String videoCardType = rs.getString("video_card");
+			int hdd = rs.getInt("hdd");
+			String operationSystem = rs.getString("operation_system");
+			int id = rs.getInt("id");
+			computers.add(new Computer(model, label, ram, processorType, processorSpeed, videoCardType, hdd,
+					operationSystem, price, image, id));
+		}
+		return Collections.unmodifiableList(computers);
+	}
+	
 	public Collection<Article> showAll() throws SQLException, InvalidInputException, InvalidInputException {
 		List<Computer> computers = new ArrayList<Computer>();
 		String query = "SELECT c.*, p.*, v.*, o.*, l.* FROM computer c "
