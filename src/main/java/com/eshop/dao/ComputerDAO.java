@@ -75,6 +75,13 @@ public class ComputerDAO implements DAO {
 		}
 		return Collections.unmodifiableList(computers);
 	}
+	
+	public void deleteComputer(int id) throws SQLException{
+		String deleteQuery = "DELETE FROM computer WHERE id LIKE '" + id + "';";
+		PreparedStatement deletePs = connection.prepareStatement(deleteQuery);
+		deletePs.executeUpdate();
+		
+	}
 
 	public void insertComputer(Computer computer) throws ArticleException {
 

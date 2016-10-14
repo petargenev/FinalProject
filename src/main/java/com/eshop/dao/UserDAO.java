@@ -24,12 +24,16 @@ public class UserDAO {
 		
 		
 		try {
-			PreparedStatement ps = connection.prepareStatement("INSERT INTO user VALUES(null, ?, ?, md5(?))");	
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO user VALUES(null, ?, ?, md5(?), ?)");	
+			System.out.println(user.getName());
+			System.out.println(user.getEmail());
+			System.out.println(user.getPassword());
 			ps.setString(1, user.getName());
 			
 			ps.setString(2, user.getEmail());
 			
 			ps.setString(3, user.getPassword());
+			ps.setInt(4, 0);
 			
 			ps.executeUpdate();
 		} catch (SQLException e) {

@@ -70,6 +70,13 @@ Connection connection = DBConnection.getInstance().getConnection();
 		return Collections.unmodifiableList(tablets);
 	}
 	
+	public void deleteTablet(int id) throws SQLException{
+		String deleteQuery = "DELETE FROM tablet WHERE id LIKE '" + id + "';";
+		PreparedStatement deletePs = connection.prepareStatement(deleteQuery);
+		deletePs.executeUpdate();
+		
+	}
+	
 	public void insertTable(Tablet tablet){
 		try {
 			//inserting lable

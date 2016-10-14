@@ -11,6 +11,28 @@
 
 @import url(http://fonts.googleapis.com/css?family=Abel);
 
+.styled-select select {
+	background: transparent;
+	width: 210px;
+	padding: 5px;
+	font-size: 18px;
+	line-height: 1;
+	border: 0;
+	border-radius: 0;
+	text-align-last:center; 
+	
+	height: 34px;
+	-webkit-appearance: none;
+}
+
+.styled-select {
+   width: 210px;
+   height: 34px;
+   overflow: hidden;
+   text-align-last:center;
+   border: 1px solid #ccc;
+   }
+
 .labelmodel {
 	color: #004fa2;
 	font-size: 24px
@@ -24,38 +46,44 @@ li span {
 	color: black; /* text color */
 }
 
-.cena{
+.cena {
 	color: red;
 	font-weight: bold;
 }
 
-.cqlacena{
+.cqlacena {
 	font-size: 20px;
-	
 }
-.tdcena{
+
+.tdcena {
 	vertical-align: top;
 }
+
 .snimka {
 	color: black; /* text color */
 }
-.cart1{
+
+.cart1 {
 	font-size: 16px;
 }
-.lisize{
+
+.lisize {
 	font-size: 15px;
 }
-.categories{
+
+.categories {
 	font-size: 17px;
 }
 
-.subcategories{
+.subcategories {
 	font-size: 15px;
 }
-.stoinosti{
+
+.stoinosti {
 	color: #004fa2;
 	font-weight: bold;
 }
+
 .tdharakteristiki {
 	vertical-align: top;
 }
@@ -384,30 +412,46 @@ ul.sub-menu {
 opacity
 
 
+
+
 :
 
+
  
+
 
 1;
 -webkit-transform
 
 
+
+
 :
+
 
  
 
+
 translateY
+
+
 
 
 (0);
 transform
 
 
+
+
 :
+
 
  
 
+
 translateY
+
+
 
 
 (0);

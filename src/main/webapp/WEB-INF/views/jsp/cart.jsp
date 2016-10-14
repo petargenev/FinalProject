@@ -244,8 +244,9 @@
 							<li>Общо: <span>200 лв.</span></li>
 						</ul>
 							
-							<a class="btn btn-default check_out" href="" class="pull-right" >Поръчай</a>
-							
+							<form action="./checkout" method="post">
+								<button type="submit" class="btn btn-default check_out"  class="pull-right" >Поръчай</button>
+							</form>
 					</div>
 				</div>
 			</div>

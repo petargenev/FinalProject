@@ -27,26 +27,28 @@ public class LoginController {
 	// }
 
 	@RequestMapping(value = "/LoginController", method = RequestMethod.POST)
-	public String logUser(@ModelAttribute User user, HttpServletRequest request) throws UserException {
-
-		System.out.println(user);
-
+	public String logUser(@ModelAttribute User user, HttpServletRequest request) throws UserException, InvalidInputException, SQLException {
+		
 		User userFromDb = null;
+
+		 
 		try {
 			userFromDb = new UserDAO().getUser(user.getEmail(), user.getPassword());
 			if (userFromDb.getName() != null) {
 
 				HttpSession session = request.getSession();
-				if (userFromDb.isAdministrator()) {
-					session.setAttribute("isAdmin", true);
-				} else {
-					session.setAttribute("isAdmin", false);
-				}
 				session.setAttribute("username", userFromDb.getName());
 				session.setAttribute("cart", new ArrayList<Article>());
 				Double price = new Double(0);
 				session.setAttribute("carttotalprice", price);
 				System.out.println(session.getAttribute("username"));
+				
+				if (userFromDb.isAdministrator()) {
+					session.setAttribute("isAdmin", true);
+				} else {
+					session.setAttribute("isAdmin", false);
+				}
+				
 
 				return "redirect:/mainpage";
 			} else {

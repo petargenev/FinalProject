@@ -20,12 +20,14 @@ public class RegistrationController {
 	}
 
 	@RequestMapping(value="/RegistrationController", method = RequestMethod.POST)
-	public String addNewUser(@ModelAttribute User user) throws UserException {
+	public String addNewUser(@ModelAttribute User user, Model model) throws UserException {
+		
 		
 		new UserDAO().registerUser(user);
+		model.addAttribute(user);
 		System.out.println(user);
 
-		return "login";
+		return "forward:/LoginController";
 	}
 
 }

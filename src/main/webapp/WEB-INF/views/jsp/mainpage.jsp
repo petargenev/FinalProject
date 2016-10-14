@@ -203,11 +203,14 @@
 							<h2>Марки</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
-									<li><a href=""> <span class="pull-right">(50)</span>Acer</a></li>
-									<li><a href=""> <span class="pull-right">(56)</span>ASUS</a></li>
-									<li><a href=""> <span class="pull-right">(27)</span>Lenovo</a></li>
-									<li><a href=""> <span class="pull-right">(32)</span>Braun</a></li>
-							
+								<c:choose>
+									<c:when test="${ not empty labels}">
+										<c:forEach items="${labels}" var="label">
+											<li><a href=""> <span class="pull-right">(<c:out value="${label.count}"/>)</span><c:out value="${label.name}"/></a></li>
+											
+											</c:forEach>
+									</c:when>
+								</c:choose>
 								</ul>
 							</div>
 						</div><!--/brands_products-->

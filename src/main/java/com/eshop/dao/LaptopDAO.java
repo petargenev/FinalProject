@@ -86,6 +86,13 @@ public class LaptopDAO implements DAO {
 		}
 		return Collections.unmodifiableList(laptops);
 	}
+	
+	public void deleteLaptop(int id) throws SQLException{
+		String deleteQuery = "DELETE FROM laptop WHERE id LIKE '" + id + "';";
+		PreparedStatement deletePs = connection.prepareStatement(deleteQuery);
+		deletePs.executeUpdate();
+		
+	}
 
 	public void insertLaptop(Laptop laptop) throws ArticleException {
 
