@@ -61,19 +61,10 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-4">
-						<!-- <div class="logo pull-left">
-							<a href="index.html"><img src="images/home/logo.png" alt="" /></a>
-						</div> -->
+						
 						<div class="btn-group pull-left">
 							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									BG
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									
-									<li><a href="">UK</a></li>
-								</ul>
+								<iframe scrolling="no" frameborder="no" clocktype="html5" style="overflow:hidden;border:0;margin:0;padding:0;width:180px;height:60px;"src="http://www.clocklink.com/html5embed.php?clock=004&timezone=Bulgaria_Sofia&color=orange&size=180&Title=&Message=&Target=&From=2016,1,1,0,0,0&Color=orange"></iframe>
 							</div>
 							
 							
@@ -111,36 +102,18 @@
 				</div>
 			</div>
 		</div><!--/header-middle-->
-	
+	<!-- 
 		<div class="header-bottom"><!--header-bottom-->
-			<!-- <!-- <div class="container">
+			<!--  <div class="container">
 				<div class="row">
-					<div class="col-sm-9">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
-						</div>
-						<div class="breadcrumbs">
-							<ol class="breadcrumb">
-								<li><a href="#">Начало</a></li>
-								
-							</ol>
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<div class="search_box pull-right">
-							<input type="text" placeholder="Търсене"/>
-						</div>
-					</div>
+					<div >
+							<a><img src="C:\Users\petar\Desktop\MyProject\src\main\webapp\static\images\koren.png" style="width:50px;height:50px;" /></a>
+						</div> 
 				</div>
 				</div>
-			</div> --> 
+			</div> 
 	</header>
-	
+	-->
 	<section id="advertisement">
 		<div class="container">
 			

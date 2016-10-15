@@ -1,6 +1,3 @@
-/*price range*/
-
-$('#sl2').slider();
 
 var RGBChange = function() {
 	$('#RGB').css(
@@ -39,17 +36,17 @@ $(document).ready(function() {
 	});
 });
 
-function Validatebodypanelbumper(theForm) {
-	var regexp;
-	var extension = new FormData(theForm).get("file").value.lastIndexOf('.');
-	if ((extension.toLowerCase() != ".gif")
-			&& (extension.toLowerCase() != ".jpg") && (extension != "")) {
-		alert("The \"FileUpload\" field contains an unapproved filename.");
-		theForm.file.focus();
-		return false;
-	}
-	return true;
-}
+//function Validatebodypanelbumper(theForm) {
+//	var regexp;
+//	var extension = new FormData(theForm).get("file").value.lastIndexOf('.');
+//	if ((extension.toLowerCase() != ".gif")
+//			&& (extension.toLowerCase() != ".jpg") && (extension != "")) {
+//		alert("The \"FileUpload\" field contains an unapproved filename.");
+//		theForm.file.focus();
+//		return false;
+//	}
+//	return true;
+//}
 
 function getId(item) {
 	var itemId = item.id

@@ -96,7 +96,7 @@
 		</div>
 
 		<button class="btn btn-default update" value="showCompDiv" onclick="showComputer()">ДОБАВИ КОМПЮТЪР</button>
-		<button class="btn btn-default update" value="showTabletDiv" onclick="showTablet()" onclick="clearComputerFields">ДОБАВИ ТАБЛЕТ</button>
+		<button class="btn btn-default update" value="showTabletDiv" onclick="showTablet()">ДОБАВИ ТАБЛЕТ</button>
 		<button class="btn btn-default update" value="showLaptopDiv" onclick="showLaptop()" >ДОБАВИ ЛАПТОП</button>
 		
 		<div id="computerDiv"  style="display:none;" class="container">
@@ -106,7 +106,7 @@
 				<!-- <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p> -->
 			</div>
 			
-			<form:form commandName="computer" action="./addcomputer" method="post" id="computerForm" enctype="multipart/form-data" onsubmit="Validatebodypanelbumper()">
+			<form:form commandName="computer" action="./addcomputer" method="post" id="computerForm" enctype="multipart/form-data" >
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="chose_area">
@@ -154,16 +154,16 @@
 							<li >
 								<label>Снимка</label>
 						
-									<input type="file"  id="file" name="file" accept="image/*" onchange="readURL(this);" />
-							       	<img class="snimka" id="blah" src="#" alt="Вашата снимка" />
+									<input type="file" name="file" id="computerImage"  onchange="ValidateFileUploadComputer()" />
+							       	<img class="snimka" id="imageC" src="#" alt="Вашата снимка" />
 											
 							</li>
 							
 							
 							
 					</ul>
-						<button type="submit" value="Add new computer" class="btn btn-default update" href="">Добави</button>
-						
+						<button type="submit" value="Add new computer" id="computerBtn" class="btn btn-default update" >Добави</button>
+						<h2 id="computerWarning" style="display:none"><span>Моля качете валидна снимка, за да добавите артикул.</span></h2>
 					
 					</div>
 				</div>
@@ -181,7 +181,7 @@
 				
 			</div>
 			
-			<form:form commandName="tablet" action="./addtablet" method="post" enctype="multipart/form-data" onsubmit="Validatebodypanelbumper()">
+			<form:form commandName="tablet" action="./addtablet" method="post" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="chose_area">
@@ -225,16 +225,16 @@
 							<li >
 								<label>Снимка</label>
 						
-									<input  type="file"  name="file" accept="image/*" onchange="readURLTablet(this);" />
-							       	<img class="snimka" id="tabletImage" src="#" alt="Вашата снимка" />
+									<input  type="file"  name="file" id="tabletImage"  onchange="ValidateFileUploadTablet()" />
+							       	<img class="snimka" id="imageT" src="#" alt="Вашата снимка" />
 											
 							</li>
 							
 							
 							
 					</ul>
-						<button type="submit" value="Add new computer" class="btn btn-default update" href="">Добави</button>
-						
+						<button type="submit" value="Add new computer" id="tabletBtn" class="btn btn-default update" >Добави</button>
+						<h2 id="tabletWarning" style="display:none"><span>Моля качете валидна снимка, за да добавите артикул.</span></h2>
 					
 					</div>
 				</div>
@@ -252,7 +252,7 @@
 				<!-- <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p> -->
 			</div>
 			
-			<form:form commandName="laptop" action="./addlaptop" method="post" id="laptopForm" enctype="multipart/form-data" onsubmit="Validatebodypanelbumper()">
+			<form:form commandName="laptop" action="./addlaptop" method="post" id="laptopForm" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="chose_area">
@@ -310,8 +310,8 @@
 							<li >
 								<label>Снимка</label>
 						
-									<input   name="file" type="file"   accept="image/*" onchange="readURLLaptop(this);" />
-							       	<img class="snimka" id="laptopImage" src="#" alt="Вашата снимка" />
+									<input name="file" type="file"  id="laptopImage"  onchange="ValidateFileUploadLaptop()" />
+							       	<img class="snimka" id="imageL" src="#" alt="Вашата снимка" style="width:220px;height:180px;" />
 											
 							</li>
 				
@@ -320,8 +320,8 @@
 							
 							
 					</ul>
-						<button type="submit" value="Add new laptop" class="btn btn-default update" href="">Добави</button>
-						
+						<button type="submit" value="Add new laptop" id="laptopBtn" class="btn btn-default update" >Добави</button>
+						<h2 id="laptopWarning" style="display:none"><span>Моля качете валидна снимка, за да добавите артикул.</span></h2>
 					
 					</div>
 				</div>
