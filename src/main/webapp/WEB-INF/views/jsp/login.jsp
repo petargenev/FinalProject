@@ -124,11 +124,12 @@
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-form"><!--login form-->
 						<h2>Влезте в профила си</h2>
-						<form:form commandName="user" action="LoginController" >
-							<form:input path="email" type="email" name="userEmail" placeholder="E-mail адрес" />
-							<form:input path="password" type="password" name="userPassword" placeholder="Парола" />
+						<form:form commandName="user" name="loginForm" action="LoginController"  onsubmit="return validateLoginForm()">
+							<form:input path="email" type="email" name="email" placeholder="E-mail адрес" />
+							<form:input path="password" type="password" name="password" placeholder="Парола" />
 							
 							<button type="submit" value="Log user" class="btn btn-default">Вход</button>
+							<c:if test="${not empty sessionScope.invalidLogin }"><h3><span style="color:red"><c:out value="${sessionScope.invalidLogin}"/></span></h3> </c:if>
 						</form:form>
 					</div><!--/login form-->
 				</div>
@@ -142,11 +143,11 @@
 						<form:form commandName="user" name="registerForm" action="RegistrationController" onsubmit="return validateForm()">
 
 							<form:input path="name" name="name" type="text" placeholder="Въведете име" title="Въведете име състоящо се от 3 до 20 букви!"  pattern=".{3,20}" id="name" oninput="validateInput();" />
-							<form:input path="email" name="email" type="email" class="mailRegistration" placeholder="Въведете e-mail адрес" title="Въведете валиден Email адрес!" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|bg)\b"/>							
+							<form:input path="email" name="email" type="email" class="mailRegistration" oninput="checkEmailAvailability()" placeholder="Въведете e-mail адрес" title="Въведете валиден Email адрес!" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum|bg)\b"/>							
 							<form:input path="password"  name="password" type="password" id= "userPsw" title="Паролата ви трябва да съдържа минимъм 6 символа, ГЛАВНА и малка буква, и число." placeholder="Въведете парола"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"/>
 							<input  type="password" placeholder="Потвърдете паролата"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" oninput="check(this)" >
 	
-							<button type="submit" value="Add new user" class="btn btn-default">Създаване</button>
+							<button type="submit" value="Add new user" id="registerBtn" class="btn btn-default regButton">Създаване</button>
 						</form:form>
 					</div><!--/sign up form-->
 				</div>

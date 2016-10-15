@@ -38,7 +38,10 @@ public class MainPageController {
 		Collection<Article> laptops = new LaptopDAO().showAll();
 		Collection<Article> tablets = new TabletDAO().showAll();
 		Set<Label> labels = new TreeSet<Label>(new LabelComparator());
-
+		
+		Integer counter = new Integer(0);
+	
+		session.removeAttribute("invalidLogin");
 		if (!computers.isEmpty()) {
 			model.addAttribute("computers", computers);
 			for (Article computer : computers) {
@@ -116,14 +119,11 @@ public class MainPageController {
 	@RequestMapping(value = { "/showByLabel" }, method = RequestMethod.POST)
 	public String showByLabel(Model model, HttpServletRequest request) throws SQLException, InvalidInputException {
 		String label = request.getParameter("label");
-
+		
 		HttpSession session = request.getSession();
-		if (session.getAttribute("label") != null && session.getAttribute("label").equals("Всички")) {
-			session.removeAttribute("label");
-			return "redirect:/mainpage";
-		} else {
-			session.setAttribute("label", label);
-		}
+		
+		session.setAttribute("label", label);
+		
 		return "redirect:/mainpage";
 	}
 

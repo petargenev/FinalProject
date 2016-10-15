@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.eshop.dao.ComputerDAO;
 import com.eshop.dao.LaptopDAO;
 import com.eshop.dao.TabletDAO;
+import com.eshop.dao.UserDAO;
 import com.eshop.exceptions.InvalidInputException;
 import com.eshop.models.Article;
 import com.eshop.models.Computer;
@@ -202,5 +203,7 @@ public class AddToCartController {
 
 		return "cart";
 	}
+	
+	
 
 }

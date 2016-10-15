@@ -1,56 +1,60 @@
 package com.eshop.models;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import com.eshop.exceptions.InvalidInputException;
 
-public class Computer extends Article{
-	
+public class Computer extends Article {
+
 	private String type = "computer";
-	
 
+	@NotNull
+	@Min(1)
 	private int ram;
-	private String processorType;	
+	@NotNull
+	private String processorType;
+	@NotNull
+	@Min(0)
 	private double processorSpeed;
+	@NotNull
 	private String videoCardType;
+	@NotNull
+	@Min(1)
 	private int hdd;
+	@NotNull
 	private String operationSystem;
-	
-	
 
-	public Computer(){
+	public Computer() {
 		super();
 	}
 
-	public Computer(String model, String label,  int ram, String processorType, 
-			double processorSpeed, String videoCardType, int hdd, String operationSystem, double price, String image, int id)
-			throws InvalidInputException,InvalidInputException {
-		super(model,label,price,image, id);
-		
+	public Computer(String model, String label, int ram, String processorType, double processorSpeed,
+			String videoCardType, int hdd, String operationSystem, double price, String image, int id)
+			throws InvalidInputException, InvalidInputException {
+		super(model, label, price, image, id);
+
 		setRam(ram);
 		setProcessorType(processorType);
 		setProcessorSpeed(processorSpeed);
 		setVideoCardType(videoCardType);
 		setHdd(hdd);
 		setOperationSystem(operationSystem);
-		
+
 	}
-	
-
-	
-
-
 
 	public int getRam() {
 		return ram;
 	}
 
 	public void setRam(int ram) throws InvalidInputException {
-		if (ram >0) {
+		if (ram > 0) {
 			this.ram = ram;
 		} else {
 			throw new InvalidInputException("Invalid input!");
 		}
 	}
-	
+
 	public String getType() {
 		return type;
 	}
@@ -67,7 +71,6 @@ public class Computer extends Article{
 		}
 	}
 
-	
 	public double getProcessorSpeed() {
 		return processorSpeed;
 	}
@@ -176,10 +179,5 @@ public class Computer extends Article{
 			return false;
 		return true;
 	}
-
-
-	
-
-	
 
 }

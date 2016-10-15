@@ -19,19 +19,18 @@
 	line-height: 1;
 	border: 0;
 	border-radius: 0;
-	text-align-last:center; 
-	
+	text-align-last: center;
 	height: 34px;
 	-webkit-appearance: none;
 }
 
 .styled-select {
-   width: 210px;
-   height: 34px;
-   overflow: hidden;
-   text-align-last:center;
-   border: 1px solid #ccc;
-   }
+	width: 210px;
+	height: 34px;
+	overflow: hidden;
+	text-align-last: center;
+	border: 1px solid #ccc;
+}
 
 .labelmodel {
 	color: #004fa2;
@@ -414,10 +413,14 @@ opacity
 
 
 
+
+
 :
 
 
+
  
+
 
 
 1;
@@ -426,13 +429,19 @@ opacity
 
 
 
+
+
 :
+
 
 
  
 
 
+
 translateY
+
+
 
 
 
@@ -443,13 +452,19 @@ transform
 
 
 
+
+
 :
+
 
 
  
 
 
+
 translateY
+
+
 
 
 
@@ -2536,4 +2551,8 @@ h2.title {
 
 .contact-info .social-networks ul li a:hover {
 	color: #FE980F;
+}
+
+.regButton[disabled] {
+	background: #ffe2ad !important;
 }

@@ -128,10 +128,21 @@
 						<h2>Категории</h2>
 						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
 							<div class="panel panel-default">
+							<div class="panel-heading">
+									<h4 class="panel-title">
+										<a  href="mainpage">
+											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+											
+											<b class="categories">ВСИЧКИ</b>
+										</a>
+									</h4>
+								</div>
+								<br>
 								<div class="panel-heading">
 									<h4 class="panel-title">
 										<a data-toggle="collapse" data-parent="#accordian" href="#computers">
 											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+											
 											<b class="categories">Компютри</b>
 										</a>
 									</h4>
@@ -154,7 +165,10 @@
 										<a data-toggle="collapse" data-parent="#accordian" href="#perifery">
 											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
 											<b class="categories">Таблети</b>
+											
+											
 										</a>
+										
 									</h4>
 								</div>
 								<div id="perifery" class="panel-collapse collapse">
@@ -178,7 +192,7 @@
 							<h2>Марки</h2>
 							<div class="brands-name">
 								<ul class="nav nav-pills nav-stacked">
-								<li><a href="" name="Всички"  onclick="showByLabel(this)" > <span class="pull-right">(<c:out value="${sessionScope.articlesCount}"/>)</span>ВСИЧКИ</a></li>
+								<li><a href="" name="All"  onclick="showByLabel(this)" > <span class="pull-right">(<c:out value="${sessionScope.articlesCount}"/>)</span>ВСИЧКИ</a></li>
 								<c:choose>								
 									<c:when test="${ not empty labels}">
 										<c:forEach items="${labels}" var="label">
@@ -192,13 +206,14 @@
 							</div>
 						</div><!--/brands_products-->
 						
-						<div class="price-range"><!--price-range-->
+			<!--  		<div class="price-range">
 							<h2>ЦЕНА</h2>
 							<div class="well">
 								 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="5000" data-slider-step="100" data-slider-value="[0,3000]" id="sl2" ><br />
 								 <b>0 лв.</b> <b class="pull-right">5000 лв.</b>
 							</div>
-						</div><!--/price-range-->
+						</div>
+						-->		
 						
 						<div class="shipping text-center"><!--shipping-->
 							<img src="images/home/shipping.jpg" alt="" />
@@ -214,7 +229,8 @@
 						
 					
 						<c:choose>
-    						<c:when test="${sessionScope.label != Всички && not empty sessionScope.label}">
+    						<c:when test="${sessionScope.label != 'All'}">
+    						<c:out value="${sessionScope.label}"/>
       							<c:if test="${ not empty computers}">
 							<c:forEach items="${computers}" var="computer">
 							<c:if test="${computer.model == sessionScope.label}">
@@ -239,7 +255,8 @@
 							</td>
 							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${computer.price} лв."></c:out></span></span>
 							<br>
-							<button   id="${computer.id}" name="computer" onclick="getId(this)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
+							
+							<button   id="${computer.id}" name="computer" onclick="getId(this)"  class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
 							</td>
 							
 							
@@ -325,7 +342,7 @@
 									</c:forEach>
 								</c:if>
     							</c:when>
-    							<c:otherwise>
+    							<c:when test="${sessionScope.label == 'All'}">
        						<c:if test="${ not empty computers}">
 							<c:forEach items="${computers}" var="computer">
 							
@@ -389,7 +406,7 @@
 							</td>
 							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${laptop.price} лв."></c:out></span></span>
 							<br>
-							<button  id="${laptop.id}" name="laptop" onclick="getId(this)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
+							<button  id="${laptop.id}" name="laptop" onclick="getId(this)" class="btn btn-default add-to-cart" data-value="@Request.RequestContext.HttpContext.Session[username]"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
 							</td>
 							
 							
@@ -435,17 +452,17 @@
 						
 									</c:forEach>
 									</c:if>
-  								  </c:otherwise>
+  								  </c:when>
    							 </c:choose>			
 						
 						
-					
+					<!-- 
 						<ul class="pagination">
 							<li class="active"><a href="">1</a></li>
 							<li><a href="">2</a></li>
 							<li><a href="">3</a></li>
 							<li><a href="">&raquo;</a></li>
-						</ul>
+						</ul> -->
 					</div><!--features_items-->
 				</div>
 			</div>

@@ -8,25 +8,29 @@ function check(input) {
 	}
 }
 
-//function checkEmailAvailability() {
-//	var email = $(".mailRegistration");
-//	var emailRegex = new RegExp(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/);
-//
-//	if (emailRegex.test(email)) {
-//		$.post("ValidationServlet", {email: email.val()}, function(result) {
-//			if (result === true) {
-//				emailExist = true;
-//				email.attr('data-original-title', 'Емайла вече е зает. Моля, въведете нов.').tooltip().mouseover();
-//			} else if(result === false) {
-//				emailExist = false;
-//				email.tooltip('destroy');
-//				email.attr('title', 'Въведете валиден Email адрес!');
-//			}
-//		});
-//	}
-//	
-//	console.log('testssad')
-//}
+function checkEmailAvailability() {
+	var email = $(".mailRegistration");
+	var emailRegex = new RegExp(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/);
+	console.log('here')
+	if (emailRegex.test(email.val())) {
+		$.post("emailAvailability", {email: email.val()}, function(result) {
+			console.log(result)
+			if (result === "true") {
+				console.log(result)
+				emailExist = true;
+				email.tooltip('destroy');
+				email.attr('title', 'Емейла вече е зает. Моля, въведете нов.').tooltip().mouseover();
+				document.getElementById("registerBtn").disabled = true; 
+			} else if(result === "false") {
+				emailExist = false;
+				console.log(result)
+				email.tooltip('destroy');
+				email.attr('title', 'Емейла е свободен.').tooltip().mouseover();
+				document.getElementById("registerBtn").disabled = false; 
+			}
+		});
+	}
+}
 //
 //var emailExist = false;
 //checkEmailAvailability()

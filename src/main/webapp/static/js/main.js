@@ -36,27 +36,34 @@ $(document).ready(function() {
 	});
 });
 
-//function Validatebodypanelbumper(theForm) {
-//	var regexp;
-//	var extension = new FormData(theForm).get("file").value.lastIndexOf('.');
-//	if ((extension.toLowerCase() != ".gif")
-//			&& (extension.toLowerCase() != ".jpg") && (extension != "")) {
-//		alert("The \"FileUpload\" field contains an unapproved filename.");
-//		theForm.file.focus();
-//		return false;
-//	}
-//	return true;
-//}
+// function Validatebodypanelbumper(theForm) {
+// var regexp;
+// var extension = new FormData(theForm).get("file").value.lastIndexOf('.');
+// if ((extension.toLowerCase() != ".gif")
+// && (extension.toLowerCase() != ".jpg") && (extension != "")) {
+// alert("The \"FileUpload\" field contains an unapproved filename.");
+// theForm.file.focus();
+// return false;
+// }
+// return true;
+// }
 
 function getId(item) {
-	var itemId = item.id
+	var itemId = item.id;
 	var itemName = item.name;
+	
+	
+	var value = item.value;
+	console.log(item.value)
+// console.log(5+6);
+// console.log(sessionValue)
 	// var url = '@Url.Action("UpdateReport/", "Report")';
 	var data = {
 		Article : itemName,
 		Id : itemId
 
 	};
+	
 	if (confirm("Сигурни ли сте, че искате да добавите дадения артикул в количката си ?") == true) {
 		document.getElementById(itemId).disabled = true; 
 		$.post("getArticleId", data, function(result) {
@@ -65,9 +72,8 @@ function getId(item) {
 			}
 
 		});
-    } else {
-       
-    }
+    } 
+	
 	
 }
 
@@ -107,6 +113,8 @@ function showByLabel(item) {
 	$.post("showByLabel", data, function(result) {
 		
 	});
+	
+	
 	
 	
 
