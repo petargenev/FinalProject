@@ -17,13 +17,10 @@ import com.eshop.models.Article;
 import com.eshop.models.Computer;
 
 public class ComputerDAO implements DAO {
+	
 	Connection connection = DBConnection.getInstance().getConnection();
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.eshop.dao.DAO#getComputerById(int)
-	 */
+	
 	@Override
 	public Computer getArticleById(int computerId) throws SQLException, InvalidInputException {
 		String query = "SELECT c.*, p.*, v.*, o.*, l.* FROM computer c "
@@ -49,14 +46,11 @@ public class ComputerDAO implements DAO {
 			computer = new Computer(model, label, ram, processorType, processorSpeed, videoCardType, hdd,
 					operationSystem, price, image, id);
 		}
+		
 		return computer;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.eshop.dao.DAO#getComputerByLabel(java.lang.String)
-	 */
+	
 	@Override
 	public Collection<Article> getArticleByLabel(String computerLabel) throws SQLException, InvalidInputException {
 		List<Computer> computers = new ArrayList<Computer>();
@@ -87,11 +81,7 @@ public class ComputerDAO implements DAO {
 		return Collections.unmodifiableList(computers);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.eshop.dao.DAO#showAll()
-	 */
+	
 	@Override
 	public Collection<Article> showAll() throws SQLException, InvalidInputException, InvalidInputException {
 		List<Computer> computers = new ArrayList<Computer>();
@@ -121,11 +111,7 @@ public class ComputerDAO implements DAO {
 		return Collections.unmodifiableList(computers);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.eshop.dao.DAO#deleteComputer(int)
-	 */
+	
 	@Override
 	public void deleteArticleById(int id) throws SQLException {
 		String deleteQuery = "DELETE FROM computer WHERE id LIKE '" + id + "';";
@@ -134,11 +120,7 @@ public class ComputerDAO implements DAO {
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.eshop.dao.DAO#insertComputer(com.eshop.models.Computer)
-	 */
+	
 	@Override
 	public void insertArticle(Article computer) throws ArticleException {
 
@@ -149,15 +131,11 @@ public class ComputerDAO implements DAO {
 				connection.setAutoCommit(false);
 				// getting processor id
 				int processorId = getOrInsertProcessor((Computer) computer);
-				System.out.println("VUVEDOH PROCESOR 1");
 				int videoCardId = getOrInsertVideoCard((Computer) computer);
-				System.out.println("VUVEDOH VD 1");
 				// getting operation system id
 				int operationSystemId = getOrInsertOperationSystem((Computer) computer);
-				System.out.println("VUVEDOH OS 1");
 				// getting label id
 				int labelId = getOrInsertLabel(computer);
-				System.out.println("VUVEDOH labl 1");
 				// inserting computer into database
 				PreparedStatement computerPs = connection
 						.prepareStatement("INSERT INTO computer VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -193,7 +171,6 @@ public class ComputerDAO implements DAO {
 	}
 
 	private int getOrInsertLabel(Article computer) throws SQLException {
-		System.out.println("vleznah v label-a");
 		String labelQuery = "SELECT * FROM label WHERE label LIKE '" + computer.getLabel() + "';";
 		PreparedStatement labelPs = connection.prepareStatement(labelQuery);
 		ResultSet labelRs = labelPs.executeQuery();

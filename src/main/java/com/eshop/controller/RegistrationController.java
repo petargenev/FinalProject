@@ -23,13 +23,10 @@ public class RegistrationController {
 	@RequestMapping(value = "/RegistrationController", method = RequestMethod.POST)
 	public String addNewUser(@ModelAttribute User user, Model model) throws UserException {
 		
-		System.out.println("IMETO" + userDao.isValidName(user.getName()));
-		System.out.println("PAROLATA" + userDao.isValidPassword(user.getPassword()));
-		System.out.println("EMAILA " + userDao.isValidEmail(user.getEmail()));
+
 		if (userDao.isValidName(user.getName()) && 
 			userDao.isValidEmail(user.getEmail()) &&
 			userDao.isValidPassword(user.getPassword())){
-			System.out.println("VKARVAM USER");
 				userDao.registerUser(user);
 				model.addAttribute(user);
 				System.out.println(user);

@@ -46,7 +46,6 @@ public class ShowArticleController {
 						}
 					}
 				} else {
-					System.out.println("dobavqm nov label");
 					labels.add(new Label(computer.getModel()));
 				}
 			}
@@ -66,12 +65,6 @@ public class ShowArticleController {
 		Collection<Article> laptops = new LaptopDAO().showAll();
 		Set<Label> labels = new TreeSet<Label>(new LabelComparator());
 
-		// for (Article article : computers) {
-		// if (article instanceof Computer) {
-		// System.out.println(((Computer) article));
-		// }
-		// }
-		//
 		if (!laptops.isEmpty()) {
 			model.addAttribute("laptops", laptops);
 			for (Article laptop : laptops) {
@@ -83,7 +76,6 @@ public class ShowArticleController {
 						Label currentLabel = iterator.next();
 						if (currentLabel.getName().equals(new Label(laptop.getModel()).getName())) {
 							currentLabel.increaseCount();
-							System.out.println(currentLabel.getCount());
 						}
 					}
 				} else {
@@ -119,11 +111,9 @@ public class ShowArticleController {
 						Label currentLabel = iterator.next();
 						if (currentLabel.getName().equals(new Label(tablet.getLabel()).getName())) {
 							currentLabel.increaseCount();
-							System.out.println(currentLabel.getCount());
 						}
 					}
 				} else {
-					System.out.println("dobavqm nov label");
 					labels.add(new Label(tablet.getLabel()));
 				}
 			}

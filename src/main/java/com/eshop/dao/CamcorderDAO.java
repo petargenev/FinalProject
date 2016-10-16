@@ -54,7 +54,7 @@ public class CamcorderDAO implements DAO {
 		
 	}
 
-	public void insertCamcorder(Camcorder camcorder) {
+	public void insertCamcorder(Camcorder camcorder) throws SQLException {
 		try {
 			String labelQuery = "SELECT label FROM label WHERE label LIKE '" + camcorder.getLabel() + "';";
 			PreparedStatement labelPs = connection.prepareStatement(labelQuery);
@@ -79,9 +79,10 @@ public class CamcorderDAO implements DAO {
 			camcorderPs.setInt(8, labelId);
 
 			camcorderPs.executeUpdate();
+			connection.close();
 
 		} catch (SQLException e) {
-
+			connection.close();
 			e.printStackTrace();
 		}
 

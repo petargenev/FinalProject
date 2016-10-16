@@ -106,6 +106,12 @@
 							<a><img src="./images/kvadrat.png" style="width:120px;height:60px;"> </a>
 							<a><img src="./images/devet.jpg" style="width:120px;height:60px;"> </a>
 							-->
+							<div id="quotes"  style="position:absolute; left: 280px; top:160px; font-family: Papyrus, fantasy;
+							font-size: 30px;
+							font-style: normal;
+							font-variant: normal;
+							font-weight: 500;
+							line-height: 26.4px;"></div>
 						</div> 
 				</div>
 				</div>
@@ -617,7 +623,7 @@
 	
 	
 
-  	
+  	<script src="js/quotes.js"></script>
     <script src="js/jquery.js"></script>
 	<script src="js/price-range.js"></script>
     <script src="js/jquery.scrollUp.min.js"></script>

@@ -40,9 +40,7 @@ public class MainPageController {
 		Collection<Article> tablets = new TabletDAO().showAll();
 		Set<Label> labels = new TreeSet<Label>(new LabelComparator());
 		
-		Integer counter = new Integer(0);
 	
-		
 		if (!computers.isEmpty()) {
 			model.addAttribute("computers", computers);
 			for (Article computer : computers) {
@@ -55,11 +53,9 @@ public class MainPageController {
 						if (currentLabel.getName().equals(new Label(computer.getModel()).getName())) {
 							currentLabel.increaseCount();
 
-							System.out.println(currentLabel.getCount());
 						}
 					}
 				} else {
-					System.out.println("dobavqm nov label");
 					labels.add(new Label(computer.getModel()));
 				}
 			}
@@ -76,7 +72,6 @@ public class MainPageController {
 						if (currentLabel.getName().equals(new Label(laptop.getModel()).getName())) {
 							currentLabel.increaseCount();
 
-							System.out.println(currentLabel.getCount());
 						}
 					}
 				} else {
@@ -97,11 +92,10 @@ public class MainPageController {
 						if (currentLabel.getName().equals(new Label(tablet.getLabel()).getName())) {
 							currentLabel.increaseCount();
 
-							System.out.println(currentLabel.getCount());
 						}
 					}
 				} else {
-					System.out.println("dobavqm nov label");
+		
 					labels.add(new Label(tablet.getLabel()));
 
 				}

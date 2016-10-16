@@ -20,14 +20,12 @@ public class EmailAvailabilityController {
 		try {
 			boolean result = new UserDAO().isAvailable(request.getParameter("email"));
 			if(result == true || !minLength(request.getParameter("email"))){
-				System.out.println("EMAILA E LEGALEN!!!!!!!");
 				return "true";
 			}else{	
 				return "false";
 			}
 		    
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "false";

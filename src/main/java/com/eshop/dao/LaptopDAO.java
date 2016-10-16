@@ -130,25 +130,20 @@ public class LaptopDAO implements DAO {
 
 		try {
 			if (laptop instanceof Laptop) {
-				
+				connection.setAutoCommit(false);
 				// getting processor id
-				System.out.println("VLIZAM V PROCESSOR");
 				int processorId = getOrInsertProcessor((Laptop) laptop);
 
 				// getting video card id
-				System.out.println("VLIZAM V VIDEOCARD");
 				int videoCardId = getOrInserVideoCard((Laptop) laptop);
 
 				// getting operation system id
-				System.out.println("VLIZAM V OS");
 				int operationSystemId = getOrInsertOperationSystem((Laptop) laptop);
 
 				// getting label id
-				System.out.println("VLIZAM V LABEl");
 				int labelId = getOrInserLabel((Laptop) laptop);
 
 				// inserting resolution
-				System.out.println("VLIZAM V RESOLUTION");
 				int resolutionId = getOrInsertResolution((Laptop) laptop);
 
 				// inserting laptop into database
@@ -169,18 +164,30 @@ public class LaptopDAO implements DAO {
 				laptopPs.setInt(11, resolutionId);
 				System.out.println("SLED KATO SETVAM RESOLUTION");
 				laptopPs.setInt(12, labelId);
-				System.out.println("PREDI UPDATE-a");
+
 				laptopPs.executeUpdate();
-				System.out.println("SLED UPDATE-a");
+				connection.commit();
+
 			}
 		} catch (SQLException e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			throw new ArticleException(e);
+		}finally {
+			try {
+				connection.setAutoCommit(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
 
 	private int getOrInsertResolution(Laptop laptop) throws SQLException {
-		System.out.println("VLEZNAH V RESOLUTION");
+
 		String resolutionQuery = "SELECT * FROM resolution WHERE resolution LIKE '" + laptop.getResolution() + "';";
 		PreparedStatement resolutionPs = connection.prepareStatement(resolutionQuery);
 		ResultSet resolutionRs = resolutionPs.executeQuery();
@@ -195,7 +202,7 @@ public class LaptopDAO implements DAO {
 	}
 
 	private int getOrInserLabel(Laptop laptop) throws SQLException {
-		System.out.println("VLEZNAH V LABEL");
+
 		String labelQuery = "SELECT * FROM label WHERE label LIKE '" + laptop.getLabel() + "';";
 		PreparedStatement labelPs = connection.prepareStatement(labelQuery);
 		ResultSet labelRs = labelPs.executeQuery();
@@ -206,12 +213,12 @@ public class LaptopDAO implements DAO {
 		} else {
 			labelId = new KeysDAO().insertLabel(laptop.getLabel());
 		}
-		System.out.println("IZLEZNAH V LABEL");
+
 		return labelId;
 	}
 
 	private int getOrInsertOperationSystem(Laptop laptop) throws SQLException {
-		System.out.println("VLEZNAH V OS");
+
 		String operationSystemQuery = "SELECT * FROM operation_system WHERE operation_system LIKE '"
 				+ laptop.getOperationSystem() + "';";
 		PreparedStatement operationSystemPs = connection.prepareStatement(operationSystemQuery);
@@ -227,7 +234,7 @@ public class LaptopDAO implements DAO {
 	}
 
 	private int getOrInserVideoCard(Laptop laptop) throws SQLException {
-		System.out.println("VLEZNAH V VIDEOCARD");
+
 		String videoCardQuery = "SELECT * FROM video_card_type WHERE video_card LIKE '" + laptop.getVideoCardType()
 				+ "';";
 		PreparedStatement videoCardPs = connection.prepareStatement(videoCardQuery);
@@ -243,7 +250,7 @@ public class LaptopDAO implements DAO {
 	}
 
 	private int getOrInsertProcessor(Laptop laptop) throws SQLException {
-		System.out.println("VLEZNAH V PROCESOR");
+
 		String processorQuery = "SELECT * FROM processor_type WHERE processor_type LIKE '" + laptop.getProcessorType()
 				+ "';";
 		PreparedStatement processorPs = connection.prepareStatement(processorQuery);

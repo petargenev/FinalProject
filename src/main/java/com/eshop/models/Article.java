@@ -8,17 +8,10 @@ import org.hibernate.validator.constraints.NotBlank;
 import com.eshop.exceptions.InvalidInputException;
 
 public abstract class Article {
-	@NotNull(message="kwo stanaaa")
+
 	private String label;
-	
-	@NotBlank(message="kwo stanaaa")
 	private String model;
-	
-	@NotNull
-	@Min(1)
 	private double price;
-	
-	@NotNull
 	private String image;
 	
 	private int id;

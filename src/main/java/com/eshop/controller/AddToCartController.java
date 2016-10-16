@@ -233,7 +233,6 @@ public class AddToCartController {
 	@RequestMapping(value = "/checkIfLogged", method = RequestMethod.POST)
 	@ResponseBody
 	public String checkIfLogged(HttpServletRequest request) {
-		System.out.println("POVERQVAM ZA LOG !!!!!!!!!!!!!!!!!");
 		HttpSession session = request.getSession();
 		if (session.getAttribute("username") != null) {
 			return "true";

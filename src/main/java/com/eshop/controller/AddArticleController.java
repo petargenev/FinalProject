@@ -40,8 +40,6 @@ public class AddArticleController {
 
 		if (session.getAttribute("isAdmin") == null || session.getAttribute("isAdmin").equals(false))
 			return "404";
-		System.err.println("SEGA SUM V GET METODA");
-
 		model.addAttribute(new Computer());
 		model.addAttribute(new Tablet());
 		model.addAttribute(new Laptop());
@@ -63,21 +61,15 @@ public class AddArticleController {
 		String image = ("./img/" + fileName);
 		computer.setImage(image);
 
-		if (computer.getHdd() <= 0 || (computer.getLabel().isEmpty() || computer.getLabel() == null)
-				|| (computer.getModel().isEmpty() || computer.getModel() == null)
-				|| (computer.getOperationSystem().isEmpty() || computer.getOperationSystem() == null)
-				|| computer.getPrice() <= 0 || computer.getProcessorSpeed() <= 0
-				|| (computer.getProcessorType().isEmpty() || computer.getProcessorType() == null)
-				|| computer.getRam() <= 0
-				|| (computer.getVideoCardType().isEmpty() || computer.getVideoCardType() == null)) {
+		if(computerValidation(computer))
 			return "404";
-
-		}
 
 		new ComputerDAO().insertArticle(computer);
 
 		return creatingArticles(model, session);
 	}
+
+	
 
 	@RequestMapping(value = "/addtablet", method = RequestMethod.POST)
 	public String addNewTablet(@RequestParam("file") MultipartFile multipartFile, @ModelAttribute Tablet tablet,
@@ -90,20 +82,15 @@ public class AddArticleController {
 		String image = ("./img/" + fileName);
 		tablet.setImage(image);
 
-		if ((tablet.getLabel().isEmpty() || tablet.getLabel() == null)
-				|| (tablet.getModel().isEmpty() || tablet.getModel() == null)
-				|| (tablet.getDisplayType().isEmpty() || tablet.getDisplayType() == null) || tablet.getPrice() <= 0
-				|| tablet.getDisplaySize() <= 0 || (tablet.getLabel().isEmpty() || tablet.getLabel() == null)
-				|| (tablet.getResolution().isEmpty() || tablet.getResolution() == null)
-				|| tablet.getDisplaySize() <= 0) {
+		if(tabletValidation(tablet))
 			return "404";
-
-		}
 
 		new TabletDAO().insertArticle(tablet);
 
 		return creatingArticles(model, session);
 	}
+
+	
 
 	@RequestMapping(value = "/addlaptop", method = RequestMethod.POST)
 	public String addNewLaptop(@RequestParam("file") MultipartFile multipartFile, @ModelAttribute Laptop laptop,
@@ -116,6 +103,15 @@ public class AddArticleController {
 		String image = ("./img/" + fileName);
 		laptop.setImage(image);
 
+		if(laptopValidation(laptop))
+			return "404";
+
+		new LaptopDAO().insertArticle(laptop);
+
+		return creatingArticles(model, session);
+	}
+
+	private boolean laptopValidation(Laptop laptop) {
 		if (laptop.getHdd() <= 0 || (laptop.getLabel().isEmpty() || laptop.getLabel() == null)
 				|| (laptop.getModel().isEmpty() || laptop.getModel() == null)
 				|| (laptop.getOperationSystem().isEmpty() || laptop.getOperationSystem() == null)
@@ -124,15 +120,39 @@ public class AddArticleController {
 				|| (laptop.getVideoCardType().isEmpty() || laptop.getVideoCardType() == null)
 				|| (laptop.getResolution().isEmpty() || laptop.getResolution() == null)
 				|| laptop.getDisplaySize() <= 0) {
-			return "404";
-
+			return true;
 		}
+		return false;
 
-		new LaptopDAO().insertArticle(laptop);
-
-		return creatingArticles(model, session);
+		
 	}
-
+	
+	private boolean computerValidation(Computer computer) {
+		if (computer.getHdd() <= 0 || (computer.getLabel().isEmpty() || computer.getLabel() == null)
+				|| (computer.getModel().isEmpty() || computer.getModel() == null)
+				|| (computer.getOperationSystem().isEmpty() || computer.getOperationSystem() == null)
+				|| computer.getPrice() <= 0 || computer.getProcessorSpeed() <= 0
+				|| (computer.getProcessorType().isEmpty() || computer.getProcessorType() == null)
+				|| computer.getRam() <= 0
+				|| (computer.getVideoCardType().isEmpty() || computer.getVideoCardType() == null)) {
+			
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean tabletValidation(Tablet tablet) {
+		if ((tablet.getLabel().isEmpty() || tablet.getLabel() == null)
+				|| (tablet.getModel().isEmpty() || tablet.getModel() == null)
+				|| (tablet.getDisplayType().isEmpty() || tablet.getDisplayType() == null) || tablet.getPrice() <= 0
+				|| tablet.getDisplaySize() <= 0 || (tablet.getLabel().isEmpty() || tablet.getLabel() == null)
+				|| (tablet.getResolution().isEmpty() || tablet.getResolution() == null)
+				|| tablet.getDisplaySize() <= 0) {
+			
+			return true;
+		}
+		return false;
+	}
 	public static String getUploadLocation() {
 		return UPLOAD_LOCATION;
 	}

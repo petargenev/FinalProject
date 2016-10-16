@@ -44,8 +44,7 @@ public class LoginController {
 					Double price = new Double(0);
 					session.setAttribute("carttotalprice", price);
 					
-					System.out.println(session.getAttribute("username"));
-					System.out.println("DALI E ADMIN" + userFromDb.isAdministrator());
+					
 					if (userFromDb.isAdministrator()) {
 						session.setAttribute("isAdmin", true);
 					}else{
@@ -62,7 +61,6 @@ public class LoginController {
 			}
 
 		} catch (InvalidInputException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -102,7 +102,7 @@ public class TabletDAO implements DAO {
 		try {
 			if (tablet instanceof Tablet) {
 				// inserting lable
-				System.out.println("vuvejdam label");
+				connection.setAutoCommit(false);
 				String query = "SELECT * FROM label WHERE label LIKE '" + tablet.getLabel() + "';";
 				PreparedStatement ps = connection.prepareStatement(query);
 				ResultSet rs = ps.executeQuery();
@@ -114,7 +114,7 @@ public class TabletDAO implements DAO {
 					labelId = new KeysDAO().insertLabel(tablet.getLabel());
 				}
 				// inserting cpu
-				System.out.println("vuvejdam cpu");
+
 				String cpuQuery = "SELECT * FROM cpu WHERE cpu LIKE '" + ((Tablet) tablet).getCpu() + "';";
 				PreparedStatement cpuPs = connection.prepareStatement(cpuQuery);
 				ResultSet cpuRs = cpuPs.executeQuery();
@@ -139,9 +139,7 @@ public class TabletDAO implements DAO {
 				}
 
 				// inserting tablet
-				System.out.println("vuvejdam TABLET");
-				System.out.println(cpuId);
-				System.out.println(resolutionId);
+
 				PreparedStatement ps1 = connection
 						.prepareStatement("INSERT INTO tablet VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?)");
 				ps1.setDouble(1, ((Tablet) tablet).getDisplaySize());
@@ -154,11 +152,22 @@ public class TabletDAO implements DAO {
 				ps1.setInt(8, resolutionId);
 
 				ps1.executeUpdate();
-				System.out.println("VUVEDOH TABLET");
+				connection.commit();
 			}
 		} catch (SQLException e) {
-
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
+		}finally {
+			try {
+				connection.setAutoCommit(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
