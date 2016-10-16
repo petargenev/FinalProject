@@ -19,7 +19,8 @@ public class EmailAvailabilityController {
 	public String emailAvailability(HttpServletRequest request){
 		try {
 			boolean result = new UserDAO().isAvailable(request.getParameter("email"));
-			if(result == true){
+			if(result == true || !minLength(request.getParameter("email"))){
+				System.out.println("EMAILA E LEGALEN!!!!!!!");
 				return "true";
 			}else{	
 				return "false";
@@ -30,5 +31,17 @@ public class EmailAvailabilityController {
 			e.printStackTrace();
 		}
 		return "false";
+	}
+	
+	private boolean minLength(String email){
+		int length = 0;
+		for (int index = 0; index < email.length(); index++) {
+			if(email.charAt(index) != '@'){
+				length++;
+			}else{
+				break;
+			}
+		}
+		return length >= 3 ? true : false;
 	}
 }

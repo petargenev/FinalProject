@@ -6,6 +6,9 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +26,7 @@ import com.eshop.models.Label;
 public class ShowArticleController {
 
 	@RequestMapping(value = "/computers", method = RequestMethod.GET)
-	public String showAllComputers(Model model) throws SQLException, InvalidInputException {
+	public String showAllComputers(Model model, HttpServletRequest request) throws SQLException, InvalidInputException {
 
 		Collection<Article> computers = new ComputerDAO().showAll();
 		Set<Label> labels = new TreeSet<Label>(new LabelComparator());
@@ -48,13 +51,17 @@ public class ShowArticleController {
 				}
 			}
 		}
+
+		int articlesCount = computers.size();
+		request.getSession().setAttribute("articlesCount", articlesCount);
+
 		model.addAttribute("labels", labels);
 
 		return "mainpage";
 	}
 
 	@RequestMapping(value = "/laptops", method = RequestMethod.GET)
-	public String showAllLaptops(Model model) throws SQLException, InvalidInputException {
+	public String showAllLaptops(Model model, HttpServletRequest request) throws SQLException, InvalidInputException {
 
 		Collection<Article> laptops = new LaptopDAO().showAll();
 		Set<Label> labels = new TreeSet<Label>(new LabelComparator());
@@ -86,6 +93,9 @@ public class ShowArticleController {
 			}
 		}
 
+		int articlesCount = laptops.size();
+		request.getSession().setAttribute("articlesCount", articlesCount);
+
 		model.addAttribute("labels", labels);
 
 		return "mainpage";
@@ -93,12 +103,11 @@ public class ShowArticleController {
 	}
 
 	@RequestMapping(value = "/tablets", method = RequestMethod.GET)
-	public String showAllTablets(Model model) throws SQLException, InvalidInputException {
+	public String showAllTablets(Model model, HttpServletRequest request) throws SQLException, InvalidInputException {
 
 		Collection<Article> tablets = new TabletDAO().showAll();
 		Set<Label> labels = new TreeSet<Label>(new LabelComparator());
 
-	
 		if (!tablets.isEmpty()) {
 			model.addAttribute("tablets", tablets);
 			for (Article tablet : tablets) {
@@ -119,6 +128,9 @@ public class ShowArticleController {
 				}
 			}
 		}
+		
+		int articlesCount = tablets.size();
+		request.getSession().setAttribute("articlesCount", articlesCount);
 		model.addAttribute("labels", labels);
 
 		return "mainpage";

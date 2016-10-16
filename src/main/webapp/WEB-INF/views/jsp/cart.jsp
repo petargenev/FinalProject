@@ -43,11 +43,11 @@
 					<div class="col-sm-6">
 						<div class="social-icons pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href=""><i class="fa fa-facebook"></i></a></li>
-								<li><a href=""><i class="fa fa-twitter"></i></a></li>
-								<li><a href=""><i class="fa fa-linkedin"></i></a></li>
-								<li><a href=""><i class="fa fa-dribbble"></i></a></li>
-								<li><a href=""><i class="fa fa-google-plus"></i></a></li>
+								<li><a href="rdFacebook"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="rdTwitter"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="rdLinkedin"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="rdDribbble"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="rdGooglePlus"><i class="fa fa-google-plus"></i></a></li>
 							</ul>
 						</div>
 					</div>
@@ -63,16 +63,7 @@
 							
 						</div> -->
 						<div class="btn-group pull-left">
-							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									BG
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									
-									<li><a href="">UK</a></li>
-								</ul>
-							</div>
+						<iframe scrolling="no" frameborder="no" clocktype="html5" style="overflow:hidden;border:0;margin:0;padding:0;width:180px;height:60px;"src="http://www.clocklink.com/html5embed.php?clock=004&timezone=Bulgaria_Sofia&color=orange&size=180&Title=&Message=&Target=&From=2016,1,1,0,0,0&Color=orange"></iframe>	
 							
 							
 						</div>
@@ -114,15 +105,13 @@
 							</button>
 						</div>
 						<div class="mainmenu pull-left">
-							<ul class="nav navbar-nav collapse navbar-collapse">
-								<a class="btn btn-default update" href="index.html">ПАЗАРУВАЙ</a>
-							</ul>
+							
+								<a class="btn btn-default update" href="mainpage" style="position:absolute; left:-25px; top:-30px;">ПАЗАРУВАЙ</a>
+							
 						</div>
 					</div>
 					<div class="col-sm-3">
-						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
-						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -207,22 +196,20 @@
 								<select>
 									<option>България</option>
 									
-									<option>Великобритания</option>
-									
 								</select>
 								
 							</li>
 							<li class="single_field">
 								<label>Град:</label>
 								<select>
-									<option>Select</option>
-									<option>Dhaka</option>
-									<option>London</option>
-									<option>Dillih</option>
-									<option>Lahore</option>
-									<option>Alaska</option>
-									<option>Canada</option>
-									<option>Dubai</option>
+									<option>Избери</option>
+									<option>София</option>
+									<option>Пловдив</option>
+									<option>Бургас</option>
+									<option>Варна</option>
+									<option>Габрово</option>
+									<option>Видин</option>
+									<option>Враца</option>
 								</select>
 							
 							</li>
@@ -241,7 +228,7 @@
 							<li>Количка:<span><c:out value="${sessionScope.carttotalprice} лв"></c:out></span></li>
 							
 							<li>Доставка:<span>Безплатна</span></li>
-							<li>Общо: <span>200 лв.</span></li>
+							<li>Общо:<span><c:out value="${sessionScope.carttotalprice} лв"></c:out></span></li>
 						</ul>
 							
 							<form action="./checkout" method="post">
@@ -256,7 +243,7 @@
 		<c:if test="${sessionScope.username == null}">
 		<div class="container">
 		<div class="heading">
-				<h3>За да ползвате количката и да осъществите поръчка, моля впишете се в системата!</h3>
+				<h3>За да ползвате количката и да осъществите поръчка, моля влезте в профила си или се регистрирайте.</h3>
 				<!-- <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p> -->
 			</div>
 		</div>

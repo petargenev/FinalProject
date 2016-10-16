@@ -8,23 +8,13 @@ import com.eshop.exceptions.InvalidInputException;
 public class Computer extends Article {
 
 	private String type = "computer";
-
-	@NotNull
-	@Min(1)
 	private int ram;
-	@NotNull
 	private String processorType;
-	@NotNull
-	@Min(0)
 	private double processorSpeed;
-	@NotNull
 	private String videoCardType;
-	@NotNull
-	@Min(1)
 	private int hdd;
-	@NotNull
 	private String operationSystem;
-
+	
 	public Computer() {
 		super();
 	}

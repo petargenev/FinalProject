@@ -12,16 +12,18 @@ import java.util.List;
 import javax.activity.InvalidActivityException;
 
 import com.eshop.connection.DBConnection;
+import com.eshop.exceptions.ArticleException;
 import com.eshop.exceptions.InvalidInputException;
 import com.eshop.interfaces.DAO;
 import com.eshop.models.Article;
+import com.eshop.models.Computer;
 import com.eshop.models.Monitor;
 
 public class MonitorDAO implements DAO{
 	Connection connection = DBConnection.getInstance().getConnection();
 	
 	public Collection<Article> showAll()
-			throws SQLException, InvalidInputException, InvalidInputException, InvalidActivityException {
+			throws SQLException, InvalidInputException, InvalidInputException {
 		List<Monitor> monitors = new ArrayList<Monitor>();
 		String query = "SELECT m.*,l.*,r.* FROM monitor m" +
 						"JOIN label l ON (m.label_id = l.id)"+
@@ -40,7 +42,12 @@ public class MonitorDAO implements DAO{
 			String contrast = rs.getString("contrast");
 			int id = rs.getInt("id");
 			
-			monitors.add(new Monitor(label, model, displayType, displaySize, resolution, contrast, price, image, id));
+			try {
+				monitors.add(new Monitor(label, model, displayType, displaySize, resolution, contrast, price, image, id));
+			} catch (InvalidActivityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 		return Collections.unmodifiableList(monitors);
@@ -85,6 +92,30 @@ public class MonitorDAO implements DAO{
 		
 		monitorPs.executeUpdate();
 		
+		
+	}
+
+	@Override
+	public Computer getArticleById(int articleId) throws SQLException, InvalidInputException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection<Article> getArticleByLabel(String articlelabel) throws SQLException, InvalidInputException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteArticleById(int id) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void insertArticle(Article article) throws ArticleException {
+		// TODO Auto-generated method stub
 		
 	}
 }

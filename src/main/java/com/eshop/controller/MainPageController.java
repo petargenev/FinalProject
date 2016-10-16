@@ -33,6 +33,7 @@ public class MainPageController {
 	public String mainPage(Model model, HttpServletRequest request, @ModelAttribute String label)
 			throws SQLException, InvalidInputException {
 		HttpSession session = request.getSession();
+		session.setMaxInactiveInterval(15000);
 
 		Collection<Article> computers = new ComputerDAO().showAll();
 		Collection<Article> laptops = new LaptopDAO().showAll();
@@ -41,7 +42,7 @@ public class MainPageController {
 		
 		Integer counter = new Integer(0);
 	
-		session.removeAttribute("invalidLogin");
+		
 		if (!computers.isEmpty()) {
 			model.addAttribute("computers", computers);
 			for (Article computer : computers) {

@@ -45,11 +45,11 @@
 					<div class="col-sm-6">
 						<div class="social-icons pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href=""><i class="fa fa-facebook"></i></a></li>
-								<li><a href=""><i class="fa fa-twitter"></i></a></li>
-								<li><a href=""><i class="fa fa-linkedin"></i></a></li>
-								<li><a href=""><i class="fa fa-dribbble"></i></a></li>
-								<li><a href=""><i class="fa fa-google-plus"></i></a></li>
+								<li><a href="rdFacebook"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="rdTwitter"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="rdLinkedin"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="rdDribbble"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="rdGooglePlus"><i class="fa fa-google-plus"></i></a></li>
 							</ul>
 						</div>
 					</div>
@@ -65,16 +65,7 @@
 							
 						</div> -->
 						<div class="btn-group pull-left">
-							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									BG
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									
-									<li><a href="">UK</a></li>
-								</ul>
-							</div>
+							<iframe scrolling="no" frameborder="no" clocktype="html5" style="overflow:hidden;border:0;margin:0;padding:0;width:180px;height:60px;"src="http://www.clocklink.com/html5embed.php?clock=004&timezone=Bulgaria_Sofia&color=orange&size=180&Title=&Message=&Target=&From=2016,1,1,0,0,0&Color=orange"></iframe>
 							
 							
 						</div>
@@ -85,7 +76,7 @@
 								
 								<c:if test="${sessionScope.username == null}">
     																						
-								<li><a href="cart"><i class="fa fa-shopping-cart"></i> Количка</a></li>
+								
 								<li><a href="login"><i class="fa fa-lock"></i> Вход</a></li>
 							</c:if>
 							
@@ -102,11 +93,15 @@
 				</div>
 			</div>
 		</div>
-
+		<div  style="position:absolute; left: 70px; top:120px;">
 		<button class="btn btn-default update" value="showCompDiv" onclick="showComputer()">ДОБАВИ КОМПЮТЪР</button>
 		<button class="btn btn-default update" value="showTabletDiv" onclick="showTablet()">ДОБАВИ ТАБЛЕТ</button>
 		<button class="btn btn-default update" value="showLaptopDiv" onclick="showLaptop()" >ДОБАВИ ЛАПТОП</button>
-		
+				<a class="btn btn-default update" href="mainpage" >НАЧАЛНА СТРАНИЦА</a>
+		</div>
+		<div>
+		<button style="display:none"> asdasd</button>.
+		</div>
 		<div id="computerDiv"  style="display:none;" class="container">
 		
 			<div class="heading">
@@ -114,7 +109,7 @@
 				<!-- <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p> -->
 			</div>
 			
-			<form:form commandName="computer" action="./addcomputer" method="post" id="computerForm" name="computerForm" enctype="multipart/form-data" >
+			<form:form commandName="computer" action="./addcomputer" method="post" id="computerForm" name="computerForm" enctype="multipart/form-data" onsubmit="return validateComputerForm()" >
 			 <%-- <form:errors path="*" cssClass="error" /> --%>
 			<div class="row">
 				<div class="col-sm-6">
@@ -126,13 +121,13 @@
 							
 								<label>Марка:</label>
 								
-								<form:input path="label" id="label" type="text"/>
-								<form:errors path="label"/>
+								<form:input path="label" id="label" name="label" type="text"/>
+								
 							</li>
 							<li class="single_field">
 								<label>Модел:</label>
 								<form:input path="model" name="model" type="text"/>
-								<form:errors path="model"/>
+								
 							
 							</li>
 							<li class="single_field">
@@ -193,7 +188,7 @@
 				
 			</div>
 			
-			<form:form commandName="tablet" action="./addtablet" method="post" enctype="multipart/form-data">
+			<form:form commandName="tablet" action="./addtablet" method="post" enctype="multipart/form-data" id="tabletForm" name="tabletForm" onsubmit="return validateTabletForm()">
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="chose_area">
@@ -202,36 +197,36 @@
 						
 							<li class="single_field">
 								<label>Марка:</label>
-								<form:input path="label" type="text"/>
+								<form:input path="label" name="label" type="text"/>
 								
 							</li>
 							<li class="single_field">
 								<label>Модел:</label>
-								<form:input path="model" type="text"/>
+								<form:input path="model" name="model" type="text"/>
 							
 							</li>
 							<li class="single_field">
 								<label>Цена:</label>
-								<form:input path="price" type="text"/>
+								<form:input path="price" name="price" type="text"/>
 							</li>
 							
 							
 							<li class="single_field">
 								<label>Тип дисплей:</label>
-								<form:input path="displayType" type="text"/>
+								<form:input path="displayType" name="displayType" type="text"/>
 							</li>
 							<li class="single_field">
 								<label>Тип процесор:</label>
-								<form:input path="cpu" type="text"/>
+								<form:input path="cpu" name="cpu" type="text"/>
 							</li>
 							
 							<li class="single_field">
 								<label>Големина на екрана</label>
-								<form:input path="displaySize" type="text"/>
+								<form:input path="displaySize" name="displaySize" type="text"/>
 							</li>
 							<li class="single_field">
 								<label>Резолюция</label>
-								<form:input path="resolution" type="text"/>
+								<form:input path="resolution" name="resolution" type="text"/>
 							</li>
 							
 							<li >
@@ -264,7 +259,7 @@
 				<!-- <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p> -->
 			</div>
 			
-			<form:form commandName="laptop" action="./addlaptop" method="post" id="laptopForm" enctype="multipart/form-data">
+			<form:form commandName="laptop" action="./addlaptop" method="post" id="laptopForm" name="laptopForm" enctype="multipart/form-data" onsubmit="return validateLaptopForm()">
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="chose_area">
@@ -273,57 +268,57 @@
 						
 							<li class="single_field">
 								<label>Марка:</label>
-								<form:input path="label" type="text"/>
+								<form:input path="label" name="label" type="text"/>
 								
 							</li>
 							<li class="single_field">
 								<label>Модел:</label>
-								<form:input path="model" type="text"/>
+								<form:input path="model" name="model" type="text"/>
 							
 							</li>
 							<li class="single_field">
 								<label>Цена:</label>
-								<form:input path="price" type="text"/>
+								<form:input path="price" name="price" type="text"/>
 							</li>
 							<li class="single_field">
 								<label>Оперативна памет (ГБ):</label>
-								<form:input path="ram" type="text"/>
+								<form:input path="ram" name="ram" type="text"/>
 							</li>
 							<li class="single_field">
 								<label>Скорост на процесора:</label>
-								<form:input path="processorSpeed" type="text"/>
+								<form:input path="processorSpeed" name="processorSpeed" type="text"/>
 							</li>
 							<li class="single_field">
 								<label>Вид операционна система:</label>
-								<form:input path="operationSystem" type="text"/>
+								<form:input path="operationSystem" name="operationSystem" type="text"/>
 							</li>
 							<li class="single_field">
 								<label>HDD:</label>
-								<form:input path="hdd" type="text"/>
+								<form:input path="hdd" name="hdd" type="text"/>
 							</li>
 							<li class="single_field">
 								<label>Тип процесор:</label>
-								<form:input path="processorType" type="text"/>
+								<form:input path="processorType" name="processorType" type="text"/>
 							</li>
 							<li class="single_field">
 								<label>Тип видео карта</label>
-								<form:input path="videoCardType" type="text"/>
+								<form:input path="videoCardType" name="videoCardType" type="text"/>
 							</li>
 						
 							<li class="single_field">
 								<label>Големина на екрана</label>
-								<form:input path="displaySize" type="text"/>
+								<form:input path="displaySize" name="	" type="text"/>
 							</li>
 							<li class="single_field">
 								<label>Резолюция</label>
-								<form:input path="resolution" type="text"/>
+								<form:input path="resolution" name="resolution" type="text"/>
 							</li>
 							
 							<li >
 								<label>Снимка</label>
 						
 									<input name="file" type="file"  id="laptopImage"  onchange="ValidateFileUploadLaptop()" />
-							       	<img class="snimka" id="imageL" src="#" alt="Вашата снимка" style="width:220px;height:180px;" />
+							       	<img class="snimka" id="imageL" src="#" alt="Вашата снимка"  />
 											
 							</li>
 				
@@ -348,8 +343,8 @@
 	
 	
 
-	
 	<script src="js/fieldsRequired.js"></script>
+
 	<script src="js/photoupload.js"></script>
 	<script src="js/hideOrShow.js"></script>
     <script src="js/jquery.js"></script>

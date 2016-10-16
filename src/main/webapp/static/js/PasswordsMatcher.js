@@ -19,7 +19,7 @@ function checkEmailAvailability() {
 				console.log(result)
 				emailExist = true;
 				email.tooltip('destroy');
-				email.attr('title', 'Емейла вече е зает. Моля, въведете нов.').tooltip().mouseover();
+				email.attr('title', 'Емейла вече е зает или не отговаря на изискванията. Моля, въведете нов.').tooltip().mouseover();
 				document.getElementById("registerBtn").disabled = true; 
 			} else if(result === "false") {
 				emailExist = false;

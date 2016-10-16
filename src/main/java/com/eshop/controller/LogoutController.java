@@ -18,6 +18,7 @@ public class LogoutController {
 		HttpSession session = request.getSession();
 		session.removeAttribute("username");
 		session.removeAttribute("cart");
+		session.removeAttribute("isAdmin");
 		return "redirect:/mainpage";
 	}
 	
@@ -26,7 +27,8 @@ public class LogoutController {
 		HttpSession session = request.getSession();
 		session.removeAttribute("username");
 		session.removeAttribute("cart");
-		return "cart";
+		session.removeAttribute("isAdmin");
+		return "redirect:/mainpage";
 	}
 
 

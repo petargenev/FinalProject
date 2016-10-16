@@ -63,10 +63,20 @@ function getId(item) {
 		Id : itemId
 
 	};
+//	$.post("getArticleId", data, function(result) {
+//		if (result === "User not logged!") {
+//			alert("Моля логнете се, за да пазарувате.");
+//		}
+//
+//	});
 	
 	if (confirm("Сигурни ли сте, че искате да добавите дадения артикул в количката си ?") == true) {
 		document.getElementById(itemId).disabled = true; 
 		$.post("getArticleId", data, function(result) {
+			if (result === "User not logged!") {
+				alert("Моля логнете се, за да пазарувате.");
+			}
+			
 			if (result === "Article exists!") {
 				alert("Артикулът, който опитвате да добавите е вече в количката ви!");
 			}
@@ -90,6 +100,25 @@ function getIdAndRemove(item) {
 	};
 	if (confirm("Сигурни ли сте, че искате да премахнете дадения артикул от количката си ?") == true){
 	$.post("removeArticle", data, function(result) {
+		// var id = '#postedFor' + postId;
+		// $(id).html(result);
+
+	});
+	}
+	location.reload();
+}
+
+function removeItem(item){
+	var itemId = item.id
+	var itemName = item.name;
+	// var url = '@Url.Action("UpdateReport/", "Report")';
+	var data = {
+		Article : itemName,
+		Id : itemId
+
+	};
+	if (confirm("Сигурни ли сте, че искате да изтриете дадения артикул ?") == true){
+	$.post("removeItem", data, function(result) {
 		// var id = '#postedFor' + postId;
 		// $(id).html(result);
 

@@ -33,6 +33,7 @@ public class SpringWebConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/min/**").addResourceLocations("/static/css/");
         registry.addResourceHandler("/image/**").addResourceLocations("file:///" + AddArticleController.getUploadLocation());
         registry.addResourceHandler("/img/**").addResourceLocations("file:///" + AddArticleController.getUploadLocation());
+        registry.addResourceHandler("/images/**").addResourceLocations("/static/images/");
     }
     
     @Bean(name = "multipartResolver")

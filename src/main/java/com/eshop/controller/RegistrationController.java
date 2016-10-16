@@ -12,22 +12,32 @@ import com.eshop.models.User;
 
 @Controller
 public class RegistrationController {
+	UserDAO userDao = new UserDAO();
 
-	@RequestMapping(value="/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String creatingUser(Model model) {
 		model.addAttribute(new User());
 		return "login";
 	}
 
-	@RequestMapping(value="/RegistrationController", method = RequestMethod.POST)
+	@RequestMapping(value = "/RegistrationController", method = RequestMethod.POST)
 	public String addNewUser(@ModelAttribute User user, Model model) throws UserException {
 		
+		System.out.println("IMETO" + userDao.isValidName(user.getName()));
+		System.out.println("PAROLATA" + userDao.isValidPassword(user.getPassword()));
+		System.out.println("EMAILA " + userDao.isValidEmail(user.getEmail()));
+		if (userDao.isValidName(user.getName()) && 
+			userDao.isValidEmail(user.getEmail()) &&
+			userDao.isValidPassword(user.getPassword())){
+			System.out.println("VKARVAM USER");
+				userDao.registerUser(user);
+				model.addAttribute(user);
+				System.out.println(user);
+				return "forward:/login";
+		}else{
+			return "mainpage";
+		}
 		
-		new UserDAO().registerUser(user);
-		model.addAttribute(user);
-		System.out.println(user);
-
-		return "forward:/LoginController";
 	}
 
 }

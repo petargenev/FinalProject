@@ -44,11 +44,11 @@
 					<div class="col-sm-6">
 						<div class="social-icons pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href=""><i class="fa fa-facebook"></i></a></li>
-								<li><a href=""><i class="fa fa-twitter"></i></a></li>
-								<li><a href=""><i class="fa fa-linkedin"></i></a></li>
-								<li><a href=""><i class="fa fa-dribbble"></i></a></li>
-								<li><a href=""><i class="fa fa-google-plus"></i></a></li>
+								<li><a href="rdFacebook"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="rdTwitter"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="rdLinkedin"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="rdDribbble"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="rdGooglePlus"><i class="fa fa-google-plus"></i></a></li>
 							</ul>
 						</div>
 					</div>
@@ -62,17 +62,7 @@
 					<div class="col-sm-4">
 						
 						
-							<div class="btn-group">
-								<button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-									BG
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-									
-									<li><a href="">UK</a></li>
-								</ul>
-							</div>
-							
+						<iframe scrolling="no" frameborder="no" clocktype="html5" style="overflow:hidden;border:0;margin:0;padding:0;width:180px;height:60px;"src="http://www.clocklink.com/html5embed.php?clock=004&timezone=Bulgaria_Sofia&color=orange&size=180&Title=&Message=&Target=&From=2016,1,1,0,0,0&Color=orange"></iframe>
 							
 						
 					</div>
@@ -104,32 +94,28 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<a class="btn btn-default update" href="index.html">ПАЗАРУВАЙ</a>
+								<a class="btn btn-default update" href="mainpage" style="position:absolute; left: 75px; top:-30px;">ПАЗАРУВАЙ</a>
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-3">
-						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
-						</div>
-					</div>
+					
 				</div>
 			</div>
 		</div><!--/header-bottom-->
 	</header><!--/header-->
 	
-	<section id="form"><!--form-->
+
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-4 col-sm-offset-1">
 					<div class="login-form"><!--login form-->
 						<h2>Влезте в профила си</h2>
-						<form:form commandName="user" name="loginForm" action="LoginController"  onsubmit="return validateLoginForm()">
+						<form:form commandName="user" name="loginForm" action="login"  onsubmit="return validateLoginForm()">
 							<form:input path="email" type="email" name="email" placeholder="E-mail адрес" />
 							<form:input path="password" type="password" name="password" placeholder="Парола" />
 							
 							<button type="submit" value="Log user" class="btn btn-default">Вход</button>
-							<c:if test="${not empty sessionScope.invalidLogin }"><h3><span style="color:red"><c:out value="${sessionScope.invalidLogin}"/></span></h3> </c:if>
+							<c:if test="${not empty invalidLogin}"><h3><span style="color:red"><c:out value="${invalidLogin}"/></span></h3> </c:if>
 						</form:form>
 					</div><!--/login form-->
 				</div>

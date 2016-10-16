@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Shop | E-Shopper</title>
+    <title>E-shop</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -19,15 +19,7 @@
 	<link href="css/responsive.css" rel="stylesheet">
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->       
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+  
 </head><!--/head-->
 
 <body>
@@ -45,11 +37,13 @@
 					<div class="col-sm-6">
 						<div class="social-icons pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href=""><i class="fa fa-facebook"></i></a></li>
-								<li><a href=""><i class="fa fa-twitter"></i></a></li>
-								<li><a href=""><i class="fa fa-linkedin"></i></a></li>
-								<li><a href=""><i class="fa fa-dribbble"></i></a></li>
-								<li><a href=""><i class="fa fa-google-plus"></i></a></li>
+							
+								<li><a href="rdFacebook"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="rdTwitter"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="rdLinkedin"><i class="fa fa-linkedin"></i></a></li>
+								<li><a href="rdDribbble"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="rdGooglePlus"><i class="fa fa-google-plus"></i></a></li>
+								
 							</ul>
 						</div>
 					</div>
@@ -87,11 +81,12 @@
     							
     						<li><a ><i class="fa fa-user cart1"></i><span class="cart1">Добре дошъл ${sessionScope.username} !</span></a></li>	
     						<c:if test="${sessionScope.isAdmin == true}">	
-    						<li><a href="addarticle"><i class="fa fa-shopping-cart car1"></i> <span class="cart1">Добави артикул</span></a></li>	
+    						<li><a href="addarticle"><i class="fa fa-shopping-cart car1"></i> <span class="cart1">Добави артикул</span></a></li>
+
     						</c:if>							
 								<li><a href="cart"><i class="fa fa-shopping-cart car1"></i> <span class="cart1">Количка</span></a></li>
 								<li><a href="LogoutController"><i class="fa fa-lock car1"></i><span class="cart1"> Изход</span></a></li>
-								</c:if>
+							</c:if>
 								
 							
 							
@@ -102,18 +97,21 @@
 				</div>
 			</div>
 		</div><!--/header-middle-->
-	<!-- 
+	
 		<div class="header-bottom"><!--header-bottom-->
-			<!--  <div class="container">
+			<div class="container">
 				<div class="row">
-					<div >
-							<a><img src="C:\Users\petar\Desktop\MyProject\src\main\webapp\static\images\koren.png" style="width:50px;height:50px;" /></a>
+					<div >	<!--  
+							<a><img src="./images/koren.png" style="width:120px;height:60px;"> </a>
+							<a><img src="./images/kvadrat.png" style="width:120px;height:60px;"> </a>
+							<a><img src="./images/devet.jpg" style="width:120px;height:60px;"> </a>
+							-->
 						</div> 
 				</div>
 				</div>
 			</div> 
 	</header>
-	-->
+	
 	<section id="advertisement">
 		<div class="container">
 			
@@ -215,9 +213,7 @@
 						</div>
 						-->		
 						
-						<div class="shipping text-center"><!--shipping-->
-							<img src="images/home/shipping.jpg" alt="" />
-						</div><!--/shipping-->
+					
 						
 					</div>
 				</div>
@@ -230,7 +226,7 @@
 					
 						<c:choose>
     						<c:when test="${sessionScope.label != 'All'}">
-    						<c:out value="${sessionScope.label}"/>
+    						
       							<c:if test="${ not empty computers}">
 							<c:forEach items="${computers}" var="computer">
 							<c:if test="${computer.model == sessionScope.label}">
@@ -257,6 +253,10 @@
 							<br>
 							
 							<button   id="${computer.id}" name="computer" onclick="getId(this)"  class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
+							<br>
+							<c:if test="${sessionScope.isAdmin}">
+							<button id="${computer.id}" name="${computer.type}" onclick="removeItem(this)" class="cart_quantity_delete" ><i class="fa fa-times"></i></button>
+							</c:if>
 							</td>
 							
 							
@@ -296,6 +296,10 @@
 							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${laptop.price} лв."></c:out></span></span>
 							<br>
 							<button  id="${laptop.id}" name="laptop" onclick="getId(this)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
+							<br>
+							<c:if test="${sessionScope.isAdmin}">
+							<button id="${laptop.id}" name="${laptop.type}" onclick="removeItem(this)" class="cart_quantity_delete" ><i class="fa fa-times"></i></button>
+							</c:if>
 							</td>
 							
 							
@@ -331,6 +335,10 @@
 							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${tablet.price} лв."></c:out></span></span>
 							<br>
 							<button id="${tablet.id}" name="tablet" onclick="getId(this)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
+							<br>
+							<c:if test="${sessionScope.isAdmin}">
+							<button id="${tablet.id}" name="${tablet.type}" onclick="removeItem(this)" class="cart_quantity_delete" ><i class="fa fa-times"></i></button>
+							</c:if>
 							</td>
 							
 							
@@ -368,6 +376,10 @@
 							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${computer.price} лв."></c:out></span></span>
 							<br>
 							<button   id="${computer.id}" name="computer" onclick="getId(this)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
+							<br>
+							<c:if test="${sessionScope.isAdmin}">
+							<button id="${computer.id}" name="${computer.type}" onclick="removeItem(this)" class="cart_quantity_delete" ><i class="fa fa-times"></i></button>
+							</c:if>
 							</td>
 							
 							
@@ -407,6 +419,10 @@
 							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${laptop.price} лв."></c:out></span></span>
 							<br>
 							<button  id="${laptop.id}" name="laptop" onclick="getId(this)" class="btn btn-default add-to-cart" data-value="@Request.RequestContext.HttpContext.Session[username]"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
+							<br>
+							<c:if test="${sessionScope.isAdmin}">
+							<button id="${laptop.id}" name="${laptop.type}" onclick="removeItem(this)" class="cart_quantity_delete" ><i class="fa fa-times"></i></button>
+							</c:if>
 							</td>
 							
 							
@@ -442,6 +458,10 @@
 							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${tablet.price} лв."></c:out></span></span>
 							<br>
 							<button id="${tablet.id}" name="tablet" onclick="getId(this)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
+							<br>
+							<c:if test="${sessionScope.isAdmin}">
+							<button id="${tablet.id}" name="${tablet.type}" onclick="removeItem(this)" class="cart_quantity_delete" ><i class="fa fa-times"></i></button>
+							</c:if>
 							</td>
 							
 							
@@ -453,6 +473,129 @@
 									</c:forEach>
 									</c:if>
   								  </c:when>
+  								  <c:otherwise> 
+  								  <c:if test="${ not empty computers}">
+							<c:forEach items="${computers}" var="computer">
+							
+						<table>
+						
+							<tr><td class="labelmodel"><c:out value="Компютър ${computer.model}  ${computer.label}"></c:out></td></tr>
+							
+							<tr>
+							<td><img src="<c:out value="${computer.image}"></c:out>" style="width:220px;height:180px;"></td> 
+							<td class="tdharakteristiki"><p class="harakteristiki">ХАРАКТЕРИСТИКИ:</p>
+								
+								<ul >
+									
+									<li class="lisize"><span>RAM ПАМЕТ:  </span> <span class="stoinosti"><c:out value="${computer.ram} GB" ></c:out></span></li>
+									<li class="lisize"><span>ТИП ПРОЦЕСОР:</span> <span class="stoinosti"><c:out value="${computer.processorType}" ></c:out></span></li>
+									<li class="lisize"><span>ЧЕСТОТА НА ПРОЦЕСОРА:</span> <span class="stoinosti"><c:out value="${computer.processorSpeed} GHz"></c:out></span></li>
+									<li class="lisize"><span>ВИДЕО КАРТА:</span> <span class="stoinosti"><c:out value="${computer.videoCardType}"></c:out></span></li>
+									<li class="lisize"><span>HDD:</span> <span class="stoinosti"><c:out value="${computer.hdd} GB"></c:out></span></li>
+									<li class="lisize"><span>ОПЕРАЦИОННА СИСТЕМА:</span> <span class="stoinosti"><c:out value="${computer.operationSystem}"></c:out></span></li>
+								
+								</ul>
+							</td>
+							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${computer.price} лв."></c:out></span></span>
+							<br>
+							<button   id="${computer.id}" name="computer" onclick="getId(this)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
+							<br>
+							<c:if test="${sessionScope.isAdmin}">
+							<button id="${computer.id}" name="${computer.type}" onclick="removeItem(this)" class="cart_quantity_delete" ><i class="fa fa-times"></i></button>
+							</c:if>
+							</td>
+							
+							
+							</tr>
+							
+						</table>
+						<hr>
+						
+					</c:forEach>
+					
+					</c:if>	
+					
+					
+						<c:if test="${ not empty laptops}">
+							<c:forEach items="${laptops}" var="laptop">
+							
+						<table>
+						
+							<tr><td class="labelmodel"><c:out value="Лаптоп ${laptop.model}  ${laptop.label}"></c:out></td></tr>
+							
+							<tr>
+							<td><img src="<c:out value="${laptop.image}"></c:out>" style="width:220px;height:180px;"></td> 
+							<td class="tdharakteristiki"><p class="harakteristiki">ХАРАКТЕРИСТИКИ:</p>
+								
+								<ul >
+									<li class="lisize"><span>RAM ПАМЕТ:</span> <span class="stoinosti"><c:out value="${laptop.ram} GB"></c:out></span></li>
+									<li class="lisize"><span>ТИП ПРОЦЕСОР:</span> <span class="stoinosti"><c:out value="${laptop.processorType}"></c:out></span></li>
+									<li class="lisize"><span>ЧЕСТОТА НА ПРОЦЕСОРА:</span> <span class="stoinosti"><c:out value="${laptop.processorSpeed} GHz"></c:out></span></li>
+									<li class="lisize"><span>ВИДЕО КАРТА:</span> <span class="stoinosti"><c:out value="${laptop.videoCardType}"></c:out></span></li>
+									<li class="lisize"><span>HDD:</span> <span class="stoinosti"><c:out value="${laptop.hdd} GB"></c:out></span></li>
+									<li class="lisize"><span>ОПЕРАЦИОННА СИСТЕМА:</span> <span class="stoinosti"><c:out value="${laptop.operationSystem}"></c:out></span></li>
+									<li class="lisize"><span>ГОЛЕМИНА НА ЕКРАНА:</span> <span class="stoinosti"><c:out value='${laptop.displaySize} " '></c:out></span></li>
+									<li class="lisize"><span>РЕЗОЛЮЦИЯ:</span> <span class="stoinosti"><c:out value="${laptop.resolution}"></c:out></span></li>
+								
+								</ul>
+							</td>
+							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${laptop.price} лв."></c:out></span></span>
+							<br>
+							<button  id="${laptop.id}" name="laptop" onclick="getId(this)" class="btn btn-default add-to-cart" data-value="@Request.RequestContext.HttpContext.Session[username]"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
+							<br>
+							<c:if test="${sessionScope.isAdmin}">
+							<button id="${laptop.id}" name="${laptop.type}" onclick="removeItem(this)" class="cart_quantity_delete" ><i class="fa fa-times"></i></button>
+							</c:if>
+							</td>
+							
+							
+							</tr>
+							
+						</table>
+						<hr>
+						
+					</c:forEach>
+					</c:if>	
+					
+					
+						<c:if test="${ not empty tablets}">
+							<c:forEach items="${tablets}" var="tablet">
+							
+						<table>
+							
+							<tr><td class="labelmodel"><c:out value="Таблет ${tablet.label} ${tablet.model}  "></c:out></td></tr>
+							
+							<tr>
+							<td><img src="<c:out value="${tablet.image}"></c:out>" style="width:220px;height:180px;"></td> 
+							<td class="tdharakteristiki"><p class="harakteristiki">ХАРАКТЕРИСТИКИ:</p>
+								
+								<ul >
+									<li class="lisize"><span>ТИП ПРОЦЕСОР:</span> <span class="stoinosti"><c:out value="${tablet.cpu}"></c:out></span></li>
+									<li class="lisize"><span>ТЕХНОЛОГИЯ НА ДИСПЛЕЯ:</span> <span class="stoinosti"><c:out value="${tablet.displayType}"></c:out></span></li>
+									<li class="lisize"><span>РАЗМЕР НА ЕКРАНА:</span> <span class="stoinosti"><c:out value='${tablet.displaySize} "'></c:out></span></li>
+									<li class="lisize"><span>РЕЗОЛЮЦИЯ НА ДИСПЛЕЯ:</span> <span class="stoinosti"><c:out value="${tablet.resolution}"></c:out></span></li>
+									
+								
+								</ul>
+							</td>
+							<td class="tdcena"><span class="cqlacena"> ЦЕНА:  <span class="cena"><c:out value="${tablet.price} лв."></c:out></span></span>
+							<br>
+							<button id="${tablet.id}" name="tablet" onclick="getId(this)" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добави в количката</button>
+							<br>
+							<c:if test="${sessionScope.isAdmin}">
+							<button id="${tablet.id}" name="${tablet.type}" onclick="removeItem(this)" class="cart_quantity_delete" ><i class="fa fa-times"></i></button>
+							</c:if>
+							</td>
+							
+							
+							</tr>
+							
+						</table>
+						<hr>
+						
+									</c:forEach>
+									</c:if>
+  								  </c:otherwise>
    							 </c:choose>			
 						
 						

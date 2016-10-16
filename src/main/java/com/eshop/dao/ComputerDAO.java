@@ -19,13 +19,18 @@ import com.eshop.models.Computer;
 public class ComputerDAO implements DAO {
 	Connection connection = DBConnection.getInstance().getConnection();
 
-	public Computer getComputerById(int computerId) throws SQLException, InvalidInputException {
-		String query ="SELECT c.*, p.*, v.*, o.*, l.* FROM computer c "
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.eshop.dao.DAO#getComputerById(int)
+	 */
+	@Override
+	public Computer getArticleById(int computerId) throws SQLException, InvalidInputException {
+		String query = "SELECT c.*, p.*, v.*, o.*, l.* FROM computer c "
 				+ "JOIN processor_type p ON (c.processor_type_id = p.id) "
 				+ "JOIN video_card_type v ON (c.video_card_type_id = v.id) "
-				+ "JOIN operation_system o ON (c.operation_system_id = o.id) "
-				+ "JOIN label l ON (c.label_id = l.id) " 
-				+"WHERE c.id LIKE '"+computerId +"';";
+				+ "JOIN operation_system o ON (c.operation_system_id = o.id) " + "JOIN label l ON (c.label_id = l.id) "
+				+ "WHERE c.id LIKE '" + computerId + "';";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
 		Computer computer = null;
@@ -41,19 +46,25 @@ public class ComputerDAO implements DAO {
 			int hdd = rs.getInt("hdd");
 			String operationSystem = rs.getString("operation_system");
 			int id = rs.getInt("id");
-			computer = new Computer(model, label, ram, processorType, processorSpeed, videoCardType, hdd, operationSystem, price, image, id);
+			computer = new Computer(model, label, ram, processorType, processorSpeed, videoCardType, hdd,
+					operationSystem, price, image, id);
 		}
 		return computer;
 	}
-	
-	public Collection<Article> getComputerByLabel(String computerLabel) throws SQLException, InvalidInputException{
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.eshop.dao.DAO#getComputerByLabel(java.lang.String)
+	 */
+	@Override
+	public Collection<Article> getArticleByLabel(String computerLabel) throws SQLException, InvalidInputException {
 		List<Computer> computers = new ArrayList<Computer>();
 		String query = "SELECT c.*, p.*, v.*, o.*, l.* FROM computer c "
 				+ "JOIN processor_type p ON (c.processor_type_id = p.id) "
 				+ "JOIN video_card_type v ON (c.video_card_type_id = v.id) "
-				+ "JOIN operation_system o ON (c.operation_system_id = o.id) "
-				+ "JOIN label l ON (c.label_id = l.id) "
-				+ "WHERE l.label LIKE '" +computerLabel +"';";
+				+ "JOIN operation_system o ON (c.operation_system_id = o.id) " + "JOIN label l ON (c.label_id = l.id) "
+				+ "WHERE l.label LIKE '" + computerLabel + "';";
 
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
@@ -75,7 +86,13 @@ public class ComputerDAO implements DAO {
 		}
 		return Collections.unmodifiableList(computers);
 	}
-	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.eshop.dao.DAO#showAll()
+	 */
+	@Override
 	public Collection<Article> showAll() throws SQLException, InvalidInputException, InvalidInputException {
 		List<Computer> computers = new ArrayList<Computer>();
 		String query = "SELECT c.*, p.*, v.*, o.*, l.* FROM computer c "
@@ -103,51 +120,79 @@ public class ComputerDAO implements DAO {
 		}
 		return Collections.unmodifiableList(computers);
 	}
-	
-	public void deleteComputer(int id) throws SQLException{
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.eshop.dao.DAO#deleteComputer(int)
+	 */
+	@Override
+	public void deleteArticleById(int id) throws SQLException {
 		String deleteQuery = "DELETE FROM computer WHERE id LIKE '" + id + "';";
 		PreparedStatement deletePs = connection.prepareStatement(deleteQuery);
 		deletePs.executeUpdate();
-		
+
 	}
 
-	public void insertComputer(Computer computer) throws ArticleException {
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.eshop.dao.DAO#insertComputer(com.eshop.models.Computer)
+	 */
+	@Override
+	public void insertArticle(Article computer) throws ArticleException {
 
 		try {
-			// getting processor id
-			int processorId = getOrInsertProcessor(computer);
-			System.out.println("VUVEDOH PROCESOR 1");
-			int videoCardId = getOrInsertVideoCard(computer);
-			System.out.println("VUVEDOH VD 1");
-			// getting operation system id
-			int operationSystemId = getOrInsertOperationSystem(computer);
-			System.out.println("VUVEDOH OS 1");
-			// getting label id
-			int labelId = getOrInsertLabel(computer);
-			System.out.println("VUVEDOH labl 1");
-			// inserting computer into database
-			PreparedStatement computerPs = connection
-					.prepareStatement("INSERT INTO computer VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			computerPs.setInt(1, computer.getRam());
-			computerPs.setDouble(2, computer.getProcessorSpeed());
-			computerPs.setInt(3, computer.getHdd());
-			computerPs.setString(4, computer.getModel());
-			computerPs.setDouble(5, computer.getPrice());
-			computerPs.setString(6, computer.getImage());
-			computerPs.setInt(7, processorId);
-			computerPs.setInt(8, videoCardId);
-			computerPs.setInt(9, operationSystemId);
-			computerPs.setInt(10, labelId);
+			if (computer instanceof Computer) {
+				
+				
+				connection.setAutoCommit(false);
+				// getting processor id
+				int processorId = getOrInsertProcessor((Computer) computer);
+				System.out.println("VUVEDOH PROCESOR 1");
+				int videoCardId = getOrInsertVideoCard((Computer) computer);
+				System.out.println("VUVEDOH VD 1");
+				// getting operation system id
+				int operationSystemId = getOrInsertOperationSystem((Computer) computer);
+				System.out.println("VUVEDOH OS 1");
+				// getting label id
+				int labelId = getOrInsertLabel(computer);
+				System.out.println("VUVEDOH labl 1");
+				// inserting computer into database
+				PreparedStatement computerPs = connection
+						.prepareStatement("INSERT INTO computer VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				computerPs.setInt(1, ((Computer) computer).getRam());
+				computerPs.setDouble(2, ((Computer) computer).getProcessorSpeed());
+				computerPs.setInt(3, ((Computer) computer).getHdd());
+				computerPs.setString(4, computer.getModel());
+				computerPs.setDouble(5, computer.getPrice());
+				computerPs.setString(6, computer.getImage());
+				computerPs.setInt(7, processorId);
+				computerPs.setInt(8, videoCardId);
+				computerPs.setInt(9, operationSystemId);
+				computerPs.setInt(10, labelId);
 
-			computerPs.executeUpdate();
-
+				computerPs.executeUpdate();
+				connection.commit();
+			}
 		} catch (SQLException e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			throw new ArticleException();
+		} finally {
+			try {
+				connection.setAutoCommit(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
 
-	private int getOrInsertLabel(Computer computer) throws SQLException {
+	private int getOrInsertLabel(Article computer) throws SQLException {
 		System.out.println("vleznah v label-a");
 		String labelQuery = "SELECT * FROM label WHERE label LIKE '" + computer.getLabel() + "';";
 		PreparedStatement labelPs = connection.prepareStatement(labelQuery);

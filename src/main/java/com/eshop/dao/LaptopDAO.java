@@ -22,14 +22,13 @@ import com.eshop.models.Laptop;
 public class LaptopDAO implements DAO {
 	Connection connection = DBConnection.getInstance().getConnection();
 
-	public Laptop getLaptopById(int laptopId) throws SQLException, InvalidInputException {
+	public Laptop getArticleById(int laptopId) throws SQLException, InvalidInputException {
 		String query = "SELECT la.*, p.*, v.*, o.*, l.*,r.* FROM laptop la "
 				+ "JOIN processor_type p ON (la.processor_type_id = p.id) "
 				+ "JOIN video_card_type v ON (la.video_card_type_id = v.id) "
 				+ "JOIN operation_system o ON (la.operation_system_id = o.id) "
-				+ "JOIN label l ON (la.label_id = l.id) " 
-				+ "JOIN resolution r ON(la.resolution_id = r.id) "
-				+ "WHERE la.id LIKE'"+ laptopId + "';";
+				+ "JOIN label l ON (la.label_id = l.id) " + "JOIN resolution r ON(la.resolution_id = r.id) "
+				+ "WHERE la.id LIKE'" + laptopId + "';";
 
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
@@ -49,23 +48,22 @@ public class LaptopDAO implements DAO {
 			String resolution = rs.getString("resolution");
 			String operationSystem = rs.getString("operation_system");
 			int id = rs.getInt("id");
-			laptop = new Laptop(displaySize, resolution, model, label, ram, processorType, processorSpeed, videoCardType, hdd, operationSystem, price, image, id);
+			laptop = new Laptop(displaySize, resolution, model, label, ram, processorType, processorSpeed,
+					videoCardType, hdd, operationSystem, price, image, id);
 		}
 		System.out.println("VRUSHTAM LAPTOP");
 		System.out.println(laptop);
 		return laptop;
 	}
-	
-	public Collection<Article> getLaptopByLabel (String laptopLabel) throws SQLException, InvalidInputException{
+
+	public Collection<Article> getArticleByLabel(String laptopLabel) throws SQLException, InvalidInputException {
 		List<Computer> laptops = new ArrayList<Computer>();
 		String query = "SELECT la.*, p.*, v.*, o.*, l.*,r.* FROM laptop la "
 				+ "JOIN processor_type p ON (la.processor_type_id = p.id) "
 				+ "JOIN video_card_type v ON (la.video_card_type_id = v.id) "
 				+ "JOIN operation_system o ON (la.operation_system_id = o.id) "
-				+ "JOIN label l ON (la.label_id = l.id) "
-				+ "JOIN resolution r ON(la.resolution_id = r.id) "
-				+ "WHERE l.label LIKE '"+laptopLabel + "';";
-				
+				+ "JOIN label l ON (la.label_id = l.id) " + "JOIN resolution r ON(la.resolution_id = r.id) "
+				+ "WHERE l.label LIKE '" + laptopLabel + "';";
 
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
@@ -120,59 +118,61 @@ public class LaptopDAO implements DAO {
 		}
 		return Collections.unmodifiableList(laptops);
 	}
-	
-	public void deleteLaptop(int id) throws SQLException{
+
+	public void deleteArticleById(int id) throws SQLException {
 		String deleteQuery = "DELETE FROM laptop WHERE id LIKE '" + id + "';";
 		PreparedStatement deletePs = connection.prepareStatement(deleteQuery);
 		deletePs.executeUpdate();
-		
+
 	}
 
-	public void insertLaptop(Laptop laptop) throws ArticleException {
+	public void insertArticle(Article laptop) throws ArticleException {
 
 		try {
-			// getting processor id
-			System.out.println("VLIZAM V PROCESSOR");
-			int processorId = getOrInsertProcessor(laptop);
+			if (laptop instanceof Laptop) {
+				
+				// getting processor id
+				System.out.println("VLIZAM V PROCESSOR");
+				int processorId = getOrInsertProcessor((Laptop) laptop);
 
-			// getting video card id
-			System.out.println("VLIZAM V VIDEOCARD");
-			int videoCardId = getOrInserVideoCard(laptop);
+				// getting video card id
+				System.out.println("VLIZAM V VIDEOCARD");
+				int videoCardId = getOrInserVideoCard((Laptop) laptop);
 
-			// getting operation system id
-			System.out.println("VLIZAM V OS");
-			int operationSystemId = getOrInsertOperationSystem(laptop);
+				// getting operation system id
+				System.out.println("VLIZAM V OS");
+				int operationSystemId = getOrInsertOperationSystem((Laptop) laptop);
 
-			// getting label id
-			System.out.println("VLIZAM V LABEl");
-			int labelId = getOrInserLabel(laptop);
+				// getting label id
+				System.out.println("VLIZAM V LABEl");
+				int labelId = getOrInserLabel((Laptop) laptop);
 
-			// inserting resolution
-			System.out.println("VLIZAM V RESOLUTION");
-			int resolutionId = getOrInsertResolution(laptop);
+				// inserting resolution
+				System.out.println("VLIZAM V RESOLUTION");
+				int resolutionId = getOrInsertResolution((Laptop) laptop);
 
-			// inserting laptop into database
-			PreparedStatement laptopPs = connection
-					.prepareStatement("INSERT INTO laptop VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			laptopPs.setInt(1, laptop.getRam());
-			laptopPs.setDouble(2, laptop.getDisplaySize());
-			laptopPs.setInt(3, laptop.getHdd());
-			laptopPs.setDouble(4, laptop.getPrice());
-			laptopPs.setString(5, laptop.getModel());
-			laptopPs.setDouble(6, laptop.getProcessorSpeed());
-			laptopPs.setString(7, laptop.getImage());
-			laptopPs.setInt(8, processorId);
-			laptopPs.setInt(9, videoCardId);
-			laptopPs.setInt(10, operationSystemId);
-			System.out.println("PREDI DA SETNA RESOLUTION");
-			System.out.println(resolutionId);
-			laptopPs.setInt(11, resolutionId);
-			System.out.println("SLED KATO SETVAM RESOLUTION");
-			laptopPs.setInt(12, labelId);
-			System.out.println("PREDI UPDATE-a");
-			laptopPs.executeUpdate();
-			System.out.println("SLED UPDATE-a");
-
+				// inserting laptop into database
+				PreparedStatement laptopPs = connection
+						.prepareStatement("INSERT INTO laptop VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				laptopPs.setInt(1, ((Computer) laptop).getRam());
+				laptopPs.setDouble(2, ((Laptop) laptop).getDisplaySize());
+				laptopPs.setInt(3, ((Computer) laptop).getHdd());
+				laptopPs.setDouble(4, laptop.getPrice());
+				laptopPs.setString(5, laptop.getModel());
+				laptopPs.setDouble(6, ((Computer) laptop).getProcessorSpeed());
+				laptopPs.setString(7, laptop.getImage());
+				laptopPs.setInt(8, processorId);
+				laptopPs.setInt(9, videoCardId);
+				laptopPs.setInt(10, operationSystemId);
+				System.out.println("PREDI DA SETNA RESOLUTION");
+				System.out.println(resolutionId);
+				laptopPs.setInt(11, resolutionId);
+				System.out.println("SLED KATO SETVAM RESOLUTION");
+				laptopPs.setInt(12, labelId);
+				System.out.println("PREDI UPDATE-a");
+				laptopPs.executeUpdate();
+				System.out.println("SLED UPDATE-a");
+			}
 		} catch (SQLException e) {
 			throw new ArticleException(e);
 		}

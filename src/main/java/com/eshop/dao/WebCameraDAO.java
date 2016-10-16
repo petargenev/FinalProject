@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.eshop.connection.DBConnection;
+import com.eshop.exceptions.ArticleException;
 import com.eshop.exceptions.InvalidInputException;
 import com.eshop.interfaces.DAO;
 import com.eshop.models.Article;
@@ -85,5 +86,29 @@ public class WebCameraDAO implements DAO{
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public Article getArticleById(int articleId) throws SQLException, InvalidInputException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection<Article> getArticleByLabel(String articlelabel) throws SQLException, InvalidInputException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteArticleById(int id) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void insertArticle(Article article) throws ArticleException {
+		// TODO Auto-generated method stub
+		
 	}
 }
