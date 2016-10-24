@@ -132,15 +132,15 @@
 							</li>
 							<li class="single_field">
 								<label>Цена:</label>
-								<form:input path="price" name="price" type="text"/>
+								<form:input path="price" name="price" type="text" pattern="^([1-9]\d*|0)(\.\d+)?$"/>
 							</li>
 							<li class="single_field">
 								<label>Оперативна памет (ГБ):</label>
-								<form:input path="ram" name="ram" type="text"/>
+								<form:input path="ram" name="ram" type="text" pattern="^([1-9]\d*|0)(\.\d+)?$"/>
 							</li>
 							<li class="single_field">
 								<label>Скорост на процесора:</label>
-								<form:input path="processorSpeed" name="processorSpeed" type="text"/>
+								<form:input path="processorSpeed" name="processorSpeed" type="text" pattern="^([1-9]\d*|0)(\.\d+)?$"/>
 							</li>
 							<li class="single_field">
 								<label>Вид операционна система:</label>
@@ -148,7 +148,7 @@
 							</li>
 							<li class="single_field">
 								<label>HDD:</label>
-								<form:input path="hdd" name="hdd" type="text"/>
+								<form:input path="hdd" name="hdd" type="text" pattern="^([1-9]\d*|0)(\.\d+)?$"/>
 							</li>
 							<li class="single_field">
 								<label>Тип процесор:</label>
@@ -169,7 +169,7 @@
 							
 							
 					</ul>
-						<button type="submit" value="Add new computer" id="computerBtn" class="btn btn-default update" >Добави</button>
+						<button type="submit" value="Add new computer" id="computerBtn" class="btn btn-default update regButton" >Добави</button>
 						<h2 id="computerWarning" style="display:none"><span>Моля качете валидна снимка, за да добавите артикул.</span></h2>
 						<c:if test="${ not empty warning}"><h2>asdasd</h2></c:if>
 					</div>
@@ -207,7 +207,7 @@
 							</li>
 							<li class="single_field">
 								<label>Цена:</label>
-								<form:input path="price" name="price" type="text"/>
+								<form:input path="price" name="price" type="text" pattern="^([1-9]\d*|0)(\.\d+)?$"/>
 							</li>
 							
 							
@@ -222,7 +222,7 @@
 							
 							<li class="single_field">
 								<label>Големина на екрана</label>
-								<form:input path="displaySize" name="displaySize" type="text"/>
+								<form:input path="displaySize" name="displaySize" type="text" pattern="^([1-9]\d*|0)(\.\d+)?$"/>
 							</li>
 							<li class="single_field">
 								<label>Резолюция</label>
@@ -240,7 +240,7 @@
 							
 							
 					</ul>
-						<button type="submit" value="Add new computer" id="tabletBtn" class="btn btn-default update" >Добави</button>
+						<button type="submit" value="Add new computer" id="tabletBtn" class="btn btn-default update regButton" >Добави</button>
 						<h2 id="tabletWarning" style="display:none"><span>Моля качете валидна снимка, за да добавите артикул.</span></h2>
 					
 					</div>
@@ -278,15 +278,15 @@
 							</li>
 							<li class="single_field">
 								<label>Цена:</label>
-								<form:input path="price" name="price" type="text"/>
+								<form:input path="price" name="price" type="text" pattern="^([1-9]\d*|0)(\.\d+)?$"/>
 							</li>
 							<li class="single_field">
 								<label>Оперативна памет (ГБ):</label>
-								<form:input path="ram" name="ram" type="text"/>
+								<form:input path="ram" name="ram" type="text" pattern="^([1-9]\d*|0)(\.\d+)?$"/>
 							</li>
 							<li class="single_field">
 								<label>Скорост на процесора:</label>
-								<form:input path="processorSpeed" name="processorSpeed" type="text"/>
+								<form:input path="processorSpeed" name="processorSpeed" type="text" pattern="^([1-9]\d*|0)(\.\d+)?$"/>
 							</li>
 							<li class="single_field">
 								<label>Вид операционна система:</label>
@@ -294,7 +294,7 @@
 							</li>
 							<li class="single_field">
 								<label>HDD:</label>
-								<form:input path="hdd" name="hdd" type="text"/>
+								<form:input path="hdd" name="hdd" type="text" pattern="^([1-9]\d*|0)(\.\d+)?$"/>
 							</li>
 							<li class="single_field">
 								<label>Тип процесор:</label>
@@ -307,7 +307,7 @@
 						
 							<li class="single_field">
 								<label>Големина на екрана</label>
-								<form:input path="displaySize" name="	" type="text"/>
+								<form:input path="displaySize" name="	" type="text" pattern="^([1-9]\d*|0)(\.\d+)?$"/>
 							</li>
 							<li class="single_field">
 								<label>Резолюция</label>
@@ -327,7 +327,7 @@
 							
 							
 					</ul>
-						<button type="submit" value="Add new laptop" id="laptopBtn" class="btn btn-default update" >Добави</button>
+						<button type="submit" value="Add new laptop" id="laptopBtn" class="btn btn-default update regButton" >Добави</button>
 						<h2 id="laptopWarning" style="display:none"><span>Моля качете валидна снимка, за да добавите артикул.</span></h2>
 					
 					</div>

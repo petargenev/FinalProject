@@ -21,15 +21,8 @@ import com.eshop.models.User;
 @Controller
 public class LoginController {
 
-	// @RequestMapping(value = "/login", method = RequestMethod.GET)
-	// public String creatingUser(Model model) {
-	// model.addAttribute(new User());
-	// return "login";
-	// }
-
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String logUser(@ModelAttribute User user, HttpServletRequest request, Model model)
-			throws UserException, InvalidInputException, SQLException {
+	public String logUser(@ModelAttribute User user, HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		User userFromDb = null;
 		UserDAO userDao = new UserDAO();
@@ -43,15 +36,12 @@ public class LoginController {
 					session.setAttribute("cart", new ArrayList<Article>());
 					Double price = new Double(0);
 					session.setAttribute("carttotalprice", price);
-					
-					
+
 					if (userFromDb.isAdministrator()) {
 						session.setAttribute("isAdmin", true);
-					}else{
+					} else {
 						session.setAttribute("isAdmin", false);
 					}
-
-					
 
 					return "redirect:/mainpage";
 				} else {

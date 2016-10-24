@@ -26,8 +26,8 @@ import com.eshop.models.Label;
 public class ShowArticleController {
 
 	@RequestMapping(value = "/computers", method = RequestMethod.GET)
-	public String showAllComputers(Model model, HttpServletRequest request) throws SQLException, InvalidInputException {
-
+	public String showAllComputers(Model model, HttpServletRequest request) {
+		try{
 		Collection<Article> computers = new ComputerDAO().showAll();
 		Set<Label> labels = new TreeSet<Label>(new LabelComparator());
 
@@ -57,11 +57,18 @@ public class ShowArticleController {
 		model.addAttribute("labels", labels);
 
 		return "mainpage";
+		}catch(SQLException  | InvalidInputException e){
+			e.printStackTrace();
+			return "404";
+		}catch(Exception e){
+			e.printStackTrace();
+			return "404";
+		}
 	}
 
 	@RequestMapping(value = "/laptops", method = RequestMethod.GET)
-	public String showAllLaptops(Model model, HttpServletRequest request) throws SQLException, InvalidInputException {
-
+	public String showAllLaptops(Model model, HttpServletRequest request) {
+		try{
 		Collection<Article> laptops = new LaptopDAO().showAll();
 		Set<Label> labels = new TreeSet<Label>(new LabelComparator());
 
@@ -91,12 +98,19 @@ public class ShowArticleController {
 		model.addAttribute("labels", labels);
 
 		return "mainpage";
+		} catch (SQLException | InvalidInputException e){
+			e.printStackTrace();
+			return "404";
+		}catch (Exception e){
+			e.printStackTrace();
+			return "404";
+		}
 
 	}
 
 	@RequestMapping(value = "/tablets", method = RequestMethod.GET)
-	public String showAllTablets(Model model, HttpServletRequest request) throws SQLException, InvalidInputException {
-
+	public String showAllTablets(Model model, HttpServletRequest request)  {
+		try{
 		Collection<Article> tablets = new TabletDAO().showAll();
 		Set<Label> labels = new TreeSet<Label>(new LabelComparator());
 
@@ -124,5 +138,12 @@ public class ShowArticleController {
 		model.addAttribute("labels", labels);
 
 		return "mainpage";
+		}catch(SQLException | InvalidInputException e){
+			e.printStackTrace();
+			return "404";
+		}catch(Exception e){
+			e.printStackTrace();
+			return "404";
+		}
 	}
 }

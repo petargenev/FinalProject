@@ -17,6 +17,9 @@ import com.eshop.models.Article;
 import com.eshop.models.Tablet;
 
 public class TabletDAO implements DAO {
+	private static final String SHOW_ALL_QUERY = "SELECT t.*, l.*, c.*,r.* FROM tablet t " + "JOIN label l ON (t.label_id = l.id) "
+			+ "JOIN cpu c ON (t.cpu_id = c.id) " + "JOIN resolution r ON (t.resolution_id = r.id);";
+	
 	Connection connection = DBConnection.getInstance().getConnection();
 
 	public Tablet getArticleById(int tabletId) throws SQLException, InvalidInputException {
@@ -44,9 +47,10 @@ public class TabletDAO implements DAO {
 
 	public Collection<Article> getArticleByLabel(String tabletLabel) throws SQLException, InvalidInputException {
 		List<Article> tablets = new ArrayList<Article>();
-		String query = "SELECT t.*, l.*, c.*,r.* FROM tablet t " + "JOIN label l ON (t.label_id = l.id) "
-				+ "JOIN cpu c ON (t.cpu_id = c.id) " + "JOIN resolution r ON (t.resolution_id = r.id) "
-				+ "WHERE l.label LIKE '" + tabletLabel + "';";
+		String query = "SELECT t.*, l.*, c.*,r.* FROM tablet t " + 
+						"JOIN label l ON (t.label_id = l.id) "
+						+ "JOIN cpu c ON (t.cpu_id = c.id) " + "JOIN resolution r ON (t.resolution_id = r.id) "
+						+ "WHERE l.label LIKE '" + tabletLabel + "';";
 
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
@@ -69,8 +73,7 @@ public class TabletDAO implements DAO {
 
 	public Collection<Article> showAll() throws SQLException, InvalidInputException, InvalidInputException {
 		List<Article> tablets = new ArrayList<Article>();
-		String query = "SELECT t.*, l.*, c.*,r.* FROM tablet t " + "JOIN label l ON (t.label_id = l.id) "
-				+ "JOIN cpu c ON (t.cpu_id = c.id) " + "JOIN resolution r ON (t.resolution_id = r.id);";
+		String query = SHOW_ALL_QUERY;
 
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
@@ -103,40 +106,12 @@ public class TabletDAO implements DAO {
 			if (tablet instanceof Tablet) {
 				// inserting lable
 				connection.setAutoCommit(false);
-				String query = "SELECT * FROM label WHERE label LIKE '" + tablet.getLabel() + "';";
-				PreparedStatement ps = connection.prepareStatement(query);
-				ResultSet rs = ps.executeQuery();
-				int labelId = 0;
-
-				if (rs.next()) {
-					labelId = rs.getInt("id");
-				} else {
-					labelId = new KeysDAO().insertLabel(tablet.getLabel());
-				}
+				int labelId = getOrInsertLable(tablet);
 				// inserting cpu
 
-				String cpuQuery = "SELECT * FROM cpu WHERE cpu LIKE '" + ((Tablet) tablet).getCpu() + "';";
-				PreparedStatement cpuPs = connection.prepareStatement(cpuQuery);
-				ResultSet cpuRs = cpuPs.executeQuery();
-				int cpuId = 0;
-
-				if (cpuRs.next()) {
-					cpuId = cpuRs.getInt("id");
-				} else {
-					cpuId = new KeysDAO().insertCpu(((Tablet) tablet).getCpu());
-				}
+				int cpuId = getOrInsertCpu(tablet);
 				// inserting resolution
-				String resolutionQuery = "SELECT * FROM resolution WHERE resolution LIKE '" + ((Tablet) tablet).getResolution()
-						+ "';";
-				PreparedStatement resolutionPs = connection.prepareStatement(resolutionQuery);
-				ResultSet resolutionRs = resolutionPs.executeQuery();
-				int resolutionId = 0;
-
-				if (resolutionRs.next()) {
-					resolutionId = resolutionRs.getInt("id");
-				} else {
-					resolutionId = new KeysDAO().insertResolution(((Tablet) tablet).getResolution());
-				}
+				int resolutionId = getOrInsertResolution(tablet);
 
 				// inserting tablet
 
@@ -169,6 +144,49 @@ public class TabletDAO implements DAO {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private int getOrInsertResolution(Article tablet) throws SQLException {
+		String resolutionQuery = "SELECT * FROM resolution WHERE resolution LIKE '" + ((Tablet) tablet).getResolution()
+				+ "';";
+		PreparedStatement resolutionPs = connection.prepareStatement(resolutionQuery);
+		ResultSet resolutionRs = resolutionPs.executeQuery();
+		int resolutionId = 0;
+
+		if (resolutionRs.next()) {
+			resolutionId = resolutionRs.getInt("id");
+		} else {
+			resolutionId = new KeysDAO().insertResolution(((Tablet) tablet).getResolution());
+		}
+		return resolutionId;
+	}
+
+	private int getOrInsertCpu(Article tablet) throws SQLException {
+		String cpuQuery = "SELECT * FROM cpu WHERE cpu LIKE '" + ((Tablet) tablet).getCpu() + "';";
+		PreparedStatement cpuPs = connection.prepareStatement(cpuQuery);
+		ResultSet cpuRs = cpuPs.executeQuery();
+		int cpuId = 0;
+
+		if (cpuRs.next()) {
+			cpuId = cpuRs.getInt("id");
+		} else {
+			cpuId = new KeysDAO().insertCpu(((Tablet) tablet).getCpu());
+		}
+		return cpuId;
+	}
+
+	private int getOrInsertLable(Article tablet) throws SQLException {
+		String query = "SELECT * FROM label WHERE label LIKE '" + tablet.getLabel() + "';";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ResultSet rs = ps.executeQuery();
+		int labelId = 0;
+
+		if (rs.next()) {
+			labelId = rs.getInt("id");
+		} else {
+			labelId = new KeysDAO().insertLabel(tablet.getLabel());
+		}
+		return labelId;
 	}
 
 }

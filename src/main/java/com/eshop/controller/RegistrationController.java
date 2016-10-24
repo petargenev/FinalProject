@@ -21,20 +21,27 @@ public class RegistrationController {
 	}
 
 	@RequestMapping(value = "/RegistrationController", method = RequestMethod.POST)
-	public String addNewUser(@ModelAttribute User user, Model model) throws UserException {
-		
+	public String addNewUser(@ModelAttribute User user, Model model) {
 
-		if (userDao.isValidName(user.getName()) && 
-			userDao.isValidEmail(user.getEmail()) &&
-			userDao.isValidPassword(user.getPassword())){
+		try {
+			if (userDao.isValidName(user.getName()) && userDao.isValidEmail(user.getEmail())
+					&& userDao.isValidPassword(user.getPassword())) {
 				userDao.registerUser(user);
 				model.addAttribute(user);
 				System.out.println(user);
 				return "forward:/login";
-		}else{
-			return "mainpage";
+			} else {
+				return "mainpage";
+			}
+		} catch (UserException e) {
+
+			e.printStackTrace();
+			return "404";
+
+		}catch(Exception e){
+			e.printStackTrace();
+			return "404";
 		}
-		
 	}
 
 }

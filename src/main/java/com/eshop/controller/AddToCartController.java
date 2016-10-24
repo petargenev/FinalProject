@@ -38,113 +38,121 @@ public class AddToCartController {
 	@RequestMapping(value = "/getArticleId", method = RequestMethod.POST)
 	public String addToCart(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, InvalidInputException, IOException {
-		HttpSession session = request.getSession();
+		try {
+			HttpSession session = request.getSession();
 
-		if (session.getAttribute("username") == null) {
-			PrintWriter out = response.getWriter();
-			out.print("User not logged!");
-			out.flush();
-			out.close();
-			return "mainpage";
-		}
-
-		int id = Integer.parseInt(request.getParameter("Id"));
-		String articleType = request.getParameter("Article");
-
-		if (session.getAttribute("username") != null && session.getAttribute("cart") != null) {
-			if (articleType.equals("computer")) {
-				// adding article to the cart
-
-				ArrayList<Article> computers = (ArrayList<Article>) session.getAttribute("cart");
-				boolean isExisting = false;
-
-				for (Article computer : computers) {
-					if (computer.equals(new ComputerDAO().getArticleById(id))) {
-						isExisting = true;
-						break;
-					}
-
-				}
-
-				if (!isExisting) {
-					computers.add(new ComputerDAO().getArticleById(id));
-					// increasing total price
-					Double currentPrice = (Double) session.getAttribute("carttotalprice");
-					currentPrice += new ComputerDAO().getArticleById(id).getPrice();
-					session.setAttribute("carttotalprice", currentPrice);
-				} else {
-					PrintWriter out = response.getWriter();
-					out.print("Article exists!");
-					out.flush();
-					out.close();
-				}
-
+			if (session.getAttribute("username") == null) {
+				PrintWriter out = response.getWriter();
+				out.print("User not logged!");
+				out.flush();
+				out.close();
+				return "mainpage";
 			}
 
-			if (articleType.equals("laptop")) {
-				ArrayList<Article> laptops = (ArrayList<Article>) session.getAttribute("cart");
-				boolean isExisting = false;
+			int id = Integer.parseInt(request.getParameter("Id"));
+			String articleType = request.getParameter("Article");
 
-				if (laptops != null) {
-					for (Article laptop : laptops) {
-						if (laptop.equals(new LaptopDAO().getArticleById(id))) {
+			if (session.getAttribute("username") != null && session.getAttribute("cart") != null) {
+				if (articleType.equals("computer")) {
+					// adding article to the cart
+
+					ArrayList<Article> computers = (ArrayList<Article>) session.getAttribute("cart");
+					boolean isExisting = false;
+
+					for (Article computer : computers) {
+						if (computer.equals(new ComputerDAO().getArticleById(id))) {
 							isExisting = true;
 							break;
 						}
 
 					}
-				}
 
-				if (!isExisting) {
-					laptops.add(new LaptopDAO().getArticleById(id));
-					// increasing total price
-					Double currentPrice = (Double) session.getAttribute("carttotalprice");
-					currentPrice += new LaptopDAO().getArticleById(id).getPrice();
-					session.setAttribute("carttotalprice", currentPrice);
-				} else {
-					PrintWriter out = response.getWriter();
-					out.print("Article exists!");
-					out.flush();
-					out.close();
-				}
-
-			}
-
-			if (articleType.equals("tablet")) {
-				ArrayList<Article> tablets = (ArrayList<Article>) session.getAttribute("cart");
-				boolean isExisting = false;
-				if (tablets == null) {
-					System.out.println("kolichkata e null");
-				}
-				for (Article tablet : tablets) {
-					if (tablet.equals(new TabletDAO().getArticleById(id))) {
-						isExisting = true;
-						break;
+					if (!isExisting) {
+						computers.add(new ComputerDAO().getArticleById(id));
+						// increasing total price
+						Double currentPrice = (Double) session.getAttribute("carttotalprice");
+						currentPrice += new ComputerDAO().getArticleById(id).getPrice();
+						session.setAttribute("carttotalprice", currentPrice);
+					} else {
+						PrintWriter out = response.getWriter();
+						out.print("Article exists!");
+						out.flush();
+						out.close();
 					}
 
 				}
 
-				if (!isExisting) {
-					tablets.add(new TabletDAO().getArticleById(id));
-					// increasing total price
-					Double currentPrice = (Double) session.getAttribute("carttotalprice");
-					currentPrice += new TabletDAO().getArticleById(id).getPrice();
-					session.setAttribute("carttotalprice", currentPrice);
-				} else {
-					PrintWriter out = response.getWriter();
-					out.print("Article exists!");
-					out.flush();
-					out.close();
+				if (articleType.equals("laptop")) {
+					ArrayList<Article> laptops = (ArrayList<Article>) session.getAttribute("cart");
+					boolean isExisting = false;
+
+					if (laptops != null) {
+						for (Article laptop : laptops) {
+							if (laptop.equals(new LaptopDAO().getArticleById(id))) {
+								isExisting = true;
+								break;
+							}
+
+						}
+					}
+
+					if (!isExisting) {
+						laptops.add(new LaptopDAO().getArticleById(id));
+						// increasing total price
+						Double currentPrice = (Double) session.getAttribute("carttotalprice");
+						currentPrice += new LaptopDAO().getArticleById(id).getPrice();
+						session.setAttribute("carttotalprice", currentPrice);
+					} else {
+						PrintWriter out = response.getWriter();
+						out.print("Article exists!");
+						out.flush();
+						out.close();
+					}
+
+				}
+
+				if (articleType.equals("tablet")) {
+					ArrayList<Article> tablets = (ArrayList<Article>) session.getAttribute("cart");
+					boolean isExisting = false;
+					if (tablets == null) {
+						System.out.println("kolichkata e null");
+					}
+					for (Article tablet : tablets) {
+						if (tablet.equals(new TabletDAO().getArticleById(id))) {
+							isExisting = true;
+							break;
+						}
+
+					}
+
+					if (!isExisting) {
+						tablets.add(new TabletDAO().getArticleById(id));
+						// increasing total price
+						Double currentPrice = (Double) session.getAttribute("carttotalprice");
+						currentPrice += new TabletDAO().getArticleById(id).getPrice();
+						session.setAttribute("carttotalprice", currentPrice);
+					} else {
+						PrintWriter out = response.getWriter();
+						out.print("Article exists!");
+						out.flush();
+						out.close();
+					}
 				}
 			}
-		}
 
-		return "mainpage";
+			return "mainpage";
+		} catch (SQLException | InvalidInputException | IOException e) {
+			e.printStackTrace();
+			return "404";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "404";
+		}
 	}
 
 	@RequestMapping(value = "/removeArticle", method = RequestMethod.POST)
-	public String removeArticle(HttpServletRequest request) throws SQLException, InvalidInputException {
-
+	public String removeArticle(HttpServletRequest request)  {
+		try{
 		HttpSession session = request.getSession();
 
 		int id = Integer.parseInt(request.getParameter("Id"));
@@ -182,11 +190,15 @@ public class AddToCartController {
 		}
 
 		return "cart";
+		}catch(SQLException | InvalidInputException e){
+			e.printStackTrace();
+			return "404";
+		}
 	}
 
 	@RequestMapping(value = "/checkout", method = RequestMethod.POST)
-	public String checkout(HttpServletRequest request) throws SQLException, InvalidInputException {
-
+	public String checkout(HttpServletRequest request)  {
+		try{
 		HttpSession session = request.getSession();
 
 		if (session.getAttribute("cart") != null) {
@@ -211,23 +223,32 @@ public class AddToCartController {
 		}
 
 		return "cart";
+		} catch(SQLException e){
+			e.printStackTrace();
+			return "404";
+		}
 	}
 
 	@RequestMapping(value = "/removeItem", method = RequestMethod.POST)
-	
-	public String removeItem(HttpServletRequest request) throws SQLException, InvalidInputException {
+
+	public String removeItem(HttpServletRequest request)  {
+		try{
 		int id = Integer.parseInt(request.getParameter("Id"));
 		String articleType = request.getParameter("Article");
-		if(articleType.equals("computer"))
+		if (articleType.equals("computer"))
 			new ComputerDAO().deleteArticleById(id);
-		
-		if(articleType.equals("laptop"))
+
+		if (articleType.equals("laptop"))
 			new LaptopDAO().deleteArticleById(id);
-		
-		if(articleType.equals("tablet"))
+
+		if (articleType.equals("tablet"))
 			new TabletDAO().deleteArticleById(id);
-		
+
 		return "mainpage";
+		}catch(SQLException  e){
+			e.printStackTrace();
+			return "404";
+		}
 	}
 
 	@RequestMapping(value = "/checkIfLogged", method = RequestMethod.POST)

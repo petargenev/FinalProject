@@ -29,97 +29,115 @@ import com.eshop.models.User;
 @RequestMapping
 public class MainPageController {
 
+	private static final int EXPIRE_TIME = 15000;
+
 	@RequestMapping(value = { "/index", "/mainpage", "/sortBy" }, method = RequestMethod.GET)
-	public String mainPage(Model model, HttpServletRequest request, @ModelAttribute String label)
-			throws SQLException, InvalidInputException {
-		HttpSession session = request.getSession();
-		session.setMaxInactiveInterval(15000);
+	public String mainPage(Model model, HttpServletRequest request, @ModelAttribute String label) {
+		try {
+			HttpSession session = request.getSession();
+			session.setMaxInactiveInterval(EXPIRE_TIME);
 
-		Collection<Article> computers = new ComputerDAO().showAll();
-		Collection<Article> laptops = new LaptopDAO().showAll();
-		Collection<Article> tablets = new TabletDAO().showAll();
-		Set<Label> labels = new TreeSet<Label>(new LabelComparator());
-		
-	
-		if (!computers.isEmpty()) {
-			model.addAttribute("computers", computers);
-			for (Article computer : computers) {
+			Collection<Article> computers = new ComputerDAO().showAll();
+			Collection<Article> laptops = new LaptopDAO().showAll();
+			Collection<Article> tablets = new TabletDAO().showAll();
+			Set<Label> labels = new TreeSet<Label>(new LabelComparator());
 
-				if (labels.contains(new Label(computer.getModel()))) {
-					Iterator<Label> iterator = labels.iterator();
-					while (iterator.hasNext()) {
+			if (!computers.isEmpty()) {
+				model.addAttribute("computers", computers);
+				for (Article computer : computers) {
 
-						Label currentLabel = iterator.next();
-						if (currentLabel.getName().equals(new Label(computer.getModel()).getName())) {
-							currentLabel.increaseCount();
+					if (labels.contains(new Label(computer.getModel()))) {
+						Iterator<Label> iterator = labels.iterator();
+						while (iterator.hasNext()) {
 
+							Label currentLabel = iterator.next();
+							if (currentLabel.getName().equals(new Label(computer.getModel()).getName())) {
+								currentLabel.increaseCount();
+
+							}
 						}
+					} else {
+						labels.add(new Label(computer.getModel()));
 					}
-				} else {
-					labels.add(new Label(computer.getModel()));
 				}
 			}
-		}
-		if (!laptops.isEmpty()) {
-			model.addAttribute("laptops", laptops);
-			for (Article laptop : laptops) {
+			if (!laptops.isEmpty()) {
+				model.addAttribute("laptops", laptops);
+				for (Article laptop : laptops) {
 
-				if (labels.contains(new Label(laptop.getModel()))) {
-					Iterator<Label> iterator = labels.iterator();
-					while (iterator.hasNext()) {
+					if (labels.contains(new Label(laptop.getModel()))) {
+						Iterator<Label> iterator = labels.iterator();
+						while (iterator.hasNext()) {
 
-						Label currentLabel = iterator.next();
-						if (currentLabel.getName().equals(new Label(laptop.getModel()).getName())) {
-							currentLabel.increaseCount();
+							Label currentLabel = iterator.next();
+							if (currentLabel.getName().equals(new Label(laptop.getModel()).getName())) {
+								currentLabel.increaseCount();
 
+							}
 						}
-					}
-				} else {
+					} else {
 
-					labels.add(new Label(laptop.getModel()));
+						labels.add(new Label(laptop.getModel()));
+					}
 				}
 			}
-		}
-		if (!tablets.isEmpty()) {
-			model.addAttribute("tablets", tablets);
-			for (Article tablet : tablets) {
+			if (!tablets.isEmpty()) {
+				model.addAttribute("tablets", tablets);
+				for (Article tablet : tablets) {
 
-				if (labels.contains(new Label(tablet.getLabel()))) {
-					Iterator<Label> iterator = labels.iterator();
-					while (iterator.hasNext()) {
+					if (labels.contains(new Label(tablet.getLabel()))) {
+						Iterator<Label> iterator = labels.iterator();
+						while (iterator.hasNext()) {
 
-						Label currentLabel = iterator.next();
-						if (currentLabel.getName().equals(new Label(tablet.getLabel()).getName())) {
-							currentLabel.increaseCount();
+							Label currentLabel = iterator.next();
+							if (currentLabel.getName().equals(new Label(tablet.getLabel()).getName())) {
+								currentLabel.increaseCount();
 
+							}
 						}
-					}
-				} else {
-		
-					labels.add(new Label(tablet.getLabel()));
+					} else {
 
+						labels.add(new Label(tablet.getLabel()));
+
+					}
 				}
 			}
+
+			int articlesCount = (laptops.size() + computers.size() + tablets.size());
+
+			session.setAttribute("articlesCount", articlesCount);
+
+			model.addAttribute("labels", labels);
+
+			return "mainpage";
+		} catch (SQLException | InvalidInputException e) {
+			e.printStackTrace();
+			return "404";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "404";
 		}
-
-		int articlesCount = (laptops.size() + computers.size() + tablets.size());
-
-		session.setAttribute("articlesCount", articlesCount);
-
-		model.addAttribute("labels", labels);
-
-		return "mainpage";
 	}
 
 	@RequestMapping(value = { "/showByLabel" }, method = RequestMethod.POST)
-	public String showByLabel(Model model, HttpServletRequest request) throws SQLException, InvalidInputException {
-		String label = request.getParameter("label");
-		
-		HttpSession session = request.getSession();
-		
-		session.setAttribute("label", label);
-		
-		return "redirect:/mainpage";
+	public String showByLabel(Model model, HttpServletRequest request) {
+		try {
+			String label = request.getParameter("label");
+
+			HttpSession session = request.getSession();
+
+			session.setAttribute("label", label);
+
+			return "redirect:/mainpage";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "404";
+		}
+	}
+
+	@RequestMapping(value = { "/*" }, method = RequestMethod.GET)
+	public String unknownUrl() {
+		return "404";
 	}
 
 }

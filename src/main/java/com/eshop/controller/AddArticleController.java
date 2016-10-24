@@ -50,65 +50,104 @@ public class AddArticleController {
 
 	@RequestMapping(value = "/addcomputer", method = RequestMethod.POST)
 	public String addNewComputer(@RequestParam("file") MultipartFile multipartFile, @ModelAttribute Computer computer,
-			Model model, HttpServletRequest session)
-			throws UserException, ArticleException, IOException, InvalidInputException, SQLException {
+			Model model, HttpServletRequest session) {
 
 		// do something else
+		try {
+			String[] path = multipartFile.getOriginalFilename().split("\\\\");
+			String fileName = path[path.length - 1];
+			FileCopyUtils.copy(multipartFile.getBytes(), new File(getUploadLocation() + fileName));
+			String image = ("./img/" + fileName);
+			computer.setImage(image);
 
-		String[] path = multipartFile.getOriginalFilename().split("\\\\");
-		String fileName = path[path.length - 1];
-		FileCopyUtils.copy(multipartFile.getBytes(), new File(getUploadLocation() + fileName));
-		String image = ("./img/" + fileName);
-		computer.setImage(image);
+			if (computerValidation(computer))
+				return "404";
 
-		if(computerValidation(computer))
+			new ComputerDAO().insertArticle(computer);
+
+			return creatingArticles(model, session);
+		} catch (ArticleException | IOException e) {
+			e.printStackTrace();
 			return "404";
-
-		new ComputerDAO().insertArticle(computer);
-
-		return creatingArticles(model, session);
+		} catch (InvalidInputException e) {
+			e.printStackTrace();
+			return "404";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "404";
+		}
 	}
-
-	
 
 	@RequestMapping(value = "/addtablet", method = RequestMethod.POST)
 	public String addNewTablet(@RequestParam("file") MultipartFile multipartFile, @ModelAttribute Tablet tablet,
 			Model model, HttpServletRequest session)
 			throws UserException, ArticleException, IOException, InvalidInputException {
+		try {
+			String[] path = multipartFile.getOriginalFilename().split("\\\\");
+			String fileName = path[path.length - 1];
+			FileCopyUtils.copy(multipartFile.getBytes(), new File(getUploadLocation() + fileName));
+			String image = ("./img/" + fileName);
+			tablet.setImage(image);
 
-		String[] path = multipartFile.getOriginalFilename().split("\\\\");
-		String fileName = path[path.length - 1];
-		FileCopyUtils.copy(multipartFile.getBytes(), new File(getUploadLocation() + fileName));
-		String image = ("./img/" + fileName);
-		tablet.setImage(image);
+			if (tabletValidation(tablet))
+				return "404";
 
-		if(tabletValidation(tablet))
+			new TabletDAO().insertArticle(tablet);
+
+			return creatingArticles(model, session);
+		} catch (IOException e) {
+			e.printStackTrace();
 			return "404";
-
-		new TabletDAO().insertArticle(tablet);
-
-		return creatingArticles(model, session);
+		} catch (InvalidInputException e) {
+			e.printStackTrace();
+			return "404";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "404";
+		}
 	}
-
-	
 
 	@RequestMapping(value = "/addlaptop", method = RequestMethod.POST)
 	public String addNewLaptop(@RequestParam("file") MultipartFile multipartFile, @ModelAttribute Laptop laptop,
-			Model model, HttpServletRequest session)
-			throws UserException, ArticleException, InvalidInputException, IOException {
+			Model model, HttpServletRequest session) {
+		try {
+			String[] path = multipartFile.getOriginalFilename().split("\\\\");
+			String fileName = path[path.length - 1];
+			FileCopyUtils.copy(multipartFile.getBytes(), new File(getUploadLocation() + fileName));
+			String image = ("./img/" + fileName);
+			laptop.setImage(image);
 
-		String[] path = multipartFile.getOriginalFilename().split("\\\\");
-		String fileName = path[path.length - 1];
-		FileCopyUtils.copy(multipartFile.getBytes(), new File(getUploadLocation() + fileName));
-		String image = ("./img/" + fileName);
-		laptop.setImage(image);
+			if (laptopValidation(laptop))
+				return "404";
 
-		if(laptopValidation(laptop))
+			new LaptopDAO().insertArticle(laptop);
+
+			return creatingArticles(model, session);
+		} catch (ArticleException | IOException e) {
+			e.printStackTrace();
 			return "404";
+		} catch (InvalidInputException e) {
+			e.printStackTrace();
+			return "404";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "404";
+		}
+	}
 
-		new LaptopDAO().insertArticle(laptop);
+	@RequestMapping(value = "/addcomputer", method = RequestMethod.GET)
+	public String computerGetMethod() {
+		return "mainpage";
+	}
 
-		return creatingArticles(model, session);
+	@RequestMapping(value = "/addlaptop", method = RequestMethod.GET)
+	public String laptopGetMethod() {
+		return "mainpage";
+	}
+
+	@RequestMapping(value = "/addtablet", method = RequestMethod.GET)
+	public String tabletGetMethod() {
+		return "mainpage";
 	}
 
 	private boolean laptopValidation(Laptop laptop) {
@@ -124,9 +163,8 @@ public class AddArticleController {
 		}
 		return false;
 
-		
 	}
-	
+
 	private boolean computerValidation(Computer computer) {
 		if (computer.getHdd() <= 0 || (computer.getLabel().isEmpty() || computer.getLabel() == null)
 				|| (computer.getModel().isEmpty() || computer.getModel() == null)
@@ -135,12 +173,12 @@ public class AddArticleController {
 				|| (computer.getProcessorType().isEmpty() || computer.getProcessorType() == null)
 				|| computer.getRam() <= 0
 				|| (computer.getVideoCardType().isEmpty() || computer.getVideoCardType() == null)) {
-			
+
 			return true;
 		}
 		return false;
 	}
-	
+
 	private boolean tabletValidation(Tablet tablet) {
 		if ((tablet.getLabel().isEmpty() || tablet.getLabel() == null)
 				|| (tablet.getModel().isEmpty() || tablet.getModel() == null)
@@ -148,11 +186,12 @@ public class AddArticleController {
 				|| tablet.getDisplaySize() <= 0 || (tablet.getLabel().isEmpty() || tablet.getLabel() == null)
 				|| (tablet.getResolution().isEmpty() || tablet.getResolution() == null)
 				|| tablet.getDisplaySize() <= 0) {
-			
+
 			return true;
 		}
 		return false;
 	}
+
 	public static String getUploadLocation() {
 		return UPLOAD_LOCATION;
 	}

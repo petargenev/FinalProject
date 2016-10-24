@@ -16,7 +16,6 @@ public class RedirectToOuterPageController {
 		try {
 			response.sendRedirect("https://www.facebook.com/");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -26,7 +25,6 @@ public class RedirectToOuterPageController {
 		try {
 			response.sendRedirect("https://twitter.com/");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -36,7 +34,6 @@ public class RedirectToOuterPageController {
 		try {
 			response.sendRedirect("https://www.linkedin.com/");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -46,7 +43,6 @@ public class RedirectToOuterPageController {
 		try {
 			response.sendRedirect("https://dribbble.com/");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -56,7 +52,6 @@ public class RedirectToOuterPageController {
 		try {
 			response.sendRedirect("https://plus.google.com/");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
